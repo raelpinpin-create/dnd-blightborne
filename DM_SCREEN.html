@@ -1,0 +1,2768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Master DM Screen — Blightborne: The Ashen Trail</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Volcanic Grimdark Blood & Obsidian Palette */
+            --bg-primary: #07090e;
+            --bg-container: #0c1017;
+            --bg-card: #111722;
+            --bg-card-header: #172030;
+            --bg-card-subtle: #0d131d;
+            
+            --accent-gold: #f59e0b;
+            --accent-gold-soft: #fbbf24;
+            --accent-gold-dark: #b45309;
+            
+            --accent-crimson: #dc2626;
+            --accent-crimson-soft: #ef4444;
+            --accent-crimson-dark: #991b1b;
+            
+            --accent-emerald: #10b981;
+            --accent-emerald-soft: #34d399;
+            
+            --accent-purple: #8b5cf6;
+            --accent-purple-soft: #a78bfa;
+            
+            --text-main: #e2e8f0;
+            --text-bright: #f8fafc;
+            --text-muted: #94a3b8;
+            
+            --border-color: #1e293b;
+            --border-subtle: #151f30;
+            --border-highlight: #334155;
+            
+            --stat-bg: #090e18;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            line-height: 1.5;
+            padding-bottom: 90px;
+        }
+
+        /* Top Sticky Navigation */
+        .top-nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(12, 16, 23, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        .nav-title {
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            font-size: 1.15rem;
+            color: var(--accent-gold);
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .nav-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .nav-btn:hover {
+            background: var(--bg-card-header);
+            border-color: var(--accent-gold);
+            color: var(--accent-gold-soft);
+        }
+
+        .nav-btn-highlight {
+            background: linear-gradient(135deg, rgba(220, 38, 38, 0.2), rgba(245, 158, 11, 0.2));
+            border-color: var(--accent-crimson);
+            color: #fca5a5;
+        }
+
+        .nav-btn-highlight:hover {
+            background: var(--accent-crimson);
+            color: #fff;
+            border-color: var(--accent-crimson-soft);
+            box-shadow: 0 0 10px rgba(220, 38, 38, 0.4);
+        }
+
+        /* Container Layout */
+        .container {
+            max-width: 1320px;
+            margin: 20px auto;
+            padding: 0 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        /* Quick Launch Banner */
+        .quick-banner {
+            background: linear-gradient(90deg, #18090b 0%, #151d2c 50%, #0d121c 100%);
+            border: 1px solid var(--accent-crimson-dark);
+            border-left: 4px solid var(--accent-crimson);
+            border-radius: 8px;
+            padding: 14px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .quick-banner-text h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            color: var(--accent-gold);
+            margin-bottom: 3px;
+        }
+
+        .quick-banner-text p {
+            font-size: 0.84rem;
+            color: var(--text-muted);
+        }
+
+        .quick-banner-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        /* Section Headings */
+        .section-header {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--accent-gold-soft);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 8px;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .section-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            background: rgba(245, 158, 11, 0.12);
+            color: var(--accent-gold);
+            border: 1px solid var(--accent-gold-dark);
+            padding: 3px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        /* Grids */
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 16px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+        .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+
+        /* Card Styles */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.4);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.15s ease, border-color 0.15s ease;
+        }
+
+        .card:hover { border-color: var(--border-highlight); }
+
+        .card-header {
+            background: var(--bg-card-header);
+            border-bottom: 1px solid var(--border-color);
+            padding: 10px 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        .card-title {
+            font-family: 'Cinzel', serif;
+            font-size: 0.98rem;
+            font-weight: 700;
+            color: var(--text-bright);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .card-body {
+            padding: 12px 14px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            font-size: 0.85rem;
+        }
+
+        .card-body p { color: var(--text-main); line-height: 1.45; }
+
+        .card-meta {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            font-style: italic;
+            border-bottom: 1px solid var(--border-subtle);
+            padding-bottom: 6px;
+            margin-bottom: 2px;
+        }
+
+        /* Act Summary Cards */
+        .act-card { border-left: 3px solid var(--accent-gold-dark); }
+        .act-card-1 { border-left-color: #ef4444; }
+        .act-card-2 { border-left-color: #3b82f6; }
+        .act-card-3 { border-left-color: #eab308; }
+        .act-card-4 { border-left-color: #10b981; }
+
+        /* Buttons & Rollers */
+        .btn-modal {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            border: 1px solid var(--accent-gold-dark);
+            color: var(--accent-gold);
+            padding: 6px 12px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: all 0.15s ease;
+            width: 100%;
+            margin-top: auto;
+        }
+
+        .btn-modal:hover {
+            background: var(--accent-gold);
+            color: #07090e;
+            box-shadow: 0 0 10px rgba(245, 158, 11, 0.4);
+        }
+
+        .btn-modal-red { border-color: var(--accent-crimson); color: var(--accent-crimson-soft); }
+        .btn-modal-red:hover {
+            background: var(--accent-crimson);
+            color: #fff;
+            box-shadow: 0 0 10px rgba(220, 38, 38, 0.4);
+        }
+
+        .btn-roll {
+            background: #1e283d;
+            border: 1px solid var(--accent-gold-dark);
+            color: var(--accent-gold);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.15s ease;
+        }
+
+        .btn-roll:hover { background: var(--accent-gold); color: #07090e; }
+
+        .btn-roll-dmg { border-color: var(--accent-crimson); color: var(--accent-crimson-soft); }
+        .btn-roll-dmg:hover { background: var(--accent-crimson); color: #fff; }
+
+        /* Guide Table */
+        .guide-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin-top: 6px; }
+        .guide-table th, .guide-table td { padding: 8px 10px; border: 1px solid var(--border-color); text-align: left; }
+        .guide-table th { background-color: var(--bg-card-header); color: var(--accent-gold); font-family: 'Cinzel', serif; font-size: 0.78rem; }
+        .guide-table tr:hover { background-color: rgba(255, 255, 255, 0.03); }
+
+        .clickable-title {
+            cursor: pointer;
+            text-decoration: underline dotted var(--accent-gold-dark);
+            text-underline-offset: 3px;
+            color: var(--text-bright);
+            font-weight: 700;
+            transition: color 0.15s ease;
+        }
+        .clickable-title:hover { color: var(--accent-gold-soft) !important; }
+
+        /* Badges */
+        .tag { display: inline-block; padding: 2px 7px; border-radius: 4px; font-size: 0.72rem; font-weight: bold; }
+        .tag-intermediate { background-color: #162942; color: #93c5fd; border: 1px solid #24416b; }
+        .tag-advanced { background-color: #38240b; color: #fde68a; border: 1px solid #78521a; }
+        .tag-boss { background-color: #381216; color: #fca5a5; border: 1px solid #78232c; }
+        .tag-saint { background-color: #311c47; color: #d8b4fe; border: 1px solid #4c2c6d; }
+        .tag-heal { background-color: #064e3b; color: #6ee7b7; border: 1px solid #059669; }
+        .tag-buff { background-color: #451a03; color: #fde047; border: 1px solid #b45309; }
+        .tag-weapon { background-color: #450a0a; color: #fca5a5; border: 1px solid #991b1b; }
+        .tag-defense { background-color: #0f172a; color: #93c5fd; border: 1px solid #334155; }
+        .tag-quest { background-color: #2e1065; color: #d8b4fe; border: 1px solid #6b21a8; }
+        .tag-ration { background-color: #18181b; color: #d4d4d8; border: 1px solid #3f3f46; }
+        .tag-pill {
+            display: inline-block;
+            background: var(--bg-card-header);
+            border: 1px solid var(--border-color);
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.72rem;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--accent-gold-soft);
+        }
+
+        /* Loot Vault Table & Dark Category Subheaders */
+        .loot-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin-top: 4px; }
+        .loot-table th, .loot-table td { padding: 9px 12px; border: 1px solid var(--border-color); text-align: left; vertical-align: middle; }
+        .loot-table th { background-color: var(--bg-card-header); color: var(--accent-gold); font-family: 'Cinzel', serif; font-size: 0.78rem; letter-spacing: 0.5px; }
+        .loot-table tr:hover { background-color: rgba(255, 255, 255, 0.03); }
+
+        .loot-row-header-heal { background: linear-gradient(90deg, #091f14, #0d281a) !important; border-top: 2px solid #059669 !important; border-bottom: 1px solid #059669 !important; }
+        .loot-row-header-heal td { font-family: 'Cinzel', serif; font-weight: 700; font-size: 0.85rem; color: #6ee7b7; letter-spacing: 0.8px; padding: 8px 12px; }
+
+        .loot-row-header-buff { background: linear-gradient(90deg, #221404, #2a1b0a) !important; border-top: 2px solid #b45309 !important; border-bottom: 1px solid #b45309 !important; }
+        .loot-row-header-buff td { font-family: 'Cinzel', serif; font-weight: 700; font-size: 0.85rem; color: #fde047; letter-spacing: 0.8px; padding: 8px 12px; }
+
+        .loot-row-header-weapon { background: linear-gradient(90deg, #24090b, #330c10) !important; border-top: 2px solid #991b1b !important; border-bottom: 1px solid #991b1b !important; }
+        .loot-row-header-weapon td { font-family: 'Cinzel', serif; font-weight: 700; font-size: 0.85rem; color: #fca5a5; letter-spacing: 0.8px; padding: 8px 12px; }
+
+        .loot-row-header-defense { background: linear-gradient(90deg, #0d1524, #121d30) !important; border-top: 2px solid #2563eb !important; border-bottom: 1px solid #2563eb !important; }
+        .loot-row-header-defense td { font-family: 'Cinzel', serif; font-weight: 700; font-size: 0.85rem; color: #93c5fd; letter-spacing: 0.8px; padding: 8px 12px; }
+
+        .loot-row-header-quest { background: linear-gradient(90deg, #180a26, #220e36) !important; border-top: 2px solid #7c3aed !important; border-bottom: 1px solid #7c3aed !important; }
+        .loot-row-header-quest td { font-family: 'Cinzel', serif; font-weight: 700; font-size: 0.85rem; color: #d8b4fe; letter-spacing: 0.8px; padding: 8px 12px; }
+
+        .loot-row-header-ration { background: linear-gradient(90deg, #12141a, #1a1d24) !important; border-top: 2px solid #475569 !important; border-bottom: 1px solid #475569 !important; }
+        .loot-row-header-ration td { font-family: 'Cinzel', serif; font-weight: 700; font-size: 0.85rem; color: #cbd5e1; letter-spacing: 0.8px; padding: 8px 12px; }
+
+        .loot-clickable {
+            color: #f8fafc;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: underline dotted var(--accent-gold-dark);
+            text-underline-offset: 3px;
+            transition: color 0.15s ease;
+        }
+        .loot-clickable:hover {
+            color: var(--accent-gold-soft);
+            text-decoration-color: var(--accent-gold);
+        }
+
+        /* Modal Dialog */
+        dialog.dm-modal {
+            background-color: transparent;
+            border: none;
+            max-width: 920px;
+            width: 95vw;
+            max-height: 90vh;
+            margin: auto;
+            padding: 0;
+            box-shadow: none;
+            overflow: visible;
+        }
+
+        dialog.dm-modal::backdrop {
+            background: rgba(4, 7, 14, 0.88);
+            backdrop-filter: blur(8px);
+        }
+
+        .modal-wrapper {
+            background-color: #0d121c;
+            border: 1px solid var(--accent-gold-dark);
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            max-height: 90vh;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.85);
+            animation: modalFadeIn 0.18s ease-out;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: scale(0.97) translateY(8px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .modal-header {
+            background: linear-gradient(90deg, #141b2b, #22151b);
+            border-bottom: 1px solid var(--border-color);
+            padding: 12px 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h3 {
+            font-family: 'Cinzel', serif;
+            color: var(--accent-gold);
+            font-size: 1.15rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .modal-close-btn {
+            background: #1e283d;
+            border: 1px solid #334155;
+            color: #e2e8f0;
+            width: 30px;
+            height: 30px;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.15s;
+        }
+
+        .modal-close-btn:hover { background: #991b1b; border-color: #ef4444; color: white; }
+
+        .modal-dice-banner {
+            background: linear-gradient(90deg, #090f1a 0%, #151d2c 100%);
+            border-bottom: 2px solid var(--accent-gold-dark);
+            padding: 10px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            min-height: 44px;
+            box-shadow: inset 0 2px 6px rgba(0,0,0,0.5);
+        }
+
+        .modal-dice-output {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.88rem;
+            color: #f8fafc;
+            flex: 1;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .modal-dice-quick-btns { display: flex; gap: 6px; align-items: center; }
+
+        .modal-body {
+            padding: 18px;
+            overflow-y: auto;
+            font-size: 0.86rem;
+            line-height: 1.55;
+            color: #d1d5db;
+        }
+
+        .modal-body h4 {
+            color: var(--accent-gold);
+            font-family: 'Cinzel', serif;
+            font-size: 0.95rem;
+            margin: 16px 0 6px 0;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .modal-body p { margin-bottom: 8px; }
+
+        /* EXACT STYLED BOXES FROM SCREENSHOTS */
+        .stat-bar-strip {
+            background: #090e18;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 8px 12px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.84rem;
+            color: #fbbf24;
+            text-align: center;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+
+        .vitals-grid-card {
+            background: var(--bg-card-subtle);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+
+        .vitals-stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            text-align: center;
+        }
+
+        .vital-num-box .label {
+            font-size: 0.68rem;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .vital-num-box .val {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-bright);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .hp-bar-bg {
+            background: #1c0a0c;
+            border-radius: 4px;
+            height: 10px;
+            overflow: hidden;
+            border: 1px solid var(--accent-crimson-dark);
+            margin: 4px 0;
+        }
+
+        .hp-bar-fill {
+            background: linear-gradient(90deg, #10b981, #34d399);
+            height: 100%;
+            width: 100%;
+            transition: width 0.3s ease, background 0.3s ease;
+        }
+
+        .hp-steppers-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 6px;
+        }
+
+        .btn-step {
+            background: #1e293b;
+            border: 1px solid #334155;
+            color: #e2e8f0;
+            padding: 3px 10px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .btn-step:hover { background: #991b1b; color: #fff; border-color: #ef4444; }
+        .btn-step-heal:hover { background: #065f46; color: #fff; border-color: #10b981; }
+
+        .action-container-card {
+            background: #090e18;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .action-row-item {
+            background: #111722;
+            border: 1px solid var(--border-color);
+            border-left: 3px solid var(--accent-crimson);
+            border-radius: 0 6px 6px 0;
+            padding: 10px 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .action-row-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        /* 4-Color Content Blocks (Exact match to screenshots) */
+        .blue-box {
+            background: #0c1524;
+            border-left: 3px solid #38bdf8;
+            padding: 10px 14px;
+            border-radius: 0 5px 5px 0;
+            margin-bottom: 10px;
+            font-size: 0.84rem;
+            color: #e0f2fe;
+            line-height: 1.5;
+        }
+
+        .pink-box {
+            background: #1c1417;
+            border-left: 3px solid #f87171;
+            padding: 10px 14px;
+            border-radius: 0 5px 5px 0;
+            margin-bottom: 10px;
+            font-size: 0.84rem;
+            color: #fecaca;
+            line-height: 1.5;
+        }
+
+        .green-box {
+            background: #131d20;
+            border-left: 3px solid #34d399;
+            padding: 10px 14px;
+            border-radius: 0 5px 5px 0;
+            margin-bottom: 10px;
+            font-size: 0.84rem;
+            color: #d1fae5;
+            line-height: 1.5;
+        }
+
+        .yellow-box {
+            background: rgba(245, 158, 11, 0.08);
+            border-left: 3px solid var(--accent-gold-dark);
+            padding: 10px 14px;
+            border-radius: 0 5px 5px 0;
+            margin-bottom: 10px;
+            font-size: 0.84rem;
+            color: #fef08a;
+            line-height: 1.5;
+        }
+
+        /* NPC Terminal Snapshot Box */
+        .terminal-stat-box {
+            background: #060d17;
+            border: 1px solid #1e3a5f;
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.82rem;
+            color: #38bdf8;
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+
+        .voice-quote-box {
+            background: #090e18;
+            border-left: 3px solid var(--accent-purple);
+            padding: 10px 14px;
+            border-radius: 0 5px 5px 0;
+            margin-bottom: 10px;
+            font-style: italic;
+            color: #f1f5f9;
+        }
+
+        .modal-read-aloud {
+            background: rgba(220, 38, 38, 0.08);
+            border-left: 3px solid var(--accent-crimson);
+            padding: 10px 14px;
+            border-radius: 0 5px 5px 0;
+            margin: 10px 0;
+            font-style: italic;
+            color: #f1f5f9;
+            line-height: 1.55;
+        }
+
+        .modal-footer {
+            background-color: #080c14;
+            border-top: 1px solid var(--border-color);
+            padding: 10px 18px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        /* Fixed Bottom Dice Log Console */
+        .dice-console {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 13, 20, 0.96);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid var(--border-color);
+            padding: 8px 16px;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            box-shadow: 0 -4px 16px rgba(0,0,0,0.6);
+        }
+
+        .console-output {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--accent-gold);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            flex: 1;
+        }
+
+        .quick-dice-bar { display: flex; gap: 6px; }
+
+        .btn-die {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-bright);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .btn-die:hover { border-color: var(--accent-gold); color: var(--accent-gold); }
+    </style>
+</head>
+<body>
+
+    <!-- TOP STICKY NAV -->
+    <header class="top-nav">
+        <div class="nav-title">
+            <span>🩸</span> BLIGHTBORNE DM SCREEN
+        </div>
+        <nav class="nav-links">
+            <button class="nav-btn nav-btn-highlight" onclick="openHomebrewRulesModal()">📜 Table Homebrews & DM Rules</button>
+            <a href="#acts-section" class="nav-btn">🗺️ Session 1 Acts</a>
+            <a href="#monsters-section" class="nav-btn">👹 Monsters & Bosses</a>
+            <a href="#environments-section" class="nav-btn">🌲 Environments</a>
+            <a href="#npcs-section" class="nav-btn">👥 Key NPCs</a>
+            <a href="#loot-vault" class="nav-btn">💰 Loot Vault</a>
+            <a href="#cheat-sheet" class="nav-btn">⚖️ DCs & Quick Ref</a>
+        </nav>
+    </header>
+
+    <div class="container">
+
+        <!-- QUICK LAUNCH BANNER -->
+        <div class="quick-banner">
+            <div class="quick-banner-text">
+                <h2>🩸 The Ashen Trail (3.5 – 4h One-Shot Module)</h2>
+                <p>Protagonist: <strong>Rashuk (Laxas Langley)</strong> — Level 5 Battle Master (Advanced Rank) | Target: <strong>Inquisitor Gortash</strong></p>
+            </div>
+            <div class="quick-banner-actions">
+                <button class="btn-roll" onclick="openHomebrewRulesModal()">📜 Open Rules Compendium</button>
+                <button class="btn-roll btn-roll-dmg" onclick="openMonsterModal('vhol')">👹 Overseer Vhol Boss Card</button>
+            </div>
+        </div>
+
+        <!-- SECTION 1: SESSION 1 ACT ROADMAP -->
+        <section id="acts-section">
+            <div class="section-header">
+                <span>🗺️ Session 1: The Ashen Trail — Act Breakdown</span>
+                <span class="section-tag">Modular Story Flow</span>
+            </div>
+            <div class="grid-4">
+                <!-- ACT 1 -->
+                <div class="card act-card act-card-1">
+                    <div class="card-header">
+                        <span class="card-title">🌲 Act 1: The Hunt</span>
+                        <span class="tag" style="background:#450a0a; color:#fca5a5;">0:00 – 0:45</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-meta">The Rot-Wood Bog & Dead-Water Gulch</div>
+                        <p>Rashuk is hunted by the Iron Fang Pack after executing a sadistic overseer. Ambushes pursuers, risks exposing red blood, and cracks the lockbox confirming <strong>Inquisitor Gortash</strong>.</p>
+                        <button class="btn-modal btn-modal-red" onclick="openSceneModal('act1')">📖 Open Act 1 Details</button>
+                    </div>
+                </div>
+
+                <!-- ACT 2 -->
+                <div class="card act-card act-card-2">
+                    <div class="card-header">
+                        <span class="card-title">🏰 Act 2: Fort Kar-Vash</span>
+                        <span class="tag" style="background:#0c1e3d; color:#93c5fd;">0:45 – 1:45</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-meta">Infiltration & Slave Pens</div>
+                        <p>Sneaks past Blood-Dowsing Braziers that react to human blood. Reads the 15-year-old Sanctuary purge log, meets <strong>Old Geth</strong>, and obtains Quenching Dust.</p>
+                        <button class="btn-modal" onclick="openSceneModal('act2')">📖 Open Act 2 Details</button>
+                    </div>
+                </div>
+
+                <!-- ACT 3 -->
+                <div class="card act-card act-card-3">
+                    <div class="card-header">
+                        <span class="card-title">⚔️ Act 3: Amphitheater</span>
+                        <span class="tag" style="background:#422006; color:#fde68a;">1:45 – 3:15</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-meta">Boss: Overseer Vhol (Advanced Rank)</div>
+                        <p>Climactic duel over the magma pit. Winch lowers 10-year-old Elia every 2 rounds. Phase 2: Vhol smells Rashuk's red blood and goes into a manic bounty frenzy.</p>
+                        <button class="btn-modal" onclick="openSceneModal('act3')">📖 Open Act 3 Details</button>
+                    </div>
+                </div>
+
+                <!-- ACT 4 -->
+                <div class="card act-card act-card-4">
+                    <div class="card-header">
+                        <span class="card-title">⚖️ Act 4: The Horizon</span>
+                        <span class="tag" style="background:#064e3b; color:#a7f3d0;">3:15 – 3:45</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-meta">Moral Crossroads & Campaign Hook</div>
+                        <p>Rashuk's choice: Demonic Wrath vs. The Ashen Shield. Takes Vhol's Signet Ring, uncovers the 10,000-soul Grand Tithe map to <strong>Zul-Gaza</strong>, and plants the resistance seed.</p>
+                        <button class="btn-modal" onclick="openSceneModal('act4')">📖 Open Act 4 Details</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: MONSTER & BOSS DIRECTORY -->
+        <section id="monsters-section">
+            <div class="section-header">
+                <span>👹 Monster & Boss Roster (Interactive Stat Blocks)</span>
+                <span class="section-tag">Click Name for Full Card & Rollers</span>
+            </div>
+            
+            <div class="card">
+                <div class="card-body" style="padding:0;">
+                    <table class="guide-table">
+                        <thead>
+                            <tr>
+                                <th>Creature / NPC</th>
+                                <th>Tier / Rank</th>
+                                <th>AC</th>
+                                <th>HP</th>
+                                <th>Primary Attack</th>
+                                <th>Special Mechanics / Tell</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <span class="clickable-title" onclick="openMonsterModal('hound')">🐕 Bloodhound Chimera</span>
+                                </td>
+                                <td><span class="tag tag-intermediate">Intermediate</span></td>
+                                <td>13</td>
+                                <td>26</td>
+                                <td>Bite +5 (1d8+3 + Prone DC 12)</td>
+                                <td>Caustic split jaws, tracks fear & red blood</td>
+                                <td><button class="btn-roll" onclick="openMonsterModal('hound')">👁️ View</button></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="clickable-title" onclick="openMonsterModal('scout')">🏹 Iron Fang Scout</span>
+                                </td>
+                                <td><span class="tag tag-intermediate">Intermediate</span></td>
+                                <td>13</td>
+                                <td>18</td>
+                                <td>Crossbow +5 (1d8+3 + 1d4 poison)</td>
+                                <td>Fires from ledges, retreats when cornered</td>
+                                <td><button class="btn-roll" onclick="openMonsterModal('scout')">👁️ View</button></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="clickable-title" onclick="openMonsterModal('krug')">🪓 Captain Krug</span>
+                                </td>
+                                <td><span class="tag tag-intermediate">Intermediate Brute</span></td>
+                                <td>16</td>
+                                <td>48</td>
+                                <td>Spiked Cleaver +6 (2d6+4)</td>
+                                <td>Aggressive charge, sweeping arcs</td>
+                                <td><button class="btn-roll" onclick="openMonsterModal('krug')">👁️ View</button></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="clickable-title" onclick="openMonsterModal('hydra')">🐍 Gore-Leech Hydra</span>
+                                </td>
+                                <td><span class="tag tag-advanced">Advanced Beast</span></td>
+                                <td>14</td>
+                                <td>65</td>
+                                <td>3x Lamprey Bites +6 (1d10+3)</td>
+                                <td>Acid vomit (DC 13 Dex), attacks all factions</td>
+                                <td><button class="btn-roll" onclick="openMonsterModal('hydra')">👁️ View</button></td>
+                            </tr>
+                            <tr style="background:rgba(220, 38, 38, 0.08); border-left:3px solid var(--accent-crimson);">
+                                <td>
+                                    <span class="clickable-title" style="color:#fca5a5;" onclick="openMonsterModal('vhol')">👹 Overseer Vhol (Boss)</span>
+                                </td>
+                                <td><span class="tag tag-boss">CR 5 Advanced Boss</span></td>
+                                <td>17</td>
+                                <td>85</td>
+                                <td>2x Cleaver +7 (2d8+4) + Pitch Jet</td>
+                                <td>4 Arms, Boiling Pitch, 4x Battlefield Actions</td>
+                                <td><button class="btn-roll btn-roll-dmg" onclick="openMonsterModal('vhol')">⚔️ Boss Fight</button></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="clickable-title" style="color:#d8b4fe;" onclick="openMonsterModal('gortash')">👑 Inquisitor Gortash (Lore Profile)</span>
+                                </td>
+                                <td><span class="tag tag-saint">Saint Rank (Warlord)</span></td>
+                                <td>19</td>
+                                <td>175</td>
+                                <td>Bleeding Cross Halberd +10</td>
+                                <td>Crucifixion aura, Saint-tier holy-demonic magic</td>
+                                <td><button class="btn-roll" onclick="openMonsterModal('gortash')">📜 Intel</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: ENVIRONMENTS & HAZARDOUS ZONES -->
+        <section id="environments-section">
+            <div class="section-header">
+                <span>🌲 Environments & Hazardous Locations</span>
+                <span class="section-tag">Click for Deep Sensory & Mechanics</span>
+            </div>
+            <div class="grid-4">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">🌲 Rot-Wood Bog</span>
+                        <span class="tag-pill">Acid Rain & Quagmire</span>
+                    </div>
+                    <div class="card-body">
+                        <p>Petrified ironwood, black sulfur muck, poor visibility. Movement through deep mud costs double.</p>
+                        <button class="btn-modal" onclick="openLocationModal('bog')">👁️ Deep Biome Guide</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">🪨 Dead-Water Gulch</span>
+                        <span class="tag-pill">Chasm Bottleneck</span>
+                    </div>
+                    <div class="card-body">
+                        <p>20-ft basalt trench. Collapsed bridge prevents escape. High ground grants advantage on ranged attacks.</p>
+                        <button class="btn-modal" onclick="openLocationModal('gulch')">👁️ Deep Biome Guide</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">🏰 Fort Kar-Vash</span>
+                        <span class="tag-pill">Dowsing Braziers</span>
+                    </div>
+                    <div class="card-body">
+                        <p>Black basalt fortress. Emerald flames flare crimson-purple within 10 ft of human blood. Rafters DC 13.</p>
+                        <button class="btn-modal" onclick="openLocationModal('fort')">👁️ Deep Biome Guide</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">🌋 Sunken Amphitheater</span>
+                        <span class="tag-pill">Magma Slag Arena</span>
+                    </div>
+                    <div class="card-body">
+                        <p>Obsidian ring over boiling magma. Winch lowers crosses every 2 rounds on Init 20. Extreme heat hazard.</p>
+                        <button class="btn-modal btn-modal-red" onclick="openLocationModal('amphitheater')">👁️ Deep Biome Guide</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: KEY NPCS & ROLEPLAY -->
+        <section id="npcs-section">
+            <div class="section-header">
+                <span>👥 Key NPCs Directory</span>
+                <span class="section-tag">Stormwreck Style Profiles</span>
+            </div>
+            <div class="grid-3">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">🧪 Old Geth</span>
+                        <span class="tag" style="background:#064e3b; color:#a7f3d0;">Ally</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-meta">One-Eyed Goblin Apothecary</div>
+                        <p>Secretly comforts dying human stock. Recognizes human sorrow behind Rashuk's horns. Gifts Quenching Dust.</p>
+                        <button class="btn-modal" onclick="openNpcModal('geth')">🎭 Open NPC Profile</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">👧 Elia (10yo Captive)</span>
+                        <span class="tag" style="background:#1e1b4b; color:#c7d2fe;">Innocent</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-meta">Human Girl on Central Cross</div>
+                        <p>Mirror of Rashuk at age 10. Chained above magma. Rescuing her triggers Rashuk's protective vow.</p>
+                        <button class="btn-modal" onclick="openNpcModal('elia')">🎭 Open NPC Profile</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">👑 Inquisitor Gortash</span>
+                        <span class="tag" style="background:#450a0a; color:#fca5a5;">Arc Nemesis</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-meta">Saint of the Bleeding Cross (Zul-Gaza)</div>
+                        <p>Commanded the purge of Sanctuary 15 years ago. Building the Aethel-Engine with 10,000 human souls.</p>
+                        <button class="btn-modal btn-modal-red" onclick="openNpcModal('gortash')">🎭 Open NPC Profile</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: WORLD LOOT VAULT -->
+        <section id="loot-vault">
+            <div class="section-header">
+                <span>💰 World Loot Vault & Master Arsenal</span>
+                <span class="section-tag">Click Item Name for Full Dossier</span>
+            </div>
+            
+            <div class="card">
+                <div class="card-body" style="padding:0; overflow-x:auto;">
+                    <table class="loot-table">
+                        <thead>
+                            <tr>
+                                <th style="width:24%;">ITEM NAME (CLICK TO VIEW)</th>
+                                <th style="width:18%;">CATEGORY & RARITY</th>
+                                <th style="width:20%;">LOCATION / ORIGIN</th>
+                                <th style="width:14%;">💰 WORTH / COST</th>
+                                <th style="width:24%;">MECHANICS & IN-GAME EFFECT</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- CATEGORY 1: HEALING & RESTORATION -->
+                            <tr class="loot-row-header-heal"><td colspan="5">💚 HEALING & RESTORATION (POTIONS, HERBS & SALVES)</td></tr>
+                            <tr>
+                                <td><span class="loot-clickable" onclick="openItemModal('salve_ghost_poppy')">🍷 Ghost-Poppy Salve</span></td>
+                                <td><span class="tag tag-heal">HEAL • Rare Alchemical Salve</span></td>
+                                <td>Old Geth's Stash / Bog Foraging</td>
+                                <td style="font-family:'JetBrains Mono'; font-size:0.78rem; color:#facc15;">50 GP (500 SP)</td>
+                                <td><strong>Bonus Action:</strong> Restores <strong>2d6+1 HP</strong>, removes pain penalties & fear for 1h.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="loot-clickable" onclick="openItemModal('troll_blood_vial')">🧪 Concentrated Troll Blood Vial</span></td>
+                                <td><span class="tag tag-heal">HEAL • Uncommon Elixir</span></td>
+                                <td>Dead-Water Gulch Chasm Cache</td>
+                                <td style="font-family:'JetBrains Mono'; font-size:0.78rem; color:#facc15;">75 GP</td>
+                                <td><strong>Action:</strong> Regains <strong>3d8+3 HP</strong> over 3 rounds (1d8+1/rd); DC 12 Con or mild fever.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="loot-clickable" onclick="openItemModal('marsh_lichen_raw')">🌿 Rot-Wood Marsh Lichen (Raw)</span></td>
+                                <td><span class="tag tag-heal">REAGENT • Common Herb</span></td>
+                                <td>Petrified Tree Trunks (Rot-Wood)</td>
+                                <td style="font-family:'JetBrains Mono'; font-size:0.78rem; color:#facc15;">10 GP (100 SP)</td>
+                                <td>DC 12 Medicine/Herbalism: Stabilizes dying target with <strong>1 HP</strong>.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="loot-clickable" onclick="openItemModal('infernal_draught')">🩸 Infernal Blood-Essence Draught</span></td>
+                                <td><span class="tag tag-heal">HEAL • Rare Demonic Draught</span></td>
+                                <td>Fort Kar-Vash Altar Cache</td>
+                                <td style="font-family:'JetBrains Mono'; font-size:0.78rem; color:#facc15;">250 GP</td>
+                                <td><strong>Action:</strong> Restores <strong>4d4+4 HP</strong> + grants <strong>+1d4 to Strength checks & saves</strong> for 10 min.</td>
+                            </tr>
+
+                            <!-- CATEGORY 2: BUFFS, ALCHEMY & COMBAT ENHANCERS -->
+                            <tr class="loot-row-header-buff"><td colspan="5">⚡ BUFFS, ALCHEMY & COMBAT ENHANCERS</td></tr>
+                            <tr>
+                                <td><span class="loot-clickable" onclick="openItemModal('quenching_dust')">🧪 Alchemical Quenching Dust</span></td>
+                                <td><span class="tag tag-buff">TACTICAL • Rare Alchemy</span></td>
+                                <td>Gifted by Old Geth (Infirmary)</td>
+                                <td style="font-family:'JetBrains Mono'; font-size:0.78rem; color:#facc15;">120 GP (Priceless Gift)</td>
+                                <td>Thrown 20ft: Extinguishes magic braziers in 15ft for 3 min; <strong>blinds 1 round</strong> (DC 13 Dex).</td>
+                            </tr>
+                            <tr>
+                                <td><span class="loot-clickable" onclick="openItemModal('pitch_flask')">💣 Boiling Pitch Flask (2 Flasks)</span></td>
+                                <td><span class="tag tag-buff">EXPLOSIVE • Uncommon</span></td>
+                                <td>Iron Fang Supply Crates</td>
+                                <td style="font-family:'JetBrains Mono'; font-size:0.78rem; color:#facc15;">25 GP (250 SP) / ea</td>
+                                <td>Thrown 20ft: 5ft radius dealing <strong>2d6 Fire</strong> + <strong>1d4 ongoing burn</strong> per turn.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="loot-clickable" onclick="openItemModal('sulfur_smoke_pellets')">💨 Sulfur Smoke Pellets (3 Pellets)</span></td>
+                                <td><span class="tag tag-buff">TACTICAL • Common</span></td>
+                                <td>Iron Fang Scout Pouches</td>
+                                <td style="font-family:'JetBrains Mono'; font-size:0.78rem; color:#facc15;">20 GP (200 SP) / pouch</td>
+                                <td>Thrown 20ft: 15ft heavy smoke cloud for 1 min (Heavily Obscured; DC 11 Con or Poisoned).</td>
+                            </tr>
+                            <tr>
+                                <td><span class="loot-clickable" onclick="openItemModal('ironwood_resin')">🪨 Petrified Ironwood Resin</span></td>
+                                <td><span class="tag tag-buff">BUFF • Uncommon Reagent</span></td>
+                                <td>Rot-Wood Petrified Stumps</td>
+                                <td style="font-family:'JetBrains Mono'; font-size:0.78rem; color:#facc15;">40 GP</td>
+                                <td>Bonus Action on weapon: Next 3 hits deal <strong>+1d4 Piercing dmg</strong> & bypass resistance.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="loot-clickable" onclick="openItemModal('blight_incense')">🕯️ Blight-Nullifying Incense</span></td>
+                                <td><span class="tag tag-buff">TACTICAL • Uncommon</span></td>
+                                <td>Old Geth's Secret Cache</td>
+                                <td style="font-family:'JetBrains Mono'; font-size:0.78rem; color:#facc15;">60 GP</td>
+                                <td>Burns 1h: Masks human scent in 30ft; grants <strong>+5 Stealth</strong> vs Bloodhounds & demon sniffers.</td>
+                            </tr>
+
+                            <!-- CATEGORY 3: WEAPONS & OFFENSIVE ARSENAL -->
+                            <tr class="loot-row-header-weapon"><td colspan="5">⚔️ WEAPONS & OFFENSIVE ARSENAL</td></tr>
+                            <tr>
+                                <td><span class="loot-clickable" onclick="openItemModal('krug_cleaver')">🪓 Captain Krug's Spiked Cleaver</span></td>
+                                <td><span class="tag tag-weapon">WEAPON • Masterwork Heavy</span></td>
+                                <td>Captain Krug Boss Drop</td>
+                                <td style="font-family:'JetBrains Mono'; font-size:0.78rem; color:#facc15;">350 GP</td>
+                                <td><strong>+1 to hit & dmg</strong> (1d8+1 / 1d10+1 slash); <strong>Crits on 19-20</strong> vs bleeding targets!</td>
+                            </tr>
+                            <tr>
+                                <td><span class="loot-clickable" onclick="openItemModal('vhol_bone_saw')">🪚 Overseer Vhol's Obsidian Bone-Saw</span></td>
+                                <td><span class="tag tag-weapon">WEAPON • Uncommon Magic</span></td>
+                                <td>Overseer Vhol Boss Loot</td>
+                                <td style="font-family:'JetBrains Mono'; font-size:0.78rem; color:#facc15;">500 GP</td>
+                                <td><strong>+1 magic blade</strong> (1d6+1 slash); Crit/Nat 18+ inflicts <strong>Deep Bleed</strong> (1d4 necrotic/rd).</td>
+                            </tr>
+                            <tr>
+                                <td><span class="loot-clickable" onclick="openItemModal('scout_heavy_crossbow')">🏹 Iron Fang Scout Heavy Crossbow (+1)</span></td>
+                                <td><span class="tag tag-weapon">WEAPON • Uncommon Ranged</span></td>
+                                <td>Elite Marksman Drop</td>
+                                <td style="font-family:'JetBrains Mono'; font-size:0.78rem; color:#facc15;">250 GP</td>
+                                <td><strong>+1 to hit & dmg</strong> (1d10+1 pierce, 100/400 range); Integrated scope <strong>ignores half cover</strong>!</td>
+                            </tr>
+                            <tr>
+                                <td><span class="loot-clickable" onclick="openItemModal('winch_chain_flail')">⛓️ Heavy Winch Chain-Flail</span></td>
+                                <td><span class="tag tag-weapon">WEAPON • Martial Reach</span></td>
+                                <td>Fort Kar-Vash Winch Gantry</td>
+                                <td style="font-family:'JetBrains Mono'; font-size:0.78rem; color:#facc15;">100 GP</td>
+                                <td><strong>1d8 bludgeon (10ft Reach)</strong>; Bonus Action: DC 13 Str check to grapple or yank target 5ft closer.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="loot-clickable" onclick="openItemModal('serrated_trench_dagger')">🗡️ Serrated Trench Dagger</span></td>
+                                <td><span class="tag tag-weapon">WEAPON • Finesse Light</span></td>
+                                <td>Dead Convoy Guard Sheath</td>
+                                <td style="font-family:'JetBrains Mono'; font-size:0.78rem; color:#facc15;">35 GP</td>
+                                <td><strong>1d4 pierce/slash</strong>; Hidden sheath grants <strong>Advantage on Sleight of Hand</strong> to conceal.</td>
+                            </tr>
+
+                            <!-- CATEGORY 4: ARMOR, GEAR & DEFENSIVE RELICS -->
+                            <tr class="loot-row-header-defense"><td colspan="5">🛡️ ARMOR, GEAR & DEFENSIVE RELICS</td></tr>
+                            <tr>
+                                <td><span class="loot-clickable" onclick="openItemModal('centurion_pauldron')">🛡️ Centurion Spiked Pauldron</span></td>
+                                <td><span class="tag tag-defense">ARMOR • Uncommon Gear</span></td>
+                                <td>Fort Kar-Vash Armory</td>
+                                <td style="font-family:'JetBrains Mono'; font-size:0.78rem; color:#facc15;">300 GP</td>
+                                <td>Grants <strong>+1 AC</strong>; Attacker takes <strong>1d4 piercing damage</strong> when grappling or striking in melee.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="loot-clickable" onclick="openItemModal('sulfur_mask')">🥽 Sulfur-Filter Breathing Mask</span></td>
+                                <td><span class="tag tag-defense">GEAR • Uncommon Utility</span></td>
+                                <td>Slave Overseer Quarters</td>
+                                <td style="font-family:'JetBrains Mono'; font-size:0.78rem; color:#facc15;">50 GP</td>
+                                <td>Grants <strong>Advantage on Con Saves</strong> vs toxic gases, sulfur vents, smoke, and pitch sprays.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="loot-clickable" onclick="openItemModal('ashen_cloak')">🥋 Ashen-Weave Cloak</span></td>
+                                <td><span class="tag tag-defense">GEAR • Uncommon (Attune)</span></td>
+                                <td>Sunken Amphitheater Cache</td>
+                                <td style="font-family:'JetBrains Mono'; font-size:0.78rem; color:#facc15;">250 GP</td>
+                                <td>Grants <strong>Advantage on Stealth checks</strong> in ash, smoke, fog, and murky swamp terrain.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="loot-clickable" onclick="openItemModal('slave_shackles')">⛓️ Slave-Master's Shackles & Key</span></td>
+                                <td><span class="tag tag-defense">UTILITY • Hardened Volcanic Iron</span></td>
+                                <td>Carried by Overseer Vhol</td>
+                                <td style="font-family:'JetBrains Mono'; font-size:0.78rem; color:#facc15;">40 GP</td>
+                                <td>Hardened volcanic iron: <strong>DC 20 Athletics</strong> or <strong>DC 18 Thieves' Tools</strong> to break or pick.</td>
+                            </tr>
+
+                            <!-- CATEGORY 5: LORE DOCUMENTS, MAPS & QUEST ARTIFACTS -->
+                            <tr class="loot-row-header-quest"><td colspan="5">📜 LORE DOCUMENTS, MAPS & QUEST ARTIFACTS</td></tr>
+                            <tr>
+                                <td><span class="loot-clickable" onclick="openItemModal('inquisitor_signet')">💍 Inquisitorial Signet Ring</span></td>
+                                <td><span class="tag tag-quest">QUEST • Rare Key Artifact</span></td>
+                                <td>Worn by Overseer Vhol</td>
+                                <td style="font-family:'JetBrains Mono'; font-size:0.78rem; color:#facc15;">Priceless Imperial Seal</td>
+                                <td>Authorizes passage through military checkpoints & commandeers regional garrison courier lockboxes.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="loot-clickable" onclick="openItemModal('grand_tithe_map')">📜 Grand Tithe Supply Map to Zul-Gaza</span></td>
+                                <td><span class="tag tag-quest">CAMPAIGN KEY • Rare Intel</span></td>
+                                <td>Fort Kar-Vash Central Archive</td>
+                                <td style="font-family:'JetBrains Mono'; font-size:0.78rem; color:#facc15;">Priceless Strategic Map</td>
+                                <td>Details 3 supply fortresses funneling <strong>10,000 human souls</strong> to Zul-Gaza for the Aethel-Engine.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="loot-clickable" onclick="openItemModal('directive_409')">📜 Courier Directive 409 (Purge Order)</span></td>
+                                <td><span class="tag tag-quest">STORY • Rare Manuscript</span></td>
+                                <td>Convoy Commander Satchel</td>
+                                <td style="font-family:'JetBrains Mono'; font-size:0.78rem; color:#facc15;">Priceless Evidence</td>
+                                <td>Bloodstained order signed by <strong>Grand Inquisitor Gortash</strong> ordering the purge of Sanctuary.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="loot-clickable" onclick="openItemModal('obsidian_vault_key')">🔑 Obsidian Vault Master Key</span></td>
+                                <td><span class="tag tag-quest">QUEST KEY • Uncommon Iron Key</span></td>
+                                <td>Carried by Overseer Vhol</td>
+                                <td style="font-family:'JetBrains Mono'; font-size:0.78rem; color:#facc15;">75 GP (Unlocks Armory)</td>
+                                <td>Unlocks Fort Kar-Vash armory, drainage grates, and slave pen master locking bars.</td>
+                            </tr>
+
+                            <!-- CATEGORY 6: RATIONS, PROVISIONS & FIELD FORAGING -->
+                            <tr class="loot-row-header-ration"><td colspan="5">🍖 RATIONS, PROVISIONS & FIELD FORAGING</td></tr>
+                            <tr>
+                                <td><span class="loot-clickable" onclick="openItemModal('boar_jerky')">🥩 Dried Salted Boar Jerky (5 Rations)</span></td>
+                                <td><span class="tag tag-ration">RATION • Field Provisions</span></td>
+                                <td>Convoy Supply Pack</td>
+                                <td style="font-family:'JetBrains Mono'; font-size:0.78rem; color:#facc15;">10 SP / pouch</td>
+                                <td>Sustains for 1 day; restores <strong>+1 extra Hit Die</strong> during a Short Rest.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="loot-clickable" onclick="openItemModal('black_hardtack')">🍞 Black Rye Hardtack (8 Biscuits)</span></td>
+                                <td><span class="tag tag-ration">RATION • Dense Bread</span></td>
+                                <td>Slave Camp Mess Hall</td>
+                                <td style="font-family:'JetBrains Mono'; font-size:0.78rem; color:#facc15;">5 SP / sack</td>
+                                <td>Dense rye bread baked with ground chicory; sustains hunger for 12 full hours.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="loot-clickable" onclick="openItemModal('spring_water')">💧 Purified Spring Water Canteen</span></td>
+                                <td><span class="tag tag-ration">RATION • Fresh Water</span></td>
+                                <td>Old Geth's Workshop</td>
+                                <td style="font-family:'JetBrains Mono'; font-size:0.78rem; color:#facc15;">2 SP / canteen</td>
+                                <td>1 quart of fresh, sulfur-free pure drinking water.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 6: QUICK RULES & DIFFICULTY DCS -->
+        <section id="cheat-sheet">
+            <div class="section-header">
+                <span>⚖️ DM Rules & Difficulty Cheat-Sheet</span>
+                <span class="section-tag">2-Second Glance</span>
+            </div>
+            <div class="grid-3">
+                <div class="card">
+                    <div class="card-header"><span class="card-title">🎯 Table Difficulty DCs</span></div>
+                    <div class="card-body">
+                        <p><strong>DC 10 (Easy):</strong> Spot obvious tracks, scale dry wooden wall.</p>
+                        <p><strong>DC 12 (Moderate):</strong> Conceal red blood in mud, resist hound knock-down.</p>
+                        <p><strong>DC 14 (Hard):</strong> Evade Blood-Dowsing Braziers, dodge Vhol's Boiling Pitch Jet.</p>
+                        <p><strong>DC 16 (Very Hard):</strong> Sever winch chain while balancing on magma rim.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header"><span class="card-title">💥 Combat & Crits</span></div>
+                    <div class="card-body">
+                        <p><strong>Brutal Crits:</strong> Max Base Dmg + 1 Normal Roll + Modifiers.</p>
+                        <p><strong>Intent to Attack:</strong> Initiative is rolled immediately before any declared attack resolves.</p>
+                        <p><strong>Ability Checks in Combat:</strong> Consumes full Action.</p>
+                        <p><strong>Cover:</strong> In Cover (+2 AC) | Total Cover (Un-targetable).</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header"><span class="card-title">💀 0 HP & Death Saves</span></div>
+                    <div class="card-body">
+                        <p><strong>DC 10 Save:</strong> Success = stabilize with 1 HP (Prone). Failure = 1 Strike.</p>
+                        <p><strong>2 Strikes = Permanent Death.</strong></p>
+                        <p><strong>Damage while at 0 HP:</strong> Taking damage 2 separate times = instant permanent death.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- DIALOG MODAL (MAL'GOROTH & STORMWRECK ARCHITECTURE) -->
+    <dialog id="dm-modal" class="dm-modal">
+        <div class="modal-wrapper">
+            <div class="modal-header">
+                <h3 id="modal-title">⚔️ Modal Window</h3>
+                <button class="modal-close-btn" onclick="closeDmModal()">✕</button>
+            </div>
+            <div class="modal-dice-banner">
+                <div class="modal-dice-output" id="modal-dice-log">🎲 ROLL RESULT: Ready for rolls... (Click any button below)</div>
+                <div class="modal-dice-quick-btns">
+                    <button class="btn-die" onclick="rollDie(20)">d20</button>
+                    <button class="btn-die" onclick="rollDie(6)">d6</button>
+                    <button class="btn-die" onclick="rollDie(8)">d8</button>
+                    <button class="btn-die" onclick="clearModalLog()">Clear</button>
+                </div>
+            </div>
+            <div class="modal-body" id="modal-content">
+                <!-- Injected via JavaScript -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn-roll" onclick="closeDmModal()">Done / Close</button>
+            </div>
+        </div>
+    </dialog>
+
+    <!-- FIXED BOTTOM DICE CONSOLE -->
+    <footer class="dice-console">
+        <div class="console-output" id="dice-log">🎲 Dice Console Ready. Click any action on the screen to roll behind the DM screen.</div>
+        <div class="quick-dice-bar">
+            <button class="btn-die" onclick="rollDie(4)">d4</button>
+            <button class="btn-die" onclick="rollDie(6)">d6</button>
+            <button class="btn-die" onclick="rollDie(8)">d8</button>
+            <button class="btn-die" onclick="rollDie(10)">d10</button>
+            <button class="btn-die" onclick="rollDie(12)">d12</button>
+            <button class="btn-die" onclick="rollDie(20)">d20</button>
+            <button class="btn-die" onclick="rollDie(100)">d100</button>
+            <button class="btn-die" style="border-color:var(--accent-crimson); color:var(--accent-crimson-soft);" onclick="clearLog()">Clear</button>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT DATA & INTERACTION LOGIC -->
+    <script>
+        // MONSTER & ENEMY DATA (EXACT MAL'GOROTH FORMAT)
+        const MONSTER_DATA = {
+            hound: {
+                name: "Bloodhound Chimera",
+                rank: "Intermediate Rank War-Beast",
+                icon: "🐕",
+                cr: "CR 1 (200 XP)",
+                init: "+3",
+                type: "Medium Fiend (Demon Beast), Neutral Evil",
+                lineage: "Spawn of the Blood-Kennels",
+                stats: { str: 14, dex: 16, con: 14, int: 4, wis: 14, cha: 6 },
+                details: "Darkvision 60 ft., Passive Perception 14 • Stealth +5 • Immune: Charmed",
+                ac: 13,
+                hp: 26,
+                maxHp: 26,
+                currentHp: 26,
+                speed: "40 ft.",
+                actions: [
+                    {
+                        name: "Barbed Split-Jaw Bite",
+                        desc: "Reach 5ft. +5 to hit, 8 (1d8+3) piercing + 3 (1d6) acid damage. Target must make DC 12 Str save or fall Prone.",
+                        buttons: [
+                            { label: "🎲 Bite (+5)", func: "rollAttack('Hound Bite', 5, '1d8+3', '1d6', 'piercing+acid')" },
+                            { label: "💥 Dmg (1d8+3+1d6)", isDmg: true, func: "rollDamage('Hound Bite', '1d8+3', '1d6', 8, 'piercing+acid')" }
+                        ]
+                    }
+                ],
+                desc: "A lean, hairless demonic hound with hardened chitin plating over its skull. Its lower jaw splits into two barbed mandibles dripping with corrosive black saliva.",
+                philosophy: "Driven purely by predatory instinct and conditioning. It recognizes obedience to whip and horn, but goes into uncontrollable frenzy when it smells red human blood.",
+                problem: "Hunting Rashuk through the Rot-Wood Bog. If it tastes Rashuk's blood, it will howl in manic recognition, alerting the squad.",
+                morals: "Feral, unyielding, easily blinded by pungent alchemical smoke or fire.",
+                tactics: "Leaps at the nearest target to knock them prone, allowing allies to swarm with Advantage.",
+                lootTable: [
+                    "2x Intact Chitin Skulls (Used for light bucklers, 15 SP each)",
+                    "1x Barbed Venom Sac (Can coat 3 weapon strikes with 1d6 acid)",
+                    "Iron Tracking Collar with garrison stamp #409"
+                ]
+            },
+            scout: {
+                name: "Iron Fang Scout",
+                rank: "Intermediate Rank Sniper",
+                icon: "🏹",
+                cr: "CR 1/2 (100 XP)",
+                init: "+3",
+                type: "Small Humanoid (Goblin Demon), Lawful Evil",
+                lineage: "Iron Fang Mercenary Cohort",
+                stats: { str: 8, dex: 16, con: 12, int: 10, wis: 12, cha: 8 },
+                details: "Darkvision 60 ft., Passive Perception 11 • Stealth +7, Acrobatics +5",
+                ac: 13,
+                hp: 18,
+                maxHp: 18,
+                currentHp: 18,
+                speed: "30 ft., climb 20 ft.",
+                actions: [
+                    {
+                        name: "Repeating Poison Crossbow",
+                        desc: "Range 80/320 ft. +5 to hit, 7 (1d8+3) piercing + 3 (1d4) poison damage.",
+                        buttons: [
+                            { label: "🎲 Crossbow (+5)", func: "rollAttack('Poison Crossbow', 5, '1d8+3', '1d4', 'piercing+poison')" },
+                            { label: "💥 Dmg (1d8+3+1d4)", isDmg: true, func: "rollDamage('Poison Crossbow', '1d8+3', '1d4', 8, 'piercing+poison')" }
+                        ]
+                    },
+                    {
+                        name: "Bone Dagger",
+                        desc: "Reach 5ft. +5 to hit, 5 (1d4+3) piercing damage.",
+                        buttons: [
+                            { label: "🎲 Dagger (+5)", func: "rollAttack('Bone Dagger', 5, '1d4+3', '0', 'piercing')" },
+                            { label: "💥 Dmg (1d4+3)", isDmg: true, func: "rollDamage('Bone Dagger', '1d4+3', '0', 4, 'piercing')" }
+                        ]
+                    }
+                ],
+                desc: "A wiry, yellow-eyed scout draped in sodden moss cloaks, perching on petrified branches with a cranked iron crossbow.",
+                philosophy: "Cowardly and sadistic. Loves shooting trapped prey from safety, but flees or surrenders the instant their frontline brute falls.",
+                problem: "Sniping from the high ridge during the Dead-Water Gulch ambush.",
+                morals: "Self-preservation above all. Can be interrogated or intimidated easily with a DC 11 check.",
+                tactics: "Maintains high ground, uses Nimble Escape to bonus-action Hide after firing.",
+                lootTable: [
+                    "Repeating Crossbow with 14 poison-tipped bolts",
+                    "Pouch with 12 Silver Pieces (SP)",
+                    "Flask of Bitter Marsh Gin"
+                ]
+            },
+            krug: {
+                name: "Captain Krug",
+                rank: "Intermediate Rank Heavy Brute",
+                icon: "🪓",
+                cr: "CR 2 (450 XP)",
+                init: "+1",
+                type: "Medium Fiend (Orcish Demon), Lawful Evil",
+                lineage: "Iron Fang Syndicate Commander",
+                stats: { str: 18, dex: 12, con: 16, int: 9, wis: 10, cha: 12 },
+                details: "Darkvision 60 ft., Passive Perception 10 • Athletics +6, Intimidation +3",
+                ac: 16,
+                hp: 48,
+                maxHp: 48,
+                currentHp: 48,
+                speed: "30 ft.",
+                actions: [
+                    {
+                        name: "Spiked Heavy Cleaver",
+                        desc: "Reach 5ft. +6 to hit, 11 (2d6+4) slashing damage.",
+                        buttons: [
+                            { label: "🎲 Cleaver (+6)", func: "rollAttack('Krug Cleaver', 6, '2d6+4', '0', 'slashing')" },
+                            { label: "💥 Dmg (2d6+4)", isDmg: true, func: "rollDamage('Krug Cleaver', '2d6+4', '0', 12, 'slashing')" }
+                        ]
+                    },
+                    {
+                        name: "Tusk Gore",
+                        desc: "Reach 5ft. +6 to hit, 8 (1d8+4) piercing damage.",
+                        buttons: [
+                            { label: "🎲 Tusk Gore (+6)", func: "rollAttack('Tusk Gore', 6, '1d8+4', '0', 'piercing')" },
+                            { label: "💥 Dmg (1d8+4)", isDmg: true, func: "rollDamage('Tusk Gore', '1d8+4', '0', 8, 'piercing')" }
+                        ]
+                    }
+                ],
+                desc: "A hulking, four-tusked orcish demon encased in rusted iron lamellar armor. His tusks are engraved with kill tallies.",
+                philosophy: "Believes might makes right. Views Rashuk as an upstart half-breed mercenary who stepped out of line.",
+                problem: "Leading the squad to bring Rashuk's head back to Fort Kar-Vash.",
+                morals: "Arrogant and brutal, will not retreat even when critically wounded.",
+                tactics: "Charges in recklessly to lock Rashuk in melee so scouts can pick him off.",
+                lootTable: [
+                    "Heavy Spiked Cleaver (Martial weapon, 2d6 slashing, 20 GP value)",
+                    "Iron Tusk Syndicate Contract badge",
+                    "Pouch containing 2 Gold Pieces and 18 Silver Pieces"
+                ]
+            },
+            hydra: {
+                name: "Gore-Leech Hydra",
+                rank: "Advanced Rank Swamp Apex",
+                icon: "🐍",
+                cr: "CR 4 (1,100 XP)",
+                init: "+1",
+                type: "Large Monstrosity, Unaligned",
+                lineage: "Rot-Wood Mire Apex Predator",
+                stats: { str: 18, dex: 12, con: 16, int: 3, wis: 10, cha: 5 },
+                details: "Darkvision 60 ft., Tremorsense 30 ft., Passive Perception 14 • Immune: Blinded, Stunned",
+                ac: 14,
+                hp: 65,
+                maxHp: 65,
+                currentHp: 65,
+                speed: "30 ft., swim 40 ft.",
+                actions: [
+                    {
+                        name: "Multiattack (3 Lamprey Bites)",
+                        desc: "Makes three Lamprey Bite attacks against any targets in reach.",
+                        buttons: [
+                            { label: "🎲 Bite 1 (+6)", func: "rollAttack('Hydra Bite 1', 6, '1d10+4', '0', 'piercing')" },
+                            { label: "🎲 Bite 2 (+6)", func: "rollAttack('Hydra Bite 2', 6, '1d10+4', '0', 'piercing')" },
+                            { label: "🎲 Bite 3 (+6)", func: "rollAttack('Hydra Bite 3', 6, '1d10+4', '0', 'piercing')" }
+                        ]
+                    },
+                    {
+                        name: "Acid Bile Vomit (Recharge 5-6)",
+                        desc: "20-ft line spray. DC 13 Dex save or 14 (4d6) acid damage.",
+                        buttons: [
+                            { label: "⚡ Recharge (5-6)", func: "rollRecharge('Hydra Bile')" },
+                            { label: "💥 Dmg (4d6 Acid)", isDmg: true, func: "rollDamage('Hydra Acid Bile', '4d6', '0', 24, 'acid')" }
+                        ]
+                    }
+                ],
+                desc: "A massive, slick-skinned bog monstrosity with three thick, lamprey-like heads lined with concentric rings of serrated teeth.",
+                philosophy: "Mindless hunger. Awakened by the smell of fresh blood in the Dead-Water Gulch.",
+                problem: "Attacks both mercenaries and trapped runaways in the ravine bottleneck.",
+                morals: "Fears fire; severing a head causes it to recoil.",
+                tactics: "Attempts to grapple prey with its maw and drag them under the black bog water.",
+                lootTable: [
+                    "3x Concentric Lamprey Jaws (Crafting component for serrated daggers)",
+                    "Acid Bile Gland (Can be distilled into 2 flasks of Alchemist's Acid)",
+                    "Swallowed iron lockbox with 15 SP"
+                ]
+            },
+            vhol: {
+                name: "Overseer Vhol",
+                rank: "CR 5 Advanced-Rank Centurion (Boss)",
+                icon: "👹",
+                cr: "CR 5 (1,800 XP)",
+                init: "+2",
+                type: "Large Fiend (Demon Centurion), Lawful Evil",
+                lineage: "Imperial Commander of Fort Kar-Vash",
+                stats: { str: 18, dex: 14, con: 16, int: 12, wis: 10, cha: 14 },
+                details: "Darkvision 120 ft., Passive Perception 13 • Athletics +7, Intimidation +5 • Saves: Str +7, Con +6, Cha +5",
+                ac: 17,
+                hp: 85,
+                maxHp: 85,
+                currentHp: 85,
+                speed: "30 ft.",
+                actions: [
+                    {
+                        name: "Executioner Cleaver Multiattack",
+                        desc: "Reach 5ft. Two sweeping greatcleaver attacks. +7 to hit, 13 (2d8+4) slashing. On hit: DC 14 Str save or pushed 10 ft toward magma.",
+                        buttons: [
+                            { label: "🎲 Cleaver 1 (+7)", func: "rollAttack('Vhol Cleaver 1', 7, '2d8+4', '0', 'slashing')" },
+                            { label: "🎲 Cleaver 2 (+7)", func: "rollAttack('Vhol Cleaver 2', 7, '2d8+4', '0', 'slashing')" },
+                            { label: "💥 Dmg (2d8+4)", isDmg: true, func: "rollDamage('Vhol Cleaver', '2d8+4', '0', 16, 'slashing')" }
+                        ]
+                    },
+                    {
+                        name: "Boiling Pitch Spray (Recharge 5-6)",
+                        desc: "15-ft cone. DC 14 Dex save or 10 (3d6) fire + 3 (1d6) acid damage, and burns for 1d4 fire on next turn.",
+                        buttons: [
+                            { label: "⚡ Recharge (5-6)", func: "rollRecharge('Vhol Pitch Spray')" },
+                            { label: "💥 Dmg (3d6 Fire + 1d6 Acid)", isDmg: true, func: "rollDamage('Vhol Pitch Spray', '3d6', '1d6', 18, 'fire+acid')" }
+                        ]
+                    },
+                    {
+                        name: "Centurion's Buckler (Reaction)",
+                        desc: "Adds +2 to AC against one melee attack that would hit him using his lower buckler arm.",
+                        buttons: [
+                            { label: "🛡️ Buckler Reaction (+2 AC)", func: "logRoll('🛡️ Vhol uses Centurion Buckler! AC increases to 19 for this attack.')" }
+                        ]
+                    }
+                ],
+                battlefieldActions: {
+                    phase1: [
+                        {
+                            name: "1. Winch of the Damned (Initiative Count 20)",
+                            desc: "The central iron winch shrieks and lowers the 3 crucifixion crosses 5 feet closer to the boiling magma slag. Captives and nearby creatures take 1d6 heat damage.",
+                            btn: { label: "⚙️ Trigger Winch Lower", func: "logRoll('⚙️ Battlefield Action: Central winch lowers crosses 5 ft closer to magma! Captives take 1d6 heat damage.')" }
+                        },
+                        {
+                            name: "2. Volcanic Sulfur Vent Eruption",
+                            desc: "Vhol stomps the dais; a pressurized sulfur vent erupts in a 15-ft radius. DC 13 Con save or 2d6 poison/fire damage and poisoned for 1 round.",
+                            btn: { label: "🌋 Vent Eruption (DC 13 Con)", func: "logRoll('🌋 Battlefield Action: Volcanic Sulfur Vent erupts! DC 13 Con save or 2d6 poison/fire damage and Poisoned.')" }
+                        }
+                    ],
+                    phase2: [
+                        {
+                            name: "1. Magma Slag Splash Wave (<50% HP)",
+                            desc: "Vhol slams his cleaver into the magma rim, splashing molten rock in a 20-ft cone. DC 14 Dex save or 3d6 fire damage; floor becomes burning slag (1d6 fire on contact).",
+                            btn: { label: "🌊 Slag Wave (DC 14 Dex)", func: "logRoll('🌊 Battlefield Action: Magma Slag Splash Wave! DC 14 Dex save or 3d6 fire damage + floor ignites.')" }
+                        },
+                        {
+                            name: "2. Imperial Mana-Focus Pulse (<50% HP)",
+                            desc: "The regional mana-focus atop the central spire pulses with soul energy. All creatures with living blood make DC 13 Con save or take 2d8 necrotic damage and get dragged 10 ft toward center.",
+                            btn: { label: "🔮 Mana-Focus Pulse (DC 13 Con)", func: "logRoll('🔮 Battlefield Action: Mana-Focus Pulse! DC 13 Con save or 2d8 necrotic damage + 10 ft pull.')" }
+                        }
+                    ]
+                },
+                desc: "A towering 9-foot-tall demon clad in spiked black plate armor with four muscular arms. He wields an enormous executioner cleaver and wears a pressurized boiler of boiling pitch on his back.",
+                philosophy: "Devout enforcer of the Grand Tithe. Believes humans are strictly fuel for the Hegemony's Aethel-Engine, and that half-breeds are an unforgivable stain to be exterminated.",
+                problem: "Presiding over the public crucifixion sacrifice of 3 humans (including 10yo Elia) to consecrate Fort Kar-Vash's mana-focus.",
+                morals: "Sadistic, unyielding, obsessed with earning praise and noble titles from Grand Inquisitor Gortash.",
+                tactics: "Controls the center arena platform, using Pitch Spray to herd Rashuk toward the magma rim while the winch lowers the crosses.",
+                lootTable: [
+                    "Inquisitorial Signet Ring (Authorizes travel as Imperial Bounty Hunter)",
+                    "Grand Tithe Route Manifest (Reveals Zul-Gaza & Inquisitor Gortash)",
+                    "Executioner's Dread Cleaver (2d8 slashing, requires 18 Str)",
+                    "Alchemical Pitch Fuel Tank (3 charges of Pitch Spray)",
+                    "Pouch containing 15 Gold Pieces (GP)"
+                ]
+            },
+            gortash: {
+                name: "Grand Inquisitor Gortash",
+                rank: "Saint-Rank Warlord (Campaign Nemesis)",
+                icon: "👑",
+                cr: "CR 14 (11,500 XP)",
+                init: "+3",
+                type: "Medium Fiend (Demon Lord), Lawful Evil",
+                lineage: "Saint of the Bleeding Cross",
+                stats: { str: 20, dex: 16, con: 18, int: 18, wis: 16, cha: 20 },
+                details: "Truesight 60 ft., Passive Perception 17 • Insight +7, Intimidation +9, Religion +8 • Saves: Str +9, Con +8, Wis +7, Cha +9",
+                ac: 19,
+                hp: 175,
+                maxHp: 175,
+                currentHp: 175,
+                speed: "35 ft., fly 60 ft.",
+                actions: [
+                    {
+                        name: "Halberd of the Bleeding Cross",
+                        desc: "Reach 10ft. +10 to hit, 16 (2d10+5) slashing + 9 (2d8) radiant/necrotic damage.",
+                        buttons: [
+                            { label: "🎲 Halberd (+10)", func: "rollAttack('Gortash Halberd', 10, '2d10+5', '2d8', 'slashing+necrotic')" },
+                            { label: "💥 Dmg (2d10+5+2d8)", isDmg: true, func: "rollDamage('Gortash Halberd', '2d10+5', '2d8', 20, 'slashing+necrotic')" }
+                        ]
+                    }
+                ],
+                desc: "A magnificent and terrifying demon lord adorned in gold-trimmed obsidian plate, wearing a crown of carved bone over a pure white mask weeping black tears.",
+                philosophy: "The ultimate architect of human eradication and demonic supremacy. 15 years ago, he personally ordered the eradication of Sanctuary.",
+                problem: "Currently in Zul-Gaza overseeing the construction of the Aethel-Engine with 10,000 human souls.",
+                morals: "Cold, aristocratic, unwavering conviction that all hybrids are cosmic blights.",
+                tactics: "Fights with terrifying grace and divine-demonic spellcraft. He is the overarching campaign goal.",
+                lootTable: [
+                    "Halberd of the Bleeding Cross (Artifact)",
+                    "Crown of the Weeping Inquisitor",
+                    "Imperial Sovereign Decree from the High Council"
+                ]
+            }
+        };
+
+        // SCENE DATA
+        const SCENE_DATA = {
+            act1: {
+                title: "🌲 Act 1: The Bloodhound Hunt (0:00 – 0:45)",
+                content: `
+                    <h4>🎬 Scene Summary & Pacing</h4>
+                    <p>High-speed, terrifying nighttime pursuit through the Rot-Wood Bog. Rashuk has decapitated a sadistic transport commander to save a 10-year-old human boy and fled with the commander's locked satchel. Mercenaries and Bloodhound Chimeras are hunting him down.</p>
+                    
+                    <h4>📜 Read-Aloud Box (Opening Beat)</h4>
+                    <div class="modal-read-aloud">
+                        "The black rain comes down in violent sheets, stinging your eyes and hissing against your hot iron plate. Behind you through the suffocating fog, the sickly green glow of alchemical torches dances across the petrified trees. The wet, chittering howl of the Bloodhound Chimeras reverberates through your chest, followed by the blast of an imperial war-horn. You slide down the muddy bank into the Dead-Water Gulch. You are out of running room. It is time to turn from prey to predator."
+                    </div>
+
+                    <h4>⚔️ Combat Encounter: The Dead-Water Gulch</h4>
+                    <p><strong>Enemies:</strong> 2x Bloodhound Chimeras + 1x Captain Krug + 2x Iron Fang Scouts.</p>
+                    <p><strong>Tactical Goal:</strong> Rashuk uses Advanced-Rank maneuvers (Riposte, Trip Attack, Action Surge) to annihilate the pursuers in the narrow 20-ft ravine.</p>
+
+                    <h4>⚠️ The Crimson Blood Hazard</h4>
+                    <div class="yellow-box">
+                        <strong>DM Trigger:</strong> A stray bolt grazes Rashuk's face, drawing bright red human blood. Krug sees it before he dies.<br>
+                        <strong>Check:</strong> DC 12 Sleight of Hand / Athletics to stomp Krug's head into the mud and smear black bog muck over the red stain before anyone else confirms it.
+                    </div>
+
+                    <h4>📜 Confirming Gortash's Name</h4>
+                    <p>Prying open the dead commander's brass satchel reveals Directive 409 sealed with <em>A Crown of Bone Piercing a Weeping Eye</em>. Signed: <strong>Grand Inquisitor Gortash</strong>. For 15 years, the nightmare had no name—now Rashuk knows his target.</p>
+                `
+            },
+            act2: {
+                title: "🏰 Act 2: The Salt-Rot Citadel (0:45 – 1:45)",
+                content: `
+                    <h4>🎬 Scene Summary & Atmosphere</h4>
+                    <p>Rashuk infiltrates Fort Kar-Vash, a jagged black-basalt stronghold perched over a bubbling sulfur rift. Hanging gibbets hold sun-bleached slave bones. The stench of boiling pitch and burning sulfur fills the air.</p>
+
+                    <h4>🕯️ Hazard: Blood-Dowsing Braziers</h4>
+                    <div class="yellow-box">
+                        <strong>Mechanic:</strong> Emerald alchemical flames flare violently into purple-crimson within 10 ft of human blood.<br>
+                        <strong>Infiltration:</strong> DC 13 Acrobatics to scale soot-stained rafters, or DC 13 Sleight of Hand to douse brazier flue chains with thrown daggers.
+                    </div>
+
+                    <h4>📜 The Dissection Archives (Lore Drop)</h4>
+                    <div class="modal-read-aloud">
+                        "PURIFICATION RECORD SECTOR 09-C: Settlement 'Sanctuary' razed by order of Inquisitor Gortash. 42 demon sympathizers crucified and burned. 19 human stock culled. ANOMALY: 1x Blight-Born hybrid infant unaccounted for. Kill on sight."
+                    </div>
+
+                    <h4>👥 Ally Roleplay: Old Geth</h4>
+                    <p>In the slave infirmary, Rashuk meets <strong>Old Geth</strong>, a one-eyed demon apothecary secretly numbing dying captives. Geth recognizes the human sorrow in Rashuk's eyes, reveals Vhol is preparing the sacrifice in the amphitheater, and gifts him <strong>Alchemical Quenching Dust</strong>.</p>
+                `
+            },
+            act3: {
+                title: "⚔️ Act 3: The Amphitheater of Bone (1:45 – 3:15)",
+                content: `
+                    <h4>🎬 Scene Summary & Boss Arena</h4>
+                    <p>A sunken circular obsidian amphitheater ringed with bubbling magma trenches. Suspended by iron chains over the magma are three wooden crosses holding human captives—including 10-year-old Elia.</p>
+
+                    <h4>👹 Boss: Overseer Vhol (Advanced Rank)</h4>
+                    <p>Four-armed demon centurion wielding a colossal cleaver and boiling pitch sprayer.</p>
+
+                    <h4>⏳ The Winch Countdown (Lair Action)</h4>
+                    <div class="yellow-box">
+                        Every 2 rounds on <strong>Initiative Count 20</strong>, the central winch groans and lowers the crosses 5 feet closer to the boiling magma. Rashuk must spend attacks or maneuvers (AC 14, 15 HP) to lock or sever the winch chains.
+                    </div>
+
+                    <h4>🩸 Phase 2: Red Blood Exposed (<50% HP / 42 HP)</h4>
+                    <div class="modal-read-aloud">
+                        "Vhol sweeps his cleaver across your chestplate, tearing iron and spraying your blood across his visor. Vhol sniffs the liquid, his eyes widening in maniacal ecstasy: 'That smell... Copper?! RED BLOOD?! By the Hegemon... You're the Blight-Born bastard Gortash missed fifteen years ago! Your head is worth a dukedom!'"
+                    </div>
+                    <p>Vhol enters a manic frenzy, gaining +1 extra attack per round and fighting recklessly.</p>
+                `
+            },
+            act4: {
+                title: "⚖️ Act 4: The Moral Crossroads & The Horizon (3:15 – 3:45)",
+                content: `
+                    <h4>🎬 Scene Summary & Climax</h4>
+                    <p>Vhol crashes to the stone, broken and coughing black ichor. Rashuk leaps across the slag, catching Elia's falling cross and severing her bonds just inches from the magma.</p>
+
+                    <h4>⚖️ The Three Moral Paths</h4>
+                    <div class="pink-box">
+                        <strong>🩸 Demonic Wrath (Leans Evil):</strong> Gruesomely butcher Vhol, terrify the surviving captives into submission, embrace fear as your armor.
+                    </div>
+                    <div class="green-box">
+                        <strong>🛡️ The Ashen Shield (Leans Good):</strong> Cleanly execute Vhol, comfort Elia and tend her burns: <em>"As long as I live, no one burns today."</em>
+                    </div>
+                    <div class="blue-box">
+                        <strong>⚖️ Lawful Pragmatism (True Neutral):</strong> Execute Vhol for silence, seize his signet ring, commandeer the transport route.
+                    </div>
+
+                    <h4>📜 Long-Term Campaign Launchpad</h4>
+                    <p>1. <strong>Inquisitorial Signet:</strong> Grants authorized passage across continental military checkpoints.</p>
+                    <p>2. <strong>The Grand Tithe Route Map:</strong> Reveals the 3 supply fortresses feeding 10,000 souls to <strong>Zul-Gaza</strong> for Gortash's Aethel-Engine.</p>
+                    <p>3. <strong>The Seed of Resistance:</strong> Old Geth and the rescued slaves turn Fort Kar-Vash into a hidden sanctuary.</p>
+                `
+            }
+        };
+
+        // LOCATION & DEEP BIOME DATA (EXACT USER REQUEST: VERY VERY DETAILED)
+        const LOCATION_DATA = {
+            bog: {
+                title: "🌲 The Rot-Wood Bog (Deep Biome Guide)",
+                content: `
+                    <h4>👁️ Sensory Palette & Atmosphere</h4>
+                    <div class="modal-read-aloud">
+                        "The air tastes of rotten copper and sulfur soot. Massive ironwood trees—petrified black by centuries of demonic alchemical runoff—twist into the rain like weeping skeletons. Gray parasitic lichen drips from every branch, and stagnant pools of oily black water swallow the sound of footsteps. Above, lightning flashes violet, revealing leeches the size of daggers clinging to wet bark."
+                    </div>
+
+                    <h4>🌲 Biome Hazards & Environmental Rules</h4>
+                    <div class="pink-box">
+                        <strong>🌧️ Acidic Rain Storm:</strong> Non-magical exposed vision is capped at 60 feet. Ranged attacks beyond 60 ft have Disadvantage. Leather and cloth gear slowly sizzle.<br>
+                        <strong>🪵 Petrified Ironwood Snags:</strong> Climbing or leaping onto petrified branches requires DC 12 Athletics/Acrobatics. Failing by 5+ deals 1d6 piercing damage from razor-sharp bark.<br>
+                        <strong>🕳️ Black Sulfur Quagmire:</strong> Entering knee-deep slurry costs <strong>2x movement speed</strong>. When knocked prone, standing up requires an extra 10 feet of movement.
+                    </div>
+
+                    <h4>🎯 Tactical Cover & Battlefield Geometry</h4>
+                    <div class="blue-box">
+                        • <strong>Hollowed Ironwood Trunks:</strong> Provide Total Cover against ranged crossbow attacks.<br>
+                        • <strong>Sulfur Steam Vents:</strong> Standing within 5 ft grants Heavily Obscured cover (+2 AC, attacks against you have Disadvantage), but requires DC 11 Con save at start of turn or 1d4 poison damage.
+                    </div>
+
+                    <h4>🎲 Rot-Wood Bog Encounter & Hazard Table (d6)</h4>
+                    <div class="yellow-box">
+                        <strong>1. Chittering Leech Swarm:</strong> Drops from canopy (DC 12 Dex save or 1d6 bleed).<br>
+                        <strong>2. Sinking Peat Vent:</strong> Ground collapses (DC 13 Str save or trapped at 0 speed).<br>
+                        <strong>3. Stray Iron Crossbow Trap:</strong> Tripwire left by scouts (+5 to hit, 1d8+3 poison).<br>
+                        <strong>4. Alchemical Slag Pool:</strong> Glowing violet mud (Deals 2d6 acid if stepped in).<br>
+                        <strong>5. Corpse of an Escaped Slave:</strong> Clutches an intact flask of marsh water.<br>
+                        <strong>6. Dead Ironwood Canopy Collapse:</strong> 15-ft crash (DC 13 Dex save or 2d8 bludgeoning).
+                    </div>
+                `
+            },
+            gulch: {
+                title: "🪨 The Dead-Water Gulch (Deep Biome Guide)",
+                content: `
+                    <h4>👁️ Sensory Palette & Chasm Overview</h4>
+                    <div class="modal-read-aloud">
+                        "A natural basalt scar cut 20 feet deep into the volcanic bedrock. Slick black shale walls rise straight up on either side, slick with weeping moss and grease. At the bottleneck, the timbers of an ancient supply bridge have been chopped away, their splintered ruins choking a pool of knee-deep black mud."
+                    </div>
+
+                    <h4>🪨 Chasm Mechanics & Elevation</h4>
+                    <div class="blue-box">
+                        <strong>⬆️ The High Ridge (15 ft Above):</strong> Provides +2 AC from partial cover. Ranged attacks against targets below have Advantage on hit rolls.<br>
+                        <strong>🧗 Slick Basalt Cliffs:</strong> Scaling the walls without a rope or climbing gear requires DC 14 Athletics. Failing causes a fall for 1d6 bludgeoning.<br>
+                        <strong>🌊 The Deep Basalt Sump:</strong> The center pool is 4 feet deep. Large creatures move normally; Medium creatures treat it as difficult terrain.
+                    </div>
+
+                    <h4>⚠️ The Scent of Red Blood (Hydra Lure)</h4>
+                    <div class="pink-box">
+                        The Gore-Leech Hydra hibernates beneath the sump sediment. If more than 10 damage of slashing/piercing is dealt in the water, the beast awakens on Initiative 20, erupting from the center of the ravine.
+                    </div>
+                `
+            },
+            fort: {
+                title: "🏰 Fort Kar-Vash: The Salt-Rot Citadel (Deep Biome Guide)",
+                content: `
+                    <h4>👁️ Fortress Architecture & Sensory Profile</h4>
+                    <div class="modal-read-aloud">
+                        "A colossal monolith of stepped black volcanic basalt rising above a howling sulfur gorge. Steam vents hiss like serpents along the foundation. Iron gibbets swing from the battlements, housing the sun-bleached ribcages of rebellious slaves. The corridors smell of burning mutton fat, boiling pitch, and human fear."
+                    </div>
+
+                    <h4>🕯️ Blood-Dowsing Brazier Security System</h4>
+                    <div class="pink-box">
+                        <strong>The Alchemical Pyres:</strong> Suspended every 30 feet in main hallways are iron cauldrons burning emerald fire.<br>
+                        <strong>Detection Range:</strong> Within 10 feet of a creature with human blood, the flame violently hisses and turns <strong>pulsing crimson-purple</strong>.<br>
+                        <strong>Bypassing:</strong><br>
+                        • <em>Rafter Stalking (DC 13 Acrobatics):</em> Traverse overhead roof beams 15 ft above brazier detection range.<br>
+                        • <em>Flue Sabotage (DC 13 Sleight of Hand):</em> Fling iron weights/daggers into the dampener chains to snuff the flame before entering.
+                    </div>
+
+                    <h4>🏰 Interior Zones & Infiltration Paths</h4>
+                    <div class="green-box">
+                        • <strong>Lower Drainage Flue:</strong> Smells of sewage and sulfur; bypasses outer gate sentries (DC 11 Athletics).<br>
+                        • <strong>The Dissection Archives:</strong> Guarded by 1 sleep-deprived demon clerk. Contains 50 years of extermination logs.<br>
+                        • <strong>The Slave Infirmary:</strong> 20 iron cages holding dying laborers. Old Geth's workshop is in the rear alcove.
+                    </div>
+                `
+            },
+            amphitheater: {
+                title: "🌋 The Sunken Amphitheater of Bone (Deep Biome Guide)",
+                content: `
+                    <h4>👁️ Arena Layout & Sensory Dread</h4>
+                    <div class="modal-read-aloud">
+                        "A circular gladiatorial pit carved into volcanic obsidian, 60 feet across. A roaring 10-foot-wide moat of bubbling orange magma-slag circles the outer ring, emitting blistering heat that distorts the air. Suspended from high iron roof winches are three heavy timber crosses hovering above the lava."
+                    </div>
+
+                    <h4>🌋 Magma & Environmental Hazards</h4>
+                    <div class="pink-box">
+                        <strong>🔥 The Magma Trench:</strong> Entering or starting a turn in the magma deals <strong>6d10 fire damage</strong>. Forced movement over the rim requires DC 14 Dex save to catch the ledge.<br>
+                        <strong>♨️ Extreme Radiant Heat:</strong> Standing within 5 ft of the magma rim deals 1d6 fire damage at the start of each turn.<br>
+                        <strong>⛓️ The Winch Cables (AC 14, 15 HP):</strong> Can be severed or jammed with a weapon strike or maneuver to prevent crosses from descending.
+                    </div>
+
+                    <h4>⚔️ Battlefield Lair Rules (Overseer Vhol)</h4>
+                    <div class="yellow-box">
+                        On <strong>Initiative Count 20</strong>, the arena activates one of Overseer Vhol's Battlefield Actions based on current combat phase.
+                    </div>
+                `
+            }
+        };
+
+        // NPC DATA (EXACT STORMWRECK ISLE PROFILE FORMAT FROM SCREENSHOTS 3 & 4)
+        const NPC_DATA = {
+            geth: {
+                title: "🎭 NPC PROFILE: OLD GETH",
+                philosophy: "<strong>Quiet Compassion in a World of Iron.</strong> The Demon Hegemony's cruelty is a sickness that rots the soul. Power without purpose is vulgar butchery; true strength is protecting those who cannot bleed for themselves.",
+                dilemma: {
+                    problem: "Comatose and dying human stock in the infirmary; secretly brewing painkilling salves while hiding his seditious herbs from Overseer Vhol's enforcers.",
+                    involves: "Slave pens infirmary, ghost-poppy stores, Overseer Vhol's evening inspection.",
+                    approach: "Administers ghost-poppy tea to spare captives agony; risks execution to supply sympathetic warriors with alchemical tools."
+                },
+                moralStand: "<strong>Absolute Red Line:</strong> Refuses to aid in the torture or public sacrifice of children; will betray garrison security if an opportunity to save captives presents itself.",
+                appearance: "Aging, hunchbacked goblin-demon with peeling gray scales, a blind cataract in his left eye, and nicotine-stained claws smelling of crushed poppies and sulfur.",
+                voice: "\"You have demon horns, boy... but your eyes are haunted by human sorrow. If you are here for blood, head to the amphitheater. But remember: power without a purpose to protect just makes you another butcher in iron armor.\"",
+                vitals: "Vitals: AC 11 (Natural) | HP 22 (5d6+5) | Init +1 | Speed 25 ft | Darkvision 60 ft | CR 1/4<br>Saves: INT +4, WIS +4",
+                actions: [
+                    "🧪 <strong>Ghost-Poppy Draught:</strong> Restores 2d6+1 HP to an adjacent living creature.",
+                    "💨 <strong>Quenching Dust Flask:</strong> 20-ft radius cloud; blinds creatures for 1 round and snuffs alchemical alarms.",
+                    "🗡️ <strong>Rusted Scalpel:</strong> +3 to hit, 1d4+1 piercing damage."
+                ],
+                gear: "Pouch of Ghost-Poppy Salve, 1x Quenching Dust Flask, Iron Slave Infirmary Master Key."
+            },
+            elia: {
+                title: "🎭 NPC PROFILE: ELIA (10-YEAR-OLD CAPTIVE)",
+                philosophy: "<strong>Innocence in the Ashes.</strong> A child of the borderlands who remembers when parents held hands before the iron collars came. Believes that someone strong will come to break the chains.",
+                dilemma: {
+                    problem: "Chained to the central timber cross suspended above the boiling magma pit; heat is blistering her feet as the winch lowers.",
+                    involves: "The central amphitheater, Overseer Vhol, the crucifixion winch mechanism.",
+                    approach: "Clutches her woven reed doll and weeps quietly, praying for deliverance."
+                },
+                moralStand: "<strong>Absolute Red Line:</strong> Terrified of demon horns and blood, but recognizes true kindness and will not flee from a protector who bleeds red.",
+                appearance: "10-year-old human girl with soot-stained chestnut hair, torn linen slave rags, and blistered wrists bound in rough hemp rope. Direct mirror of Rashuk at age 10.",
+                voice: "\"You... you bleed like me... Are you an angel... or a demon? Please... don't let me burn...\"",
+                vitals: "Vitals: AC 10 | HP 4 (1d8) | Init +0 | Speed 25 ft | CR 0<br>Saves: None",
+                actions: [
+                    "🧸 <strong>Clutch Reed Doll:</strong> Advantage on saves against being frightened for 1 round."
+                ],
+                gear: "Woven reed doll with a polished river pebble hidden inside."
+            },
+            gortash: {
+                title: "🎭 NPC PROFILE: GRAND INQUISITOR GORTASH",
+                philosophy: "<strong>The Bleeding Cross & Absolute Purge.</strong> The Hegemony is eternal; human blood is an infectious contaminant that must be burned into ash. Hybrids are cosmic abominations that defile existence.",
+                dilemma: {
+                    problem: "Constructing the continental Aethel-Engine in Zul-Gaza; requires 10,000 human souls before the Blood Eclipse to activate the soul-core.",
+                    involves: "The Three Supply Fortresses (Fort Kar-Vash, Mines of Oros, Sanguine Bastion), High Imperial Council.",
+                    approach: "Enforces brutal quotas, crucifies any commander who fails to deliver stock, and scours the continent for the escaped Blight-Born infant."
+                },
+                moralStand: "<strong>Absolute Red Line:</strong> Zero tolerance for failure, treason, or racial impurity; will incinerate entire provinces to extinguish a single hybrid.",
+                appearance: "Magnificent and terrifying demon lord adorned in gold-trimmed obsidian plate, wearing a crown of carved bone over a pure white porcelain mask weeping black tears.",
+                voice: "\"Leave only ash. The Aethel-Engine will drink ten thousand souls, and the cosmos will finally know true silence.\"",
+                vitals: "Vitals: AC 19 (Obsidian Plate) | HP 175 (18d8+72) | Init +3 | Speed 35 ft, fly 60 ft | Truesight 60 ft | CR 14<br>Saves: STR +9, CON +8, WIS +7, CHA +9",
+                actions: [
+                    "⚔️ <strong>Halberd of the Bleeding Cross:</strong> +10 to hit, reach 10ft, 2d10+5 slashing + 2d8 radiant/necrotic.",
+                    "✝️ <strong>Aura of the Bleeding Cross:</strong> Healing within 30 ft becomes necrotic damage (DC 16 Con save).",
+                    "👑 <strong>Inquisitorial Decree:</strong> Commands up to 4 allies to make immediate reaction attacks."
+                ],
+                gear: "Halberd of the Bleeding Cross (Artifact), Crown of the Weeping Inquisitor, Imperial Soul-Seal."
+            }
+        };
+
+        // MASTER LOOT & ITEM DOSSIER DATA
+        const LOOT_DATA = {
+            salve_ghost_poppy: {
+                name: "🍷 Ghost-Poppy Salve",
+                category: "HEAL • Rare Alchemical Salve",
+                tagClass: "tag-heal",
+                location: "Old Geth's Infirmary Stash / Bog Foraging",
+                cost: "50 GP (500 SP)",
+                desc: "A thick, pungent obsidian-black salve steeped from crushed bog poppies and volcanic ash.",
+                effect: "• <strong>Bonus Action:</strong> Administer to self or an adjacent ally.<br>• Restores <strong>2d6 + 1 Hit Points</strong>.<br>• <strong>Pain Nullification:</strong> Removes all exhaustion and pain penalties to ability checks and saving throws for <strong>1 hour</strong>.<br>• Grants Advantage on saving throws against being Frightened.",
+                placement: "Carried by 🧪 Old Geth in Fort Kar-Vash slave infirmary, or crafted with 2x Rot-Wood Marsh Lichen."
+            },
+            troll_blood_vial: {
+                name: "🧪 Concentrated Troll Blood Vial",
+                category: "HEAL • Uncommon Elixir",
+                tagClass: "tag-heal",
+                location: "Dead-Water Gulch Chasm Cache",
+                cost: "75 GP",
+                desc: "A viscous, bubbling emerald fluid harvested from the regenerative glands of a swamp troll.",
+                effect: "• <strong>Action to Drink:</strong> Instantly regains <strong>1d8 + 1 Hit Points</strong>, and regains another <strong>1d8 + 1 Hit Points</strong> at the start of your next 2 turns (total <strong>3d8 + 3 HP</strong>).<br>• <strong>Regenerative Fever:</strong> The imbiber must make a <strong>DC 12 Constitution Save</strong> or suffer vivid demonic hallucinations (Disadvantage on Perception checks for 10 minutes).",
+                placement: "Hidden in the submerged supply crate below the collapsed chasm bridge in Dead-Water Gulch."
+            },
+            marsh_lichen_raw: {
+                name: "🌿 Rot-Wood Marsh Lichen (Raw)",
+                category: "REAGENT • Common Herb",
+                tagClass: "tag-heal",
+                location: "Petrified Ironwood Trunks (Rot-Wood Bog)",
+                cost: "10 GP (100 SP) / bundle",
+                desc: "Spongy, sulfur-dusted gray moss that leeches natural antiseptic nutrients from dead ironwood.",
+                effect: "• <strong>Action (DC 12 Medicine or Herbalism Kit):</strong> Pack into an open wound on a dying creature at 0 HP. Immediately stabilizes the creature, restoring them to <strong>1 Hit Point</strong>.<br>• Can be brewed by Old Geth into 1x Ghost-Poppy Salve.",
+                placement: "Harvestable from petrified hollow snags throughout the Rot-Wood Bog."
+            },
+            infernal_draught: {
+                name: "🩸 Infernal Blood-Essence Draught",
+                category: "HEAL • Rare Demonic Draught",
+                tagClass: "tag-heal",
+                location: "Fort Kar-Vash Sanctum Altar",
+                cost: "250 GP",
+                desc: "A glowing crimson liquor distilled from demon blood and soul-ash, sealed with an iron wax crest.",
+                effect: "• <strong>Action to Drink:</strong> Restores <strong>4d4 + 4 Hit Points</strong>.<br>• <strong>Demonic Surge:</strong> For the next <strong>10 minutes</strong>, you add <strong>+1d4</strong> to all Strength checks, Strength saving throws, and melee weapon damage rolls.<br>• Emits a faint brimstone heat visible to demon truesight.",
+                placement: "Placed atop the sacrificial altar in Fort Kar-Vash inner sanctum."
+            },
+            quenching_dust: {
+                name: "🧪 Alchemical Quenching Dust",
+                category: "TACTICAL • Rare Alchemical Reagent",
+                tagClass: "tag-buff",
+                location: "Gifted by Old Geth (Fort Kar-Vash Infirmary)",
+                cost: "120 GP (Priceless Ally Gift)",
+                desc: "A fragile glass globe packed with super-dense pulverized volcanic sulfur, saltpeter, and poppy resin.",
+                effect: "• <strong>Action:</strong> Thrown up to 20 feet. Explodes in a <strong>20-foot radius cloud</strong> of chalky white quenching mist.<br>• <strong>Brazier Suppression:</strong> Instantly douses and suppresses magical and alchemical fire alarms (including Blood-Dowsing Braziers) for <strong>3 minutes</strong>.<br>• <strong>Blinding Flash:</strong> All creatures in the radius must succeed on a <strong>DC 13 Dexterity Save</strong> or be <strong>Blinded until the end of their next turn</strong>.",
+                placement: "Gifted directly to Rashuk by 🧪 Old Geth during the Act 2 infirmary meeting."
+            },
+            pitch_flask: {
+                name: "💣 Boiling Pitch Flask",
+                category: "EXPLOSIVE • Uncommon Consumable",
+                tagClass: "tag-buff",
+                location: "Iron Fang Supply Crates / Overseer Vhol's Stash",
+                cost: "25 GP (250 SP) / flask",
+                desc: "A heavy clay flask fitted with a pressurized phosphorus striker, filled with black volcanic resin.",
+                effect: "• <strong>Action:</strong> Thrown up to 20 feet. Shatters on impact in a <strong>5-foot radius</strong>.<br>• Creatures in the area must succeed on a <strong>DC 13 Dexterity Save</strong> or take <strong>2d6 Fire Damage</strong>.<br>• <strong>Ongoing Burn:</strong> A creature that fails the save takes <strong>1d4 Fire Damage</strong> at the start of each of its turns until someone spends an Action to scrape off the pitch.",
+                placement: "Found in the iron supply bins on the ramparts and armory of Fort Kar-Vash."
+            },
+            sulfur_smoke_pellets: {
+                name: "💨 Sulfur Smoke Pellets (3 Pellets)",
+                category: "TACTICAL • Common Consumable",
+                tagClass: "tag-buff",
+                location: "Iron Fang Scout Pouches",
+                cost: "20 GP (200 SP) / pouch",
+                desc: "Marble-sized black clay spheres that ignite with caustic yellow smoke upon impact.",
+                effect: "• <strong>Action or Bonus Action:</strong> Throw at feet or up to 20 feet.<br>• Instantly creates a <strong>15-foot radius sphere of thick yellow smoke</strong> for 1 minute or until dispersed by strong wind.<br>• The area is <strong>Heavily Obscured</strong> (+2 AC / Disadvantage on incoming attacks).<br>• Any creature entering or starting turn inside without a breathing mask must make a <strong>DC 11 Constitution Save</strong> or spend its action coughing and retching (Poisoned condition for 1 round).",
+                placement: "Looted from fallen Iron Fang Scouts in Dead-Water Gulch."
+            },
+            ironwood_resin: {
+                name: "🪨 Petrified Ironwood Resin",
+                category: "BUFF • Uncommon Alchemical Reagent",
+                tagClass: "tag-buff",
+                location: "Rot-Wood Bog Petrified Stumps",
+                cost: "40 GP",
+                desc: "Glass-hard amber sap that hardens into razor-sharp crystalline mineral edges when exposed to blood.",
+                effect: "• <strong>Bonus Action:</strong> Coat one melee weapon or up to 3 pieces of ammunition.<br>• For the next <strong>3 successful hits</strong>, the weapon deals an additional <strong>+1d4 Piercing Damage</strong>, and damage dealt by the weapon completely bypasses nonmagical damage resistance.",
+                placement: "Harvested from glowing amber nodules inside hollow ironwood trunks in the bog."
+            },
+            blight_incense: {
+                name: "🕯️ Blight-Nullifying Incense",
+                category: "TACTICAL • Uncommon Wondrous Item",
+                tagClass: "tag-buff",
+                location: "Old Geth's Secret Cache",
+                cost: "60 GP",
+                desc: "A dried stick of compressed charcoal, dried myrrh, and crushed drake scales.",
+                effect: "• <strong>Action:</strong> Light the incense. Burns for <strong>1 hour</strong>.<br>• Emits a 30-foot aura of cold gray smoke that completely neutralizes human pheromones and biological scents.<br>• Grants <strong>+5 bonus to Stealth checks</strong> against creatures relying on keen smell (including Bloodhound Chimeras and demonic scouts).",
+                placement: "Hidden behind a false brick in the infirmary mortar wall."
+            },
+            krug_cleaver: {
+                name: "🪓 Captain Krug's Spiked Cleaver",
+                category: "WEAPON • Masterwork Martial Heavy",
+                tagClass: "tag-weapon",
+                location: "Captain Krug Boss Drop (Dead-Water Gulch)",
+                cost: "350 GP",
+                desc: "A brutal 4-foot executioner's broad-blade forged from blackened furnace-iron, spiked along the spine.",
+                effect: "• <strong>+1 bonus to Attack and Damage rolls</strong>.<br>• Deals <strong>1d8 + 1 Slashing Damage</strong> (Versatile: <strong>1d10 + 1 Slashing</strong>).<br>• <strong>Bloodseeker Edge:</strong> Weapon attacks score a <strong>Critical Hit on a roll of 19 or 20</strong> against any target currently below its maximum HP!",
+                placement: "Wielded by 🪓 Captain Krug in Act 1."
+            },
+            vhol_bone_saw: {
+                name: "🪚 Overseer Vhol's Obsidian Bone-Saw",
+                category: "WEAPON • Uncommon Magic Blade",
+                tagClass: "tag-weapon",
+                location: "Overseer Vhol Boss Loot (Amphitheater of Bone)",
+                cost: "500 GP",
+                desc: "A heavy serrated falchion carved from razor-sharp volcanic obsidian and bound in demonic tendon.",
+                effect: "• <strong>+1 bonus to Attack and Damage rolls</strong>.<br>• Deals <strong>1d6 + 1 Slashing Damage</strong> (Light / Finesse).<br>• <strong>Deep Laceration:</strong> When you roll a <strong>Natural 18, 19, or 20</strong> on an attack roll, the target suffers a deep arterial wound and takes <strong>1d4 Necrotic Damage</strong> at the start of each of its turns until treated with a DC 13 Medicine check.",
+                placement: "Looted from 👹 Overseer Vhol's primary weapon belt."
+            },
+            scout_heavy_crossbow: {
+                name: "🏹 Iron Fang Scout Heavy Crossbow (+1)",
+                category: "WEAPON • Uncommon Martial Ranged",
+                tagClass: "tag-weapon",
+                location: "Elite Iron Fang Scout Drop",
+                cost: "250 GP",
+                desc: "A reinforced steel winch-crossbow fitted with an alchemical brass lens sight.",
+                effect: "• <strong>+1 bonus to Attack and Damage rolls</strong> (<strong>1d10 + 1 Piercing</strong>, Range 100/400 ft, Heavy, Two-Handed, Loading).<br>• <strong>Hawkeye Scope:</strong> Completely <strong>ignores Half Cover (+2 AC)</strong> when targeting creatures beyond 30 feet.",
+                placement: "Dropped by the scout sniper perched upon the Dead-Water Gulch bridge abutment."
+            },
+            winch_chain_flail: {
+                name: "⛓️ Heavy Winch Chain-Flail",
+                category: "WEAPON • Martial Reach Weapon",
+                tagClass: "tag-weapon",
+                location: "Fort Kar-Vash Winch Mechanism Gantry",
+                cost: "100 GP",
+                desc: "A 10-foot iron cable studded with heavy spiked gear links, salvaged from the amphitheater winch.",
+                effect: "• Deals <strong>1d8 Bludgeoning Damage</strong> with <strong>Reach (10 ft)</strong>.<br>• <strong>Hook & Drag:</strong> When you hit a Medium or smaller creature, you can use a <strong>Bonus Action</strong> to force the target to make a <strong>DC 13 Strength Save</strong>. On a failure, the target is pulled up to 5 feet closer to you or knocked Prone.",
+                placement: "Mounted above the winch crank in the Sunken Amphitheater."
+            },
+            serrated_trench_dagger: {
+                name: "🗡️ Serrated Trench Dagger",
+                category: "WEAPON • Finesse Light",
+                tagClass: "tag-weapon",
+                location: "Dead Convoy Guard Sheath",
+                cost: "35 GP",
+                desc: "A double-edged combat dagger with an integrated knuckle guard and gutting teeth.",
+                effect: "• Deals <strong>1d4 Piercing or Slashing Damage</strong> (Finesse, Light, Thrown 20/60 ft).<br>• <strong>Concealed Sheath:</strong> Designed to strap flat against forearm or boot; grants <strong>Advantage on Sleight of Hand checks</strong> to conceal the weapon from guard searches.",
+                placement: "Recovered from the boot sheath of the slain convoy commander."
+            },
+            centurion_pauldron: {
+                name: "🛡️ Centurion Spiked Pauldron",
+                category: "ARMOR • Uncommon Wondrous Gear",
+                tagClass: "tag-defense",
+                location: "Fort Kar-Vash Armory Vault",
+                cost: "300 GP",
+                desc: "A heavy shoulder-guard of layered black plate forged with three forward-curving obsidian spikes.",
+                effect: "• Grants <strong>+1 to Armor Class (AC)</strong> when wearing Medium or Heavy Armor.<br>• <strong>Spiked Retaliation:</strong> Any creature that grapples you or hits you with an unarmed strike or melee attack within 5 feet takes <strong>1d4 Piercing Damage</strong>.",
+                placement: "Locked in the officer's armory locker in Fort Kar-Vash."
+            },
+            sulfur_mask: {
+                name: "🥽 Sulfur-Filter Breathing Mask",
+                category: "GEAR • Uncommon Utility Gear",
+                tagClass: "tag-defense",
+                location: "Slave Overseer Quarters",
+                cost: "50 GP",
+                desc: "A molded leather half-mask fitted with brass-rimmed active charcoal and dried lavender filters.",
+                effect: "• Grants <strong>Advantage on Constitution Saving Throws</strong> against toxic gases, sulfur vents, inhaled poisons, smoke clouds, and boiling pitch vapors.",
+                placement: "Hung on the pegboard in the Fort Kar-Vash guard barracks."
+            },
+            ashen_cloak: {
+                name: "🥋 Ashen-Weave Cloak",
+                category: "GEAR • Uncommon Wondrous Item (Attune)",
+                tagClass: "tag-defense",
+                location: "Sunken Amphitheater Cache",
+                cost: "250 GP",
+                desc: "A ragged traveling mantle woven from fire-retardant ash-spider silk that shifts in shade.",
+                effect: "• Grants <strong>Advantage on Dexterity (Stealth) checks</strong> when attempting to hide in fog, smoke, ash, burning terrain, or murky swamp quagmires.<br>• Grants <strong>Resistance to ongoing Fire Damage</strong> (burn effects).",
+                placement: "Found in the locked chest behind the amphitheater royal viewing box."
+            },
+            slave_shackles: {
+                name: "⛓️ Slave-Master's Reinforced Shackles & Key",
+                category: "UTILITY • Hardened Volcanic Iron",
+                tagClass: "tag-defense",
+                location: "Carried by Overseer Vhol",
+                cost: "40 GP",
+                desc: "Hardened volcanic iron cuffs stamped with anti-magic suppression runes.",
+                effect: "• Extremely durable manacles: Requires a <strong>DC 20 Strength (Athletics) check</strong> to burst or a <strong>DC 18 Dexterity (Thieves' Tools) check</strong> to pick.<br>• Includes the master brass skeleton key that opens all slave cell chains in Fort Kar-Vash.",
+                placement: "Hung from Overseer Vhol's hip belt."
+            },
+            inquisitor_signet: {
+                name: "💍 Inquisitorial Signet Ring of the Bleeding Cross",
+                category: "QUEST • Rare Key Artifact",
+                tagClass: "tag-quest",
+                location: "Worn by Overseer Vhol (Fort Kar-Vash)",
+                cost: "Priceless Imperial Seal (Non-Sellable)",
+                desc: "A heavy obsidian signet band depicting a Crown of Bone piercing a weeping blood-drop eye.",
+                effect: "• <strong>Imperial Authority:</strong> Allows Rashuk to legally pose as an authorized Inquisitorial Bounty Hunter.<br>• Grants free passage through Imperial Hegemony military checkpoints, tollgates, and courier fortresses.<br>• Allows commandeering of low-tier garrison horses and rations without raising suspicion.",
+                placement: "Looted from the severed finger of Overseer Vhol after Act 3."
+            },
+            grand_tithe_map: {
+                name: "📜 Grand Tithe Supply Map to Zul-Gaza",
+                category: "CAMPAIGN KEY • Rare Strategic Intel",
+                tagClass: "tag-quest",
+                location: "Fort Kar-Vash Central Archive",
+                cost: "Priceless Strategic Intel",
+                desc: "A continent-wide scorched leather map plotting the transit grid funneling souls to the capital.",
+                effect: "• <strong>Campaign Roadmap:</strong> Unlocks the location and defense schematics of the 3 major transit strongholds leading to Grand Inquisitor Gortash in Zul-Gaza:<br>&nbsp;&nbsp;1. <strong>Fort Kar-Vash</strong> (Sulfur Basin — 1,200 souls)<br>&nbsp;&nbsp;2. <strong>Iron Mines of Oros</strong> (Basalt Quarry — 3,800 souls)<br>&nbsp;&nbsp;3. <strong>The Sanguine Bastion</strong> (Blood Plains — 5,000 souls)<br>• Reveals the countdown: 10,000 souls required before the upcoming Blood Eclipse.",
+                manuscript: "IMPERIAL TITHE TRANSIT DIRECTORY — TARGET: ZUL-GAZA CENTRAL ENGINE<br>• Sector Alpha: Fort Kar-Vash (Obsidian Spire & Sulfur Basin) ➔ 1,200 souls<br>• Sector Beta: The Iron Crag Bastion (Basalt Mines) ➔ 3,800 souls<br>• Sector Gamma: The Sanguine Redoubt (Blood Plains) ➔ 5,000 souls<br>TOTAL QUOTA: 10,000 HUMAN SOULS PRIOR TO THE BLOOD ECLIPSE.",
+                placement: "Locked inside the black basalt archive cylinder in Overseer Vhol's command dais."
+            },
+            directive_409: {
+                name: "📜 Courier Directive 409 (Sanctuary Purge Order)",
+                category: "STORY • Rare Inquisitorial Manuscript",
+                tagClass: "tag-quest",
+                location: "Dead Convoy Commander's Brass Satchel",
+                cost: "Priceless Inquisitorial Proof",
+                desc: "A bloodstained parchment bearing the crimson wax seal of the Inquisition of Zul-Gaza.",
+                effect: "• <strong>The 15-Year Revelation:</strong> Provides absolute confirmation that Grand Inquisitor Gortash personally signed the extermination order that crucified Rashuk's mother and burned the Sanctuary settlement 15 years ago.",
+                manuscript: "\"BY ORDER OF GRAND INQUISITOR GORTASH — SOVEREIGN INQUISITION OF ZUL-GAZA:<br>Directive 409 — Liquidation of Sanctuary Sector 7.<br>All human stock harboring illegal demonic cross-breeding traits (designated 'Blight-Born') are hereby condemned to total purification.<br>Execute all adult harboring subjects upon the Bleeding Cross. Children displaying hybrid resonance are to be harvested for Aethel-Engine mana calibration. Leave only ash.\"",
+                placement: "Pried from the brass lockbox carried by the convoy commander killed in the prologue."
+            },
+            obsidian_vault_key: {
+                name: "🔑 Obsidian Vault Master Key",
+                category: "QUEST KEY • Uncommon Iron Key",
+                tagClass: "tag-quest",
+                location: "Carried by Overseer Vhol",
+                cost: "75 GP (Unlocks Armory)",
+                desc: "A heavy 8-inch key carved from volcanic glass with intricate tooth engravings.",
+                effect: "• Unlocks the Fort Kar-Vash armory vault, secret drainage grates under the sulfur rift, and the master lock on the slave pens.",
+                placement: "Found in Overseer Vhol's internal chest pocket."
+            },
+            boar_jerky: {
+                name: "🥩 Dried Salted Boar Jerky (5 Rations)",
+                category: "RATION • Field Provisions",
+                tagClass: "tag-ration",
+                location: "Convoy Supply Pack",
+                cost: "10 SP (1 GP) / pouch",
+                desc: "Thick strips of cured wild boar smoked over ironwood and heavily rubbed with sea salt.",
+                effect: "• Contains 5 daily field rations.<br>• <strong>Hearty Sustenance:</strong> Eating a full ration during a <strong>Short Rest</strong> allows a character to roll <strong>+1 extra Hit Die for healing</strong> without expending an actual Hit Die!",
+                placement: "Found in the leather supply rucksacks dropped by Iron Fang enforcers."
+            },
+            black_hardtack: {
+                name: "🍞 Black Rye Hardtack (8 Biscuits)",
+                category: "RATION • Dense Bread",
+                tagClass: "tag-ration",
+                location: "Slave Camp Mess Hall",
+                cost: "5 SP / sack",
+                desc: "Dense, dark biscuits baked from roasted rye and chicory root. Rock-hard and moisture-resistant.",
+                effect: "• Contains 8 biscuits. Each biscuit completely satisfies hunger for <strong>12 hours</strong> and restores <strong>1d4 Hit Points</strong> when softened in broth or water.",
+                placement: "Found in the commissary barrels near the slave kitchen."
+            },
+            spring_water: {
+                name: "💧 Purified Spring Water Canteen",
+                category: "RATION • Fresh Water",
+                tagClass: "tag-ration",
+                location: "Old Geth's Workshop",
+                cost: "2 SP / canteen",
+                desc: "A heavy boiled-leather canteen filled with filtered, sulfur-free mountain spring water.",
+                effect: "• Holds 1 quart of fresh drinking water. Can be used to wash acid or sulfur from eyes, immediately ending eye-burn penalties.",
+                placement: "Hung near Old Geth's apothecary distillation bench."
+            }
+        };
+
+        // HOMEBREW RULES & DM GUIDE MODAL DATA
+        function openHomebrewRulesModal() {
+            const modal = document.getElementById('dm-modal');
+            document.getElementById('modal-title').innerHTML = `📜 Master Table Rules & DM Compendium`;
+            
+            let html = `
+                <h4>⚡ 1. Combat Initiation, Surprise & Action Economy</h4>
+                <p><strong>Zero Free Pre-Combat Hits:</strong> The moment any player or NPC declares intent to attack, <strong>EVERYONE rolls Initiative immediately BEFORE the attack resolves</strong>.</p>
+                <p><strong>Attacking from Hidden:</strong> If attacker was successfully hidden (Stealth vs Passive Perception), the target suffers the <strong>Surprised Condition</strong> (skips Round 1 turn), and attacker gains Advantage on opening attack.</p>
+                <p><strong>Ability Checks in Combat:</strong> Active checks (Perception, Insight, Arcana, Investigation) consume your <strong>FULL ACTION</strong>.</p>
+
+                <h4>🤝 2. The Help System & Help Tokens</h4>
+                <p>Each PC has <strong>2 Help Tokens</strong> maximum. A player can spend 1 Help Token (within 30 ft) to grant a <strong>+1d6 Advantage Die</strong> to an ally's d20 roll <strong>ONLY IF they provide a valid narrative explanation of HOW they actively help</strong>.</p>
+
+                <h4>💀 3. 0 HP, Dying & Death Saves (2-Strike Lethal System)</h4>
+                <p>When reduced to 0 HP, character falls Prone and enters the Dying State. On their turn, roll a <strong>DC 10 Death Saving Throw (d20)</strong>:</p>
+                <ul>
+                    <li><strong>10+ (Success):</strong> Stabilize and wake up with 1 HP (remains Prone)!</li>
+                    <li><strong>1–9 (Failure):</strong> 1 Death Strike. <strong>💥 2 FAILURES = PERMANENT DEATH!</strong></li>
+                    <li><strong>Nat 20:</strong> Instantly regain 1 HP and stand up immediately.</li>
+                    <li><strong>Taking Damage while at 0 HP:</strong> Taking damage <strong>2 separate times</strong> before healing = instant permanent death.</li>
+                </ul>
+
+                <h4>💥 4. Brutal Critical Hits</h4>
+                <p>On a <strong>Natural 20</strong>, attacks deal <strong>Maximum Base Weapon/Spell Damage + 1 Normal Damage Roll + Ability Modifiers</strong> (e.g. 1d6 weapon = 6 + 1d6 + mod).</p>
+
+                <h4>🛡️ 5. Simplified 2-Second Cover Rule</h4>
+                <ul>
+                    <li><strong>🧱 In Cover (+2 AC):</strong> Behind barrels, low walls, thick pillars, or standing behind an ally/enemy.</li>
+                    <li><strong>🚫 Total Cover:</strong> 100% concealed behind solid stone wall or iron door—cannot be targeted.</li>
+                </ul>
+
+                <h4>🩸 6. Blight-Born Blood Hazard (Setting Homebrew)</h4>
+                <p>In this 500-year demon regime, hybrids are an illegal heresy. Rashuk's blood is vibrant crimson human red. When taking heavy slashing/piercing damage or near Blood-Dowsing Braziers, a DC 12-14 check is required to conceal or extinguish the tell before demon sentries sound the extermination alarm.</p>
+
+                <h4>💰 7. Simplified 2-Coin Economy</h4>
+                <p><strong>10 Silver Pieces (SP) = 1 Gold Piece (GP)</strong>. No copper pieces exist. Common lodging/food priced in SP; weapons/armor/magic in GP.</p>
+            `;
+
+            document.getElementById('modal-content').innerHTML = html;
+            clearModalLog();
+            modal.showModal();
+        }
+
+        // MONSTER MODAL OPENING FUNCTION (EXACT MAL'GOROTH FORMAT FROM SCREENSHOTS)
+        function openMonsterModal(key) {
+            const m = MONSTER_DATA[key];
+            if (!m) return;
+            const modal = document.getElementById('dm-modal');
+            
+            // Set Header with Name & Subtitle
+            document.getElementById('modal-title').innerHTML = `⚔️ ${m.name} — Stat Block & Dossier`;
+
+            // TOP IDENTITY STRIP, STAT BAR & SENSES/SAVES (EXACT MATCH TO MAL'GOROTH SCREENSHOT)
+            let html = `
+                <!-- TOP IDENTITY CARD -->
+                <div style="background:#141b2b; border-left:3px solid var(--accent-gold); padding:8px 12px; border-radius:0 5px 5px 0; margin-bottom:10px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+                    <div>
+                        <strong style="color:var(--accent-gold-soft); font-size:1rem;">${m.icon || '👹'} ${m.name}</strong>
+                        <p style="font-size:0.78rem; color:var(--text-muted); margin-top:2px;">${m.type} • Lineage: <span style="color:var(--accent-gold);">${m.lineage || 'Demonic Hegemony'}</span></p>
+                    </div>
+                    <div style="text-align:right;">
+                        <span style="font-size:0.8rem; color:#86efac; font-weight:700; font-family:'JetBrains Mono';">${m.cr}</span>
+                        <p style="font-size:0.75rem; color:#fca5a5; font-family:'JetBrains Mono'; margin-top:2px;">Initiative: ${m.init || '+0'}</p>
+                    </div>
+                </div>
+
+                <!-- BOXED MONOSPACE STAT BAR STRIP -->
+                <div style="background:#090e18; border:1px solid var(--border-color); padding:8px 12px; border-radius:6px; font-family:'JetBrains Mono',monospace; font-size:0.82rem; color:var(--accent-gold); text-align:center; margin-bottom:6px; box-shadow: inset 0 1px 4px rgba(0,0,0,0.5);">
+                    STR ${m.stats.str} (${m.stats.str >= 10 ? '+' : ''}${Math.floor((m.stats.str - 10)/2)}) | 
+                    DEX ${m.stats.dex} (${m.stats.dex >= 10 ? '+' : ''}${Math.floor((m.stats.dex - 10)/2)}) | 
+                    CON ${m.stats.con} (${m.stats.con >= 10 ? '+' : ''}${Math.floor((m.stats.con - 10)/2)}) | 
+                    INT ${m.stats.int} (${m.stats.int >= 10 ? '+' : ''}${Math.floor((m.stats.int - 10)/2)}) | 
+                    WIS ${m.stats.wis} (${m.stats.wis >= 10 ? '+' : ''}${Math.floor((m.stats.wis - 10)/2)}) | 
+                    CHA ${m.stats.cha} (${m.stats.cha >= 10 ? '+' : ''}${Math.floor((m.stats.cha - 10)/2)})
+                </div>
+                <div style="font-size:0.75rem; color:var(--text-muted); text-align:center; margin-bottom:14px;">
+                    ${m.details || 'Darkvision 120 ft., Passive Perception 13 • Athletics +7, Intimidation +5 • Saves: Str +7, Con +6, Cha +5'}
+                </div>
+            `;
+
+            // SPECIAL DUAL-PHASE BOSS RENDERING FOR OVERSEER VHOL (SIMPLIFIED DARK THEME)
+            if (key === 'vhol') {
+                html += `
+                    <!-- 2-PHASE SIDE-BY-SIDE BOSS CARDS -->
+                    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(350px, 1fr)); gap:14px; margin-bottom:16px;">
+                        
+                        <!-- PHASE 1 CARD (45 HP, AC 17) -->
+                        <div style="background:#0e131d; border:1px solid #1e293b; border-radius:6px; padding:12px; display:flex; flex-direction:column; gap:10px;">
+                            <div style="display:flex; justify-content:space-between; align-items:center;">
+                                <div style="font-family:'Cinzel',serif; font-weight:700; color:#cbd5e1; font-size:0.92rem;">🎭 PHASE 1: THE SPIKED CENTURION</div>
+                                <span style="font-family:'JetBrains Mono',monospace; font-size:0.75rem; color:#94a3b8; background:#1e293b; padding:2px 6px; border-radius:4px;">AC 17 • 45 HP</span>
+                            </div>
+                            <p style="font-size:0.78rem; color:#94a3b8; margin:0; line-height:1.4;">
+                                Four-armed demon centurion in spiked obsidian plate and alchemical pitch boiler. Wields massive executioner greatcleaver and buckler.
+                            </p>
+
+                            <!-- Vitals Strip -->
+                            <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:6px; background:#070a10; border:1px solid #1e293b; border-radius:4px; padding:6px; text-align:center;">
+                                <div><div style="font-size:0.65rem; color:var(--text-muted);">AC</div><div style="font-weight:700; font-family:'JetBrains Mono'; font-size:1rem; color:#e2e8f0;">17</div></div>
+                                <div><div style="font-size:0.65rem; color:var(--text-muted);">HP</div><div style="font-weight:700; font-family:'JetBrains Mono'; font-size:1rem; color:#38bdf8;" id="vhol-p1-hp">45 / 45</div></div>
+                                <div><div style="font-size:0.65rem; color:var(--text-muted);">SPEED</div><div style="font-weight:700; font-family:'JetBrains Mono'; font-size:0.85rem; color:#e2e8f0;">30 ft.</div></div>
+                                <div><div style="font-size:0.65rem; color:var(--text-muted);">INIT</div><div style="font-weight:700; font-family:'JetBrains Mono'; font-size:0.85rem; color:#e2e8f0;">+2</div></div>
+                            </div>
+
+                            <div class="hp-bar-bg">
+                                <div class="hp-bar-fill" id="vhol-p1-bar" style="width:100%; background:#0284c7;"></div>
+                            </div>
+
+                            <div class="hp-steppers-row">
+                                <div style="display:flex; gap:4px;">
+                                    <button class="btn-step" onclick="adjustCustomHp('vhol-p1', -10, 45)">-10</button>
+                                    <button class="btn-step" onclick="adjustCustomHp('vhol-p1', -1, 45)">-1</button>
+                                </div>
+                                <span style="font-size:0.72rem; color:var(--text-muted); font-family:'JetBrains Mono';">Phase 1 HP</span>
+                                <div style="display:flex; gap:4px;">
+                                    <button class="btn-step btn-step-heal" onclick="adjustCustomHp('vhol-p1', 1, 45)">+1</button>
+                                    <button class="btn-step btn-step-heal" onclick="adjustCustomHp('vhol-p1', 10, 45)">+10</button>
+                                </div>
+                            </div>
+
+                            <!-- Phase 1 Attacks -->
+                            <div style="background:#090d14; border:1px solid #1e293b; padding:8px 10px; border-radius:4px;">
+                                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px; flex-wrap:wrap; gap:4px;">
+                                    <strong style="color:#e2e8f0; font-size:0.82rem;">Executioner Cleaver (+7)</strong>
+                                    <div style="display:flex; gap:4px;">
+                                        <button class="btn-roll" onclick="rollAttack('Vhol Cleaver', 7, '2d8+4', '0', 'slashing')">🎲 Atk (+7)</button>
+                                        <button class="btn-roll btn-roll-dmg" onclick="rollDamage('Vhol Cleaver', '2d8+4', '0', 16, 'slashing')">💥 2d8+4</button>
+                                    </div>
+                                </div>
+                                <p style="font-size:0.75rem; color:#94a3b8; margin:0;">2 attacks (5ft reach): 13 (2d8+4) slashing. On hit: DC 14 Str save or pushed 10 ft.</p>
+                            </div>
+
+                            <div style="background:#090d14; border:1px solid #1e293b; padding:8px 10px; border-radius:4px;">
+                                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px; flex-wrap:wrap; gap:4px;">
+                                    <strong style="color:#e2e8f0; font-size:0.82rem;">Boiling Pitch Spray (Recharge 5-6)</strong>
+                                    <div style="display:flex; gap:4px;">
+                                        <button class="btn-roll" onclick="rollRecharge('Pitch Spray')">⚡ Recharge</button>
+                                        <button class="btn-roll btn-roll-dmg" onclick="rollDamage('Pitch Spray', '3d6', '1d6', 18, 'fire+acid')">💥 3d6F+1d6A</button>
+                                    </div>
+                                </div>
+                                <p style="font-size:0.75rem; color:#94a3b8; margin:0;">15ft cone: DC 14 Dex save or 10 (3d6) fire + 3 (1d6) acid.</p>
+                            </div>
+                        </div>
+
+                        <!-- PHASE 2 CARD (40 HP, AC 17) -->
+                        <div style="background:#140e11; border:1px solid #2d1519; border-radius:6px; padding:12px; display:flex; flex-direction:column; gap:10px;">
+                            <div style="display:flex; justify-content:space-between; align-items:center;">
+                                <div style="font-family:'Cinzel',serif; font-weight:700; color:#fca5a5; font-size:0.92rem;">🩸 PHASE 2: SANGUINE BLOOD FRENZY</div>
+                                <span style="font-family:'JetBrains Mono',monospace; font-size:0.75rem; color:#fca5a5; background:#2d1519; padding:2px 6px; border-radius:4px;">AC 17 • 40 HP</span>
+                            </div>
+                            <p style="font-size:0.78rem; color:#fca5a5; margin:0; line-height:1.4;">
+                                Phase 2 Trigger (After 45 HP lost / Smelling Red Blood): Discards buckler for frenzied claw & cleaver strikes, eyes dilating upon confirming Rashuk's red blood!
+                            </p>
+
+                            <!-- Vitals Strip -->
+                            <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:6px; background:#0d080a; border:1px solid #2d1519; border-radius:4px; padding:6px; text-align:center;">
+                                <div><div style="font-size:0.65rem; color:var(--text-muted);">AC</div><div style="font-weight:700; font-family:'JetBrains Mono'; font-size:1rem; color:#fca5a5;">17</div></div>
+                                <div><div style="font-size:0.65rem; color:var(--text-muted);">HP</div><div style="font-weight:700; font-family:'JetBrains Mono'; font-size:1rem; color:#ef4444;" id="vhol-p2-hp">40 / 40</div></div>
+                                <div><div style="font-size:0.65rem; color:var(--text-muted);">SPEED</div><div style="font-weight:700; font-family:'JetBrains Mono'; font-size:0.85rem; color:#fca5a5;">35 ft.</div></div>
+                                <div><div style="font-size:0.65rem; color:var(--text-muted);">INIT</div><div style="font-weight:700; font-family:'JetBrains Mono'; font-size:0.85rem; color:#fca5a5;">+2</div></div>
+                            </div>
+
+                            <div class="hp-bar-bg">
+                                <div class="hp-bar-fill" id="vhol-p2-bar" style="width:100%; background:#b91c1c;"></div>
+                            </div>
+
+                            <div class="hp-steppers-row">
+                                <div style="display:flex; gap:4px;">
+                                    <button class="btn-step" onclick="adjustCustomHp('vhol-p2', -10, 40)">-10</button>
+                                    <button class="btn-step" onclick="adjustCustomHp('vhol-p2', -1, 40)">-1</button>
+                                </div>
+                                <span style="font-size:0.72rem; color:#fca5a5; font-family:'JetBrains Mono';">Phase 2 HP</span>
+                                <div style="display:flex; gap:4px;">
+                                    <button class="btn-step btn-step-heal" onclick="adjustCustomHp('vhol-p2', 1, 40)">+1</button>
+                                    <button class="btn-step btn-step-heal" onclick="adjustCustomHp('vhol-p2', 10, 40)">+10</button>
+                                </div>
+                            </div>
+
+                            <!-- Phase 2 Attacks -->
+                            <div style="background:#0d080a; border:1px solid #2d1519; padding:8px 10px; border-radius:4px;">
+                                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px; flex-wrap:wrap; gap:4px;">
+                                    <strong style="color:#fee2e2; font-size:0.82rem;">Frenzied Multiattack (3 Attacks)</strong>
+                                    <div style="display:flex; gap:4px;">
+                                        <button class="btn-roll btn-roll-dmg" onclick="rollAttack('Vhol Frenzied Cleaver', 7, '2d8+4', '0', 'slashing')">🎲 Cleaver (+7)</button>
+                                        <button class="btn-roll btn-roll-dmg" onclick="rollAttack('Vhol Pitch Claw', 7, '1d10+4', '1d6', 'piercing+acid')">🎲 Claw (+7)</button>
+                                    </div>
+                                </div>
+                                <p style="font-size:0.75rem; color:#fca5a5; margin:0;">2x Cleavers (2d8+4 slash) + 1x Pitch Claw (1d10+4 pierce + 1d6 acid).</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- POINTY HAT: BATTLEFIELD ACTIONS SECTION (SIMPLIFIED & CLEAN) -->
+                    <div style="background:#090d14; border:1px solid #1e293b; border-radius:6px; padding:12px; margin-bottom:14px;">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; flex-wrap:wrap; gap:6px;">
+                            <div style="font-family:'Cinzel',serif; font-weight:700; color:var(--accent-gold); font-size:0.95rem;">
+                                ⚔️ BATTLEFIELD ACTIONS (Pointy Hat Framework)
+                            </div>
+                            <span style="font-family:'JetBrains Mono',monospace; font-size:0.72rem; color:#94a3b8;">
+                                Tell (End of Turn) ➔ Counterplay ➔ Resolve (Start of Next Turn)
+                            </span>
+                        </div>
+
+                        <!-- Phase 1 Action 1: Tectonic Magma-Cleave -->
+                        <div style="background:#0e131d; border:1px solid #1e293b; border-left:3px solid #38bdf8; border-radius:0 4px 4px 0; padding:8px 10px; margin-bottom:8px;">
+                            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px; flex-wrap:wrap; gap:6px;">
+                                <strong style="color:#e2e8f0; font-size:0.82rem;">Phase 1: Tectonic Magma-Cleave (Aggro Pivot)</strong>
+                                <div style="display:flex; gap:4px;">
+                                    <button class="btn-roll" onclick="logRoll('🎯 Vhol pivots to face whoever damaged him last during the round!')">🎯 Pivot</button>
+                                    <button class="btn-roll btn-roll-dmg" onclick="rollDamage('Tectonic Magma-Cleave', '3d10', '0', 30, 'fire+slashing')">💥 3d10 Dmg</button>
+                                </div>
+                            </div>
+                            <p style="font-size:0.75rem; color:#94a3b8; margin:0; line-height:1.4;">
+                                • <strong>Tell:</strong> Cleaver heats white-hot; Vhol pivots to face whoever damaged him last.<br>
+                                • <strong>Counterplay:</strong> Tank strikes last to aim the cone away, or allies move outside the 20-ft cone.<br>
+                                • <strong>Resolve:</strong> 20-ft cone: <strong>DC 14 Dex Save</strong> or take <strong>3d10 Fire/Slashing</strong> and fall Prone (half, no prone on success).
+                            </p>
+                        </div>
+
+                        <!-- Phase 1 Action 2: Winch of the Damned -->
+                        <div style="background:#0e131d; border:1px solid #1e293b; border-left:3px solid #eab308; border-radius:0 4px 4px 0; padding:8px 10px; margin-bottom:8px;">
+                            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px; flex-wrap:wrap; gap:6px;">
+                                <strong style="color:#e2e8f0; font-size:0.82rem;">Phase 1: Winch of the Damned (Sacrificial Descent)</strong>
+                                <div style="display:flex; gap:4px;">
+                                    <button class="btn-roll" onclick="logRoll('⚙️ Vhol locks winch gear! Crosses lower 5 ft closer to magma.')">⚙️ Lower Crosses</button>
+                                    <button class="btn-roll" onclick="logRoll('🎯 Winch Cable: 15 HP (AC 14) to sever or DC 13 Athletics to jam.')">🎯 Track Winch</button>
+                                </div>
+                            </div>
+                            <p style="font-size:0.75rem; color:#94a3b8; margin:0; line-height:1.4;">
+                                • <strong>Tell:</strong> Vhol locks an iron gear; winch groans and lowers the 3 crosses 5 ft closer to magma.<br>
+                                • <strong>Counterplay:</strong> Deal 15 damage to the cable (AC 14) or pass DC 13 Athletics check to jam the cog.<br>
+                                • <strong>Resolve:</strong> Crosses drop 5 ft; captives take 1d6 heat damage and arena fills with sulfur smoke.
+                            </p>
+                        </div>
+
+                        <!-- Phase 2 Action 1: Slag Eruption -->
+                        <div style="background:#140e11; border:1px solid #2d1519; border-left:3px solid #ef4444; border-radius:0 4px 4px 0; padding:8px 10px; margin-bottom:8px;">
+                            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px; flex-wrap:wrap; gap:6px;">
+                                <strong style="color:#fca5a5; font-size:0.82rem;">Phase 2: Slag Eruption (Radial Shockwave)</strong>
+                                <div style="display:flex; gap:4px;">
+                                    <button class="btn-roll" onclick="logRoll('🎲 DC 14 Dex Save required vs. Slag Eruption!')">🎲 DC 14 Dex</button>
+                                    <button class="btn-roll btn-roll-dmg" onclick="rollDamage('Slag Eruption', '3d10', '0', 30, 'fire+bludgeoning')">💥 3d10 Dmg</button>
+                                </div>
+                            </div>
+                            <p style="font-size:0.75rem; color:#fca5a5; margin:0; line-height:1.4;">
+                                • <strong>Tell:</strong> Vhol slams his cleaver into the magma rim; cracks snake toward the party.<br>
+                                • <strong>Counterplay:</strong> Move 25+ ft away from Vhol or climb onto perimeter posts.<br>
+                                • <strong>Resolve:</strong> Creatures within 20 ft make <strong>DC 14 Dex Save</strong> or take <strong>3d10 Fire/Bludgeoning</strong> (half on success).
+                            </p>
+                        </div>
+
+                        <!-- Phase 2 Action 2: Imperial Soul-Siphon -->
+                        <div style="background:#140e11; border:1px solid #2d1519; border-left:3px solid #a855f7; border-radius:0 4px 4px 0; padding:8px 10px;">
+                            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px; flex-wrap:wrap; gap:6px;">
+                                <strong style="color:#fca5a5; font-size:0.82rem;">Phase 2: Imperial Soul-Siphon (Concentration Aura)</strong>
+                                <div style="display:flex; gap:4px;">
+                                    <button class="btn-roll" onclick="logRoll('🎲 DC 14 Con Save required vs. Soul-Siphon Aura!')">🎲 DC 14 Con</button>
+                                    <button class="btn-roll btn-roll-dmg" onclick="rollDamage('Soul Siphon', '3d10', '0', 30, 'necrotic')">💥 3d10 Necrotic</button>
+                                    <button class="btn-roll" onclick="logRoll('💚 Vhol heals for half the necrotic damage dealt!')">💚 Heal Vhol</button>
+                                </div>
+                            </div>
+                            <p style="font-size:0.75rem; color:#fca5a5; margin:0; line-height:1.4;">
+                                • <strong>Tell:</strong> Vhol channels the regional spire; emerald soul-tendrils latch onto living targets.<br>
+                                • <strong>Counterplay:</strong> Break Vhol's Concentration (DC 10+ Con save on hit) or break line of sight.<br>
+                                • <strong>Resolve:</strong> Targeted creatures make <strong>DC 14 Con Save</strong> or take <strong>3d10 Necrotic damage</strong> and Vhol heals for half.
+                            </p>
+                        </div>
+                    </div>
+                `;
+            } else {
+                // STANDARD MONSTER RENDERING (FOR HOUND, SCOUT, KRUG, HYDRA, GORTASH)
+                html += `
+                    <!-- VITALS & HP CONTROLLER -->
+                    <div class="vitals-grid-card">
+                        <div class="vitals-stats-row">
+                            <div class="vital-num-box"><div class="label">AC</div><div class="val">${m.ac}</div></div>
+                            <div class="vital-num-box"><div class="label">HP</div><div class="val" id="monster-hp-val">${m.currentHp} / ${m.maxHp}</div></div>
+                            <div class="vital-num-box"><div class="label">SPEED</div><div class="val" style="font-size:0.95rem;">${m.speed}</div></div>
+                            <div class="vital-num-box"><div class="label">INITIATIVE</div><div class="val">${m.init || '+0'}</div></div>
+                        </div>
+
+                        <div class="hp-bar-bg">
+                            <div class="hp-bar-fill" id="monster-hp-bar" style="width: ${(m.currentHp/m.maxHp)*100}%;"></div>
+                        </div>
+
+                        <div class="hp-steppers-row">
+                            <div style="display:flex; gap:4px;">
+                                <button class="btn-step" onclick="adjustMonsterHp('${key}', -10)">-10</button>
+                                <button class="btn-step" onclick="adjustMonsterHp('${key}', -5)">-5</button>
+                                <button class="btn-step" onclick="adjustMonsterHp('${key}', -1)">-1</button>
+                            </div>
+                            <span style="font-size:0.75rem; color:var(--text-muted); font-family:'JetBrains Mono';">Damage / Heal</span>
+                            <div style="display:flex; gap:4px;">
+                                <button class="btn-step btn-step-heal" onclick="adjustMonsterHp('${key}', 1)">+1</button>
+                                <button class="btn-step btn-step-heal" onclick="adjustMonsterHp('${key}', 5)">+5</button>
+                                <button class="btn-step btn-step-heal" onclick="adjustMonsterHp('${key}', 10)">+10</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ACTIONS & COMBAT FEATURES -->
+                    <div class="action-container-card">
+                        <div style="font-family:'Cinzel',serif; font-weight:700; color:var(--accent-gold); font-size:0.92rem; display:flex; align-items:center; gap:6px;">
+                            ⚔️ Actions & Combat Features
+                        </div>
+
+                        ${m.actions.map(act => `
+                            <div class="action-row-item">
+                                <div class="action-row-top">
+                                    <strong style="color:var(--text-bright); font-size:0.88rem;">${act.name}</strong>
+                                    <div style="display:flex; gap:6px;">
+                                        ${act.buttons ? act.buttons.map(b => `
+                                            <button class="btn-roll ${b.isDmg ? 'btn-roll-dmg' : ''}" onclick="${b.func}">${b.label}</button>
+                                        `).join('') : ''}
+                                    </div>
+                                </div>
+                                <p style="font-size:0.78rem; color:var(--text-muted); margin:0;">${act.desc}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }
+
+            // DOWN BELOW: VISUAL DESCRIPTION, PHILOSOPHY, DILEMMA, WEAKNESSES, TACTICS, LOOT
+            html += `
+                <!-- VISUAL DESCRIPTION -->
+                <h4>👁️ CREATURE VISUAL & LORE DESCRIPTION</h4>
+                <p style="font-style:italic; color:#e2e8f0; margin-bottom:12px;">${m.desc}</p>
+
+                <!-- PHILOSOPHY (BLUE BOX) -->
+                <h4>🧭 MORAL & CREATURE PHILOSOPHY</h4>
+                <div class="blue-box">${m.philosophy}</div>
+
+                <!-- PURPOSE / DILEMMA (PINK BOX) -->
+                <h4>⚡ PURPOSE & IMMEDIATE DILEMMA / CONFLICT</h4>
+                <div class="pink-box">${m.problem}</div>
+
+                <!-- THINGS TO KNOW / WEAKNESSES (GREEN BOX) -->
+                <h4>⚖️ THINGS NEED TO KNOW / MORAL STAND & WEAKNESSES</h4>
+                <div class="green-box">${m.morals}</div>
+
+                <!-- DM TACTICS (YELLOW BOX) -->
+                <h4>🎯 DM TACTICS & COMBAT STRATEGY</h4>
+                <div class="yellow-box">${m.tactics}</div>
+
+                <!-- LOOT DROP TABLE -->
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-top:14px; border-bottom:1px solid var(--border-color); padding-bottom:4px;">
+                    <h4 style="margin:0;">🎲 POSSIBLE LOOT DROP TABLE</h4>
+                    <button class="btn-roll" onclick="rollLootTable('${key}')">🎲 Roll Loot Drop</button>
+                </div>
+                <ul style="padding-left:18px; margin-top:8px; font-size:0.82rem; color:#cbd5e1;">
+                    ${m.lootTable.map(l => `<li style="margin-bottom:3px;">${l}</li>`).join('')}
+                </ul>
+                <div id="loot-roll-result" style="display:none; background:#090e18; border:1px solid var(--accent-gold-dark); padding:8px 12px; border-radius:5px; margin-top:8px; font-family:'JetBrains Mono',monospace; font-size:0.82rem; color:#86efac;"></div>
+            `;
+
+            document.getElementById('modal-content').innerHTML = html;
+            clearModalLog();
+            modal.showModal();
+        }
+
+        // CUSTOM HP STEPPERS FOR DUAL-PHASE BOSS
+        function adjustCustomHp(id, delta, maxHp) {
+            const valEl = document.getElementById(`${id}-hp`);
+            const barEl = document.getElementById(`${id}-bar`);
+            if (!valEl) return;
+
+            let cur = parseInt(valEl.innerText.split('/')[0].trim());
+            cur = Math.max(0, Math.min(maxHp, cur + delta));
+            valEl.innerText = `${cur} / ${maxHp}`;
+
+            if (barEl) {
+                const pct = (cur / maxHp) * 100;
+                barEl.style.width = `${pct}%`;
+            }
+            logRoll(`🩸 Vhol (${id}) HP updated: <strong>${cur} / ${maxHp}</strong> (${delta >= 0 ? '+' + delta : delta})`);
+        }
+
+        function adjustMonsterHp(key, delta) {
+            const m = MONSTER_DATA[key];
+            if (!m) return;
+            m.currentHp = Math.max(0, Math.min(m.maxHp, m.currentHp + delta));
+            
+            const hpValEl = document.getElementById('monster-hp-val');
+            const hpBarEl = document.getElementById('monster-hp-bar');
+            if (hpValEl) hpValEl.innerText = `${m.currentHp} / ${m.maxHp}`;
+            if (hpBarEl) {
+                const pct = (m.currentHp / m.maxHp) * 100;
+                hpBarEl.style.width = `${pct}%`;
+                if (pct <= 25) {
+                    hpBarEl.style.background = '#ef4444';
+                } else if (pct <= 50) {
+                    hpBarEl.style.background = '#f59e0b';
+                } else {
+                    hpBarEl.style.background = 'linear-gradient(90deg, #10b981, #34d399)';
+                }
+            }
+            logRoll(`🩸 ${m.name} HP updated: <strong>${m.currentHp} / ${m.maxHp}</strong> (${delta >= 0 ? '+' + delta : delta})`);
+        }
+
+        // NPC MODAL OPENING FUNCTION (EXACT STORMWRECK ISLE FORMAT FROM SCREENSHOTS 3 & 4)
+        function openNpcModal(key) {
+            const n = NPC_DATA[key];
+            if (!n) return;
+            const modal = document.getElementById('dm-modal');
+            document.getElementById('modal-title').innerHTML = n.title;
+
+            let html = `
+                <!-- CORE PHILOSOPHY & WORLDVIEW -->
+                <h4>🧭 CORE PHILOSOPHY & WORLDVIEW</h4>
+                <div class="blue-box">${n.philosophy}</div>
+
+                <!-- IMMEDIATE ACTIVE DILEMMA -->
+                <h4>⚡ IMMEDIATE ACTIVE DILEMMA (INDEPENDENT OF PARTY)</h4>
+                <div class="pink-box">
+                    <strong>Current Problem:</strong> ${n.dilemma.problem}<br>
+                    <strong>Who / What It Involves:</strong> ${n.dilemma.involves}<br>
+                    <strong>Current Approach:</strong> ${n.dilemma.approach}
+                </div>
+
+                <!-- MORAL STAND & DM ROLEPLAY CUES -->
+                <h4>⚖️ MORAL STAND & DM ROLEPLAY CUES</h4>
+                <div class="green-box">${n.moralStand}</div>
+
+                <!-- APPEARANCE & VISUAL VIBE -->
+                <h4>👁️ APPEARANCE & VISUAL VIBE</h4>
+                <p style="color:#f8fafc; font-size:0.85rem; margin-bottom:10px;">${n.appearance}</p>
+
+                <!-- VOICE, TONE & DM ROLEPLAY CUES -->
+                <h4>🗣️ VOICE, TONE & DM ROLEPLAY CUES</h4>
+                <div class="voice-quote-box">${n.voice}</div>
+
+                <!-- D&D 5E STAT BLOCK SNAPSHOT -->
+                <h4>⚔️ D&D 5E STAT BLOCK SNAPSHOT</h4>
+                <div class="terminal-stat-box">${n.vitals}</div>
+
+                <!-- ACTIONS & SPECIAL TRAITS -->
+                <h4>🛡️ ACTIONS & SPECIAL TRAITS</h4>
+                <ul style="padding-left:18px; margin-bottom:12px; font-size:0.84rem; color:#cbd5e1;">
+                    ${n.actions.map(act => `<li style="margin-bottom:4px;">${act}</li>`).join('')}
+                </ul>
+
+                <!-- GEAR, INVENTORY & SECRETS -->
+                <h4>👛 GEAR, INVENTORY & SECRETS</h4>
+                <p style="font-size:0.84rem; color:var(--accent-gold-soft);">${n.gear}</p>
+            `;
+
+            document.getElementById('modal-content').innerHTML = html;
+            clearModalLog();
+            modal.showModal();
+        }
+
+        function openSceneModal(key) {
+            const sc = SCENE_DATA[key];
+            if (!sc) return;
+            const modal = document.getElementById('dm-modal');
+            document.getElementById('modal-title').innerHTML = sc.title;
+            document.getElementById('modal-content').innerHTML = sc.content;
+            clearModalLog();
+            modal.showModal();
+        }
+
+        function openLocationModal(key) {
+            const loc = LOCATION_DATA[key];
+            if (!loc) return;
+            const modal = document.getElementById('dm-modal');
+            document.getElementById('modal-title').innerHTML = loc.title;
+            document.getElementById('modal-content').innerHTML = loc.content;
+            clearModalLog();
+            modal.showModal();
+        }
+
+        // ITEM DOSSIER MODAL OPENING FUNCTION (EXACT STORMWRECK ISLE / ITEM DOSSIER FORMAT)
+        function openItemModal(key) {
+            const item = LOOT_DATA[key];
+            if (!item) return;
+            const modal = document.getElementById('dm-modal');
+            document.getElementById('modal-title').innerHTML = `🎁 ITEM DOSSIER: ${item.name}`;
+            
+            let html = `
+                <div style="background:#131c2c; border-left:3px solid var(--accent-gold); padding:10px 14px; border-radius:0 5px 5px 0; margin-bottom:14px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+                    <div>
+                        <strong style="color:var(--accent-gold); font-size:1.05rem;">${item.name}</strong>
+                        <p style="font-size:0.78rem; color:var(--text-muted); margin-top:2px;">Category: <span class="tag ${item.tagClass || 'tag-buff'}">${item.category}</span></p>
+                    </div>
+                    <div style="text-align:right;">
+                        <span style="font-size:0.85rem; color:#facc15; font-weight:700; font-family:'JetBrains Mono';">💰 Worth / Cost: ${item.cost}</span>
+                        <p style="font-size:0.75rem; color:var(--text-muted); margin-top:2px;">📍 ${item.location}</p>
+                    </div>
+                </div>
+
+                <h4>👁️ VISUAL APPEARANCE & LORE</h4>
+                <p style="font-style:italic; color:#e2e8f0; margin-bottom:12px; line-height:1.5;">"${item.desc}"</p>
+
+                <h4>⚡ 5E MECHANICS, FORMULAS & IN-GAME EFFECTS</h4>
+                <div style="background:#090e18; border:1px solid var(--border-color); padding:12px 14px; border-radius:6px; font-size:0.84rem; line-height:1.6; color:#f8fafc; margin-bottom:14px;">
+                    ${item.effect}
+                </div>
+            `;
+
+            if (item.manuscript) {
+                html += `
+                    <h4>📜 IN-GAME READABLE MANUSCRIPT / LOGBOOK TEXT</h4>
+                    <div class="modal-read-aloud" style="font-family:'Georgia', serif; font-size:0.88rem; line-height:1.65; background:rgba(197, 160, 89, 0.09); border-left:3px solid var(--accent-gold); color:#fde68a; padding:14px; border-radius:4px; margin-bottom:14px;">
+                        ${item.manuscript}
+                    </div>
+                `;
+            }
+
+            html += `
+                <h4>📖 DM WORLD DISTRIBUTION & PLACEMENT</h4>
+                <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:10px;">${item.placement}</p>
+            `;
+
+            document.getElementById('modal-content').innerHTML = html;
+            clearModalLog();
+            modal.showModal();
+        }
+
+        function openLootModal(key) {
+            openItemModal(key);
+        }
+
+        function closeDmModal() {
+            const modal = document.getElementById('dm-modal');
+            if (modal) modal.close();
+        }
+
+        // Close modal when clicking outside window on backdrop
+        const dmModalEl = document.getElementById('dm-modal');
+        if (dmModalEl) {
+            dmModalEl.addEventListener('click', (e) => {
+                const wrapper = dmModalEl.querySelector('.modal-wrapper');
+                if (e.target === dmModalEl || (wrapper && !wrapper.contains(e.target))) {
+                    closeDmModal();
+                }
+            });
+        }
+
+        // DICE LOGGING & ROLLING ENGINE
+        function logRoll(text) {
+            const el = document.getElementById('dice-log');
+            if (el) el.innerHTML = text;
+
+            const modalEl = document.getElementById('modal-dice-log');
+            if (modalEl) {
+                modalEl.innerHTML = text;
+                modalEl.style.transition = 'none';
+                modalEl.style.color = '#fde047';
+                setTimeout(() => {
+                    modalEl.style.transition = 'color 0.5s ease';
+                    modalEl.style.color = '#f8fafc';
+                }, 80);
+            }
+        }
+
+        function clearModalLog() {
+            const modalEl = document.getElementById('modal-dice-log');
+            if (modalEl) modalEl.innerHTML = '🎲 ROLL RESULT: Ready for rolls... (Click any button below)';
+        }
+
+        function rollDie(sides) {
+            const r = Math.floor(Math.random() * sides) + 1;
+            logRoll(`🎲 Rolled d${sides}: <strong>${r}</strong>`);
+        }
+
+        function clearLog() {
+            logRoll(`🎲 Console cleared. Ready for next roll.`);
+        }
+
+        function rollRecharge(name) {
+            const r = Math.floor(Math.random() * 6) + 1;
+            const res = r >= 5 ? '⚡ <strong style="color:#4ade80;">RECHARGED!</strong>' : '⏳ <span style="color:#8b9bb4;">Not Recharged (Needs 5-6)</span>';
+            logRoll(`⚡ Recharge for ${name}: d6 = <strong>${r}</strong> ➔ ${res}`);
+        }
+
+        function rollLootTable(key) {
+            const m = MONSTER_DATA[key];
+            if (!m || !m.lootTable || m.lootTable.length === 0) return;
+            const roll = Math.floor(Math.random() * m.lootTable.length);
+            const resultBox = document.getElementById('loot-roll-result');
+            if (resultBox) {
+                resultBox.style.display = 'block';
+                resultBox.innerHTML = `🎁 <strong>Loot Rolled (Option ${roll+1}/${m.lootTable.length}):</strong> ${m.lootTable[roll]}`;
+            }
+            logRoll(`🎁 Loot Rolled from ${m.name}: <strong>${m.lootTable[roll]}</strong>`);
+        }
+
+        function parseDice(notation) {
+            const match = notation.match(/(\d+)d(\d+)([+-]\d+)?/);
+            if (!match) return { count: 1, sides: 6, mod: 0 };
+            return {
+                count: parseInt(match[1]),
+                sides: parseInt(match[2]),
+                mod: match[3] ? parseInt(match[3]) : 0
+            };
+        }
+
+        function rollAttack(name, atkBonus, baseDmg, extraDmg, type) {
+            const d20 = Math.floor(Math.random() * 20) + 1;
+            const total = d20 + atkBonus;
+            
+            if (d20 === 20) {
+                logRoll(`💥 <span class="crit-badge" style="background:#dc2626; color:white; padding:2px 6px; border-radius:4px; font-weight:bold;">NAT 20 CRIT!</span> ${name} Attack: <strong>${total}</strong> to hit! ➔ <em>Brutal Crit Triggered!</em>`);
+            } else if (d20 === 1) {
+                logRoll(`💀 <span class="crit-badge" style="background:#475569; color:white; padding:2px 6px; border-radius:4px; font-weight:bold;">NAT 1 FUMBLE!</span> ${name} Attack misses completely!`);
+            } else {
+                logRoll(`🎯 ${name} Attack: d20(${d20}) + ${atkBonus} = <strong>${total}</strong> to hit.`);
+            }
+        }
+
+        function rollDamage(name, baseNotation, extraNotation, maxBase, type) {
+            const b = parseDice(baseNotation);
+            let sum = b.mod;
+            let rolls = [];
+            for (let i = 0; i < b.count; i++) {
+                const r = Math.floor(Math.random() * b.sides) + 1;
+                rolls.push(r);
+                sum += r;
+            }
+
+            let extraSum = 0;
+            if (extraNotation && extraNotation !== '0') {
+                const ex = parseDice(extraNotation);
+                for (let i = 0; i < ex.count; i++) {
+                    extraSum += Math.floor(Math.random() * ex.sides) + 1;
+                }
+                extraSum += ex.mod;
+            }
+
+            const total = sum + extraSum;
+            logRoll(`💥 ${name} Damage: [${rolls.join('+')}]${b.mod ? '+' + b.mod : ''} + extra(${extraSum}) = <strong>${total} ${type}</strong> dmg.`);
+        }
+    </script>
+</body>
+</html>

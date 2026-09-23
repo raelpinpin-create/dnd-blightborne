@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blightborne: The Ashen Trail • Campaign Portal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-canvas: #07090e;
+            --bg-card: #0c1017;
+            --bg-card-hover: #131924;
+            --border-card: #1e293b;
+            --accent-gold: #f59e0b;
+            --accent-gold-soft: #fbbf24;
+            --accent-crimson: #dc2626;
+            --accent-crimson-soft: #ef4444;
+            --accent-emerald: #10b981;
+            --accent-purple: #8b5cf6;
+            --text-main: #e2e8f0;
+            --text-bright: #f8fafc;
+            --text-dim: #94a3b8;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: var(--bg-canvas);
+            color: var(--text-main);
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 36px 16px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 960px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        header {
+            text-align: center;
+            background: radial-gradient(circle at top, rgba(220, 38, 38, 0.15) 0%, rgba(12, 16, 23, 0.8) 100%);
+            border: 1px solid rgba(220, 38, 38, 0.3);
+            border-radius: 16px;
+            padding: 32px 24px;
+            box-shadow: 0 12px 36px rgba(0,0,0,0.6);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 3px;
+            background: linear-gradient(90deg, transparent, var(--accent-crimson), var(--accent-gold), transparent);
+        }
+
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.2rem;
+            color: var(--text-bright);
+            letter-spacing: 1.5px;
+            margin-bottom: 6px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+        }
+
+        h1 span {
+            color: var(--accent-crimson-soft);
+        }
+
+        .subtitle {
+            color: var(--text-dim);
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+        }
+
+        .campaign-badge {
+            display: inline-block;
+            margin-top: 12px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--accent-gold);
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid var(--accent-gold);
+            padding: 4px 12px;
+            border-radius: 999px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 18px;
+        }
+
+        .portal-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: 12px;
+            padding: 22px;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+        }
+
+        .portal-card:hover {
+            transform: translateY(-4px);
+            background: var(--bg-card-hover);
+            border-color: var(--accent-gold);
+            box-shadow: 0 10px 25px rgba(245, 158, 11, 0.15);
+        }
+
+        .card-tag {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            padding: 3px 8px;
+            border-radius: 4px;
+            display: inline-block;
+            align-self: flex-start;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .card-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-bright);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card-desc {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            line-height: 1.5;
+            flex: 1;
+        }
+
+        .btn-launch {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-card);
+            color: var(--accent-gold-soft);
+            font-weight: 600;
+            font-size: 0.85rem;
+            padding: 9px 14px;
+            border-radius: 6px;
+            text-align: center;
+            margin-top: 6px;
+            transition: all 0.15s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .portal-card:hover .btn-launch {
+            background: var(--accent-gold);
+            color: #07090e;
+            border-color: var(--accent-gold);
+            font-weight: 700;
+        }
+
+        .featured-card {
+            border-color: rgba(245, 158, 11, 0.5);
+            background: linear-gradient(180deg, rgba(245, 158, 11, 0.04) 0%, rgba(12, 16, 23, 1) 100%);
+        }
+
+        footer {
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            margin-top: 24px;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>⚔️ Blightborne: <span>The Ashen Trail</span></h1>
+            <p class="subtitle">Grimdark D&D 5e Campaign Hub & Interactive Master DM Screen</p>
+            <div class="campaign-badge">Mushoku Tensei Post-Laplace Setting • Act 1 Launchpad</div>
+        </header>
+
+        <div class="grid">
+            <!-- MASTER DM SCREEN (FEATURED) -->
+            <a href="DM_SCREEN.html" class="portal-card featured-card">
+                <span class="card-tag" style="background:rgba(245,158,11,0.18); color:var(--accent-gold-soft); border:1px solid var(--accent-gold);">Lead DM Command Hub</span>
+                <div class="card-title">👑 Master DM Screen</div>
+                <div class="card-desc">Complete 3-Act story roadmap, Overseer Vhol & monster cards, Pointy Hat Battlefield Actions, 6-category classified loot vault, biomes & difficulty cheat sheet.</div>
+                <div class="btn-launch">Open Master DM Screen ➔</div>
+            </a>
+
+            <!-- RASHUK (PROTAGONIST HERO) -->
+            <a href="RASHUK_PLAYER_SHEET.html" class="portal-card" style="border-color:rgba(220,38,38,0.4);">
+                <span class="card-tag" style="background:rgba(220,38,38,0.15); color:var(--accent-crimson-soft); border:1px solid rgba(220,38,38,0.4);">Level 5 Fighter • Battle Master</span>
+                <div class="card-title">🗡️ Rashuk (Laxas Langley)</div>
+                <div class="card-desc">Advanced-Rank Swordsman & Blight-Born fugitive hunter. Master of Water-God parries, Riposte maneuvers, and Action Surge execution.</div>
+                <div class="btn-launch">Open Hero Card ➔</div>
+            </a>
+
+            <!-- NPC & FACTION DIRECTORY -->
+            <a href="NPC_REGISTRY.md" class="portal-card">
+                <span class="card-tag" style="background:rgba(139,92,246,0.15); color:var(--accent-purple); border:1px solid rgba(139,92,246,0.4);">Faction Directory</span>
+                <div class="card-title">👥 NPC & World Roster</div>
+                <div class="card-desc">Old Geth the hunchback apothecary, 10yo captive Elia, Iron Fang enforcers, and Grand Inquisitor Gortash's hierarchy.</div>
+                <div class="btn-launch">View NPC Roster ➔</div>
+            </a>
+
+            <!-- STORY ARCHIVE & LOGS -->
+            <a href="01_STORY_ARCHIVE.md" class="portal-card">
+                <span class="card-tag" style="background:rgba(16,185,129,0.15); color:var(--accent-emerald); border:1px solid rgba(16,185,129,0.4);">Chronicle & Lore</span>
+                <div class="card-title">📖 Campaign Chronicle</div>
+                <div class="card-desc">Session 1 prologue logs, the purge of Sanctuary, Directive 409 reveals, and world progression milestones.</div>
+                <div class="btn-launch">Read Story Log ➔</div>
+            </a>
+        </div>
+
+        <footer>
+            D&D 5e Interactive Campaign System • Blightborne: The Ashen Trail<br>
+            GitHub Pages Live Host • Standalone Offline-Ready Glassmorphism Suite
+        </footer>
+    </div>
+</body>
+</html>
