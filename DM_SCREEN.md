@@ -6,7 +6,20 @@
 
 ---
 
-## ⚡ 0. HOMEBREW COMPENDIUM & MASTER TABLE RULES
+## 🩸 0. PARTY VITALS & PROTAGONIST STATUS
+
+### Rashuk (Laxas Langley)
+* **Class & Level:** Fighter (Battle Master) 5
+* **Heritage:** Half-Demon / Half-Human Hybrid (Abyssal Bloodline)
+* **Alignment:** `LAWFUL EVIL` (Embraced ruthless retribution after the Kar-Vash infirmary massacre)
+* **Armor Class:** **18** (Plate Armor) | **Max HP:** **59** (5d10+15+5) | **Speed:** 30 ft | **PB:** +3
+* **Primary Weapon:** **Overseer Vhol's Obsidian Greatcleaver** (Heavy 2-Handed, `2d6+4 Slashing`, GWF, Graze, Laceration Bleed on Nat 18–20)
+* **Combat Resources:** 4d8 Superiority Dice (DC 15 Saves), 2x Second Wind (1d10+5), Action Surge (1/1), 2x Help Tokens
+* **Campaign Relics Carried:** Inquisitorial Signet Ring, Grand Tithe Supply Map to Zul-Gaza, Obsidian Vault Master Key, Locked Brass Satchel
+
+---
+
+## ⚡ 1. HOMEBREW COMPENDIUM & MASTER TABLE RULES
 
 ### 1. Combat Initiation & Surprise
 * **Zero Free Pre-Combat Hits:** The moment any player or NPC declares intent to attack (*"I stab him," "I fire an arrow"*), **EVERYONE rolls Initiative immediately BEFORE the attack resolves**.
@@ -114,18 +127,20 @@
 
 ## 👥 4. NPC PROFILES (STORMWRECK ISLE FRAMEWORK)
 
-### Old Geth (One-Eyed Goblin Apothecary)
+### Old Geth (One-Eyed Goblin Apothecary) — 💀 DECEASED
+* **Status:** Slain in Fort Kar-Vash slave infirmary during post-battle sentry retaliation.
 * **Philosophy:** *Quiet Compassion in a World of Iron.* Power without purpose is vulgar butchery.
-* **Dilemma:** Comatose and dying human stock; secretly brewing painkilling salves while evading inspection.
-* **Moral Stand (Red Line):** Refuses to assist in public child sacrifices; will aid those with the courage to fight back.
-* **Voice:** *"You have demon horns, boy... but your eyes are haunted by human sorrow."*
-* **Vitals:** AC 11 | HP 22 | Init +1 | Speed 25 ft | CR 1/4 | Saves: INT +4, WIS +4
+* **Legacy:** Gifted Rashuk Alchemical Quenching Dust and warned him against becoming a monster.
+* **Vitals:** AC 11 | HP 0/22 | CR 1/4 (Deceased)
 
-### Elia (10-Year-Old Human Captive)
-* **Philosophy:** *Innocence in the Ashes.* Believes someone strong will break the chains.
-* **Dilemma:** Chained to central cross above magma; heat blistering her feet.
-* **Voice:** *"You bleed like me... Are you an angel... or a demon?"*
-* **Vitals:** AC 10 | HP 4 | Init +0 | Speed 25 ft | CR 0
+### Elia (10-Year-Old Human Captive) — 💀 DECEASED
+* **Status:** Massacred alongside all human infirmary captives when Vhol was found dead.
+* **Philosophy:** *Innocence in the Ashes.* Her death cemented Rashuk's descent into Lawful Evil vengeance.
+* **Vitals:** AC 10 | HP 0/4 | CR 0 (Deceased)
+
+### Overseer Vhol (Advanced-Rank Centurion) — 💀 DECEASED
+* **Status:** Decapitated by Rashuk in the Amphitheater of Bone. His Obsidian Greatcleaver was claimed.
+* **Vitals:** AC 17 | HP 0/85 | CR 5 (Deceased)
 
 ### Grand Inquisitor Gortash (Saint of the Bleeding Cross)
 * **Philosophy:** *The Bleeding Cross & Absolute Purge.* Human blood is an infectious blight; hybrids must be exterminated.
@@ -157,8 +172,8 @@
 ### ⚔️ Weapons & Offensive Arsenal
 | Item Name | Category & Rarity | Location / Origin | Worth / Cost | 5e Mechanics & In-Game Effect |
 | :--- | :--- | :--- | :--- | :--- |
+| 🪓 **Overseer Vhol's Obsidian Greatcleaver** | `WEAPON • Heavy Two-Handed` | Claimed by Rashuk | `500 GP` | `2d6+4 Slashing` (Graze 4 Dmg on miss; GWF); Nat 18–20 or Crit inflicts **Laceration** (`1d4` bleed/rd). |
 | 🪓 **Captain Krug's Spiked Cleaver** | `WEAPON • Masterwork` | Captain Krug Boss Drop | `350 GP` | **+1 to hit & dmg** (`1d8+1` / `1d10+1` slash); **Crits on 19-20** vs bleeding targets! |
-| 🪚 **Overseer Vhol's Obsidian Bone-Saw** | `WEAPON • Uncommon` | Overseer Vhol Boss Loot | `500 GP` | **+1 magic blade** (`1d6+1` slash); Crit/Nat 18+ inflicts **Deep Bleed** (`1d4` necrotic/rd). |
 | 🏹 **Iron Fang Heavy Crossbow (+1)** | `WEAPON • Uncommon` | Elite Marksman Drop | `250 GP` | **+1 to hit & dmg** (`1d10+1` pierce, 100/400 range); Integrated scope **ignores half cover**! |
 | ⛓️ **Heavy Winch Chain-Flail** | `WEAPON • Martial Reach` | Fort Kar-Vash Winch | `100 GP` | `1d8` bludgeoning (10ft Reach); Bonus Action: DC 13 Str check to grapple or yank target 5ft closer. |
 | 🗡️ **Serrated Trench Dagger** | `WEAPON • Finesse Light` | Dead Convoy Guard Sheath | `35 GP` | `1d4` pierce/slash; Concealed sheath grants **Advantage on Sleight of Hand** to conceal. |

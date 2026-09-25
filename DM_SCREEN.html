@@ -751,6 +751,7 @@
         </div>
         <nav class="nav-links">
             <button class="nav-btn nav-btn-highlight" onclick="openHomebrewRulesModal()">📜 Table Homebrews & DM Rules</button>
+            <a href="#vitals-section" class="nav-btn">🩸 Party Vitals</a>
             <a href="#acts-section" class="nav-btn">🗺️ Session 1 Acts</a>
             <a href="#monsters-section" class="nav-btn">👹 Monsters & Bosses</a>
             <a href="#environments-section" class="nav-btn">🌲 Environments</a>
@@ -766,13 +767,67 @@
         <div class="quick-banner">
             <div class="quick-banner-text">
                 <h2>🩸 The Ashen Trail (3.5 – 4h One-Shot Module)</h2>
-                <p>Protagonist: <strong>Rashuk (Laxas Langley)</strong> — Level 5 Battle Master (Advanced Rank) | Target: <strong>Inquisitor Gortash</strong></p>
+                <p>Protagonist: <strong>Rashuk (Laxas Langley)</strong> — Level 5 Battle Master (Advanced Rank) | Alignment: <span style="color:#ef4444; font-weight:700;">LAWFUL EVIL</span></p>
             </div>
             <div class="quick-banner-actions">
+                <a href="RASHUK_PLAYER_SHEET.html" target="_blank" class="btn-roll" style="text-decoration:none;">🧙 Open Player Sheet</a>
                 <button class="btn-roll" onclick="openHomebrewRulesModal()">📜 Open Rules Compendium</button>
                 <button class="btn-roll btn-roll-dmg" onclick="openMonsterModal('vhol')">👹 Overseer Vhol Boss Card</button>
             </div>
         </div>
+
+        <!-- SECTION 0: PARTY VITALS & PROTAGONIST STATUS -->
+        <section id="vitals-section" style="margin-bottom:20px;">
+            <div class="section-header">
+                <span>🩸 Section 0: Party Vitals & Protagonist Live State</span>
+                <span class="section-tag">Live Battle Tracker</span>
+            </div>
+            <div class="card" style="border-left:4px solid var(--accent-crimson);">
+                <div class="card-header" style="display:flex; justify-content:space-between; align-items:center;">
+                    <div style="display:flex; align-items:center; gap:8px;">
+                        <span class="card-title">🩸 Rashuk (Laxas Langley)</span>
+                        <span class="tag" style="background:rgba(220,38,38,0.2); color:#fca5a5; border:1px solid #ef4444;">LAWFUL EVIL</span>
+                        <span class="tag tag-advanced">Level 5 Fighter (Battle Master)</span>
+                    </div>
+                    <span style="font-family:'JetBrains Mono'; font-size:0.8rem; color:var(--accent-gold);">PB: +3 • Speed: 30 ft</span>
+                </div>
+                <div class="card-body" style="gap:12px;">
+                    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(140px, 1fr)); gap:8px;">
+                        <div class="vital-mini-box" style="background:#090e18; border:1px solid var(--border-color); border-radius:6px; padding:6px 10px; text-align:center;">
+                            <div style="font-size:0.68rem; color:var(--text-muted); font-weight:700;">ARMOR CLASS</div>
+                            <div style="font-size:1.15rem; font-weight:700; color:#38bdf8; font-family:'JetBrains Mono';">18 AC <small style="font-size:0.7rem; color:var(--text-muted);">(Plate)</small></div>
+                        </div>
+                        <div class="vital-mini-box" style="background:#090e18; border:1px solid var(--border-color); border-radius:6px; padding:6px 10px; text-align:center;">
+                            <div style="font-size:0.68rem; color:var(--text-muted); font-weight:700;">HIT POINTS</div>
+                            <div style="font-size:1.15rem; font-weight:700; color:#10b981; font-family:'JetBrains Mono';">59 / 59 HP</div>
+                        </div>
+                        <div class="vital-mini-box" style="background:#090e18; border:1px solid var(--border-color); border-radius:6px; padding:6px 10px; text-align:center;">
+                            <div style="font-size:0.68rem; color:var(--text-muted); font-weight:700;">SUPERIORITY DICE</div>
+                            <div style="font-size:1.15rem; font-weight:700; color:var(--accent-gold); font-family:'JetBrains Mono';">4 / 4 d8 <small style="font-size:0.7rem; color:var(--text-muted);">(DC 15)</small></div>
+                        </div>
+                        <div class="vital-mini-box" style="background:#090e18; border:1px solid var(--border-color); border-radius:6px; padding:6px 10px; text-align:center;">
+                            <div style="font-size:0.68rem; color:var(--text-muted); font-weight:700;">SECOND WIND / SURGE</div>
+                            <div style="font-size:1.15rem; font-weight:700; color:#c084fc; font-family:'JetBrains Mono';">2 / 2 • ⚡ 1 / 1</div>
+                        </div>
+                    </div>
+
+                    <div style="background:#090e18; border:1px solid var(--border-color); border-radius:6px; padding:10px 12px; font-size:0.84rem; display:flex; flex-direction:column; gap:6px;">
+                        <div>
+                            <strong style="color:var(--accent-gold);">⚔️ Active Weapon Arsenal:</strong>
+                            <span style="color:#e2e8f0; margin-left:6px;">🪓 <strong>Overseer Vhol's Obsidian Greatcleaver</strong> (+7 to Hit, 2d6+4 Slashing • Graze 4 • Laceration Bleed on Nat 18–20) | 🗡️ Greatsword (2d6+4) | 🪓 Halberd (1d10+4 • Cleave) | 🏹 Heavy Crossbow (1d10+1 • Push)</span>
+                        </div>
+                        <div>
+                            <strong style="color:var(--accent-crimson-soft);">💍 Carried Relics & Proof:</strong>
+                            <span style="color:#cbd5e1; margin-left:6px;">💍 Inquisitorial Signet Ring | 🗺️ Grand Tithe Supply Map to Zul-Gaza | 🔑 Obsidian Vault Master Key | 📜 Courier Brass Satchel</span>
+                        </div>
+                        <div>
+                            <strong style="color:#38bdf8;">🧠 Alignment Transformation:</strong>
+                            <span style="color:var(--text-muted); margin-left:6px;">Shifted to <em>Lawful Evil</em> after remembering childhood execution trauma and witnessing the garrison's retaliatory massacre of Old Geth, Elia, and all human infirmary captives.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <!-- SECTION 1: SESSION 1 ACT ROADMAP -->
         <section id="acts-section">
@@ -989,26 +1044,26 @@
                 <span class="section-tag">Stormwreck Style Profiles</span>
             </div>
             <div class="grid-3">
-                <div class="card">
+                <div class="card" style="opacity:0.85; border-color:#475569;">
                     <div class="card-header">
                         <span class="card-title">🧪 Old Geth</span>
-                        <span class="tag" style="background:#064e3b; color:#a7f3d0;">Ally</span>
+                        <span class="tag" style="background:#334155; color:#cbd5e1; border:1px solid #475569;">💀 DECEASED</span>
                     </div>
                     <div class="card-body">
-                        <div class="card-meta">One-Eyed Goblin Apothecary</div>
-                        <p>Secretly comforts dying human stock. Recognizes human sorrow behind Rashuk's horns. Gifts Quenching Dust.</p>
+                        <div class="card-meta">One-Eyed Goblin Apothecary • Slain in Infirmary</div>
+                        <p>Comforted human captives. Massacred alongside all infirmary patients by vengeful sentries when Vhol was found dead.</p>
                         <button class="btn-modal" onclick="openNpcModal('geth')">🎭 Open NPC Profile</button>
                     </div>
                 </div>
 
-                <div class="card">
+                <div class="card" style="opacity:0.85; border-color:#475569;">
                     <div class="card-header">
                         <span class="card-title">👧 Elia (10yo Captive)</span>
-                        <span class="tag" style="background:#1e1b4b; color:#c7d2fe;">Innocent</span>
+                        <span class="tag" style="background:#334155; color:#cbd5e1; border:1px solid #475569;">💀 DECEASED</span>
                     </div>
                     <div class="card-body">
-                        <div class="card-meta">Human Girl on Central Cross</div>
-                        <p>Mirror of Rashuk at age 10. Chained above magma. Rescuing her triggers Rashuk's protective vow.</p>
+                        <div class="card-meta">Human Girl • Slain in Sentry Retaliation</div>
+                        <p>Mirror of Rashuk at age 10. Massacred when the alarm sounded. Her death cemented Rashuk's descent into Lawful Evil vengeance.</p>
                         <button class="btn-modal" onclick="openNpcModal('elia')">🎭 Open NPC Profile</button>
                     </div>
                 </div>
@@ -1119,18 +1174,18 @@
                             <!-- CATEGORY 3: WEAPONS & OFFENSIVE ARSENAL -->
                             <tr class="loot-row-header-weapon"><td colspan="5">⚔️ WEAPONS & OFFENSIVE ARSENAL</td></tr>
                             <tr>
+                                <td><span class="loot-clickable" onclick="openItemModal('vhol_bone_saw')">🪓 Overseer Vhol's Obsidian Greatcleaver</span></td>
+                                <td><span class="tag tag-weapon">WEAPON • Heavy Two-Handed</span></td>
+                                <td>Claimed from Overseer Vhol</td>
+                                <td style="font-family:'JetBrains Mono'; font-size:0.78rem; color:#facc15;">500 GP</td>
+                                <td><strong>2d6+4 Slashing</strong> (Graze 4 Dmg on miss; GWF); Nat 18–20 or Crit inflicts <strong>Laceration</strong> (1d4 bleed/rd).</td>
+                            </tr>
+                            <tr>
                                 <td><span class="loot-clickable" onclick="openItemModal('krug_cleaver')">🪓 Captain Krug's Spiked Cleaver</span></td>
                                 <td><span class="tag tag-weapon">WEAPON • Masterwork Heavy</span></td>
                                 <td>Captain Krug Boss Drop</td>
                                 <td style="font-family:'JetBrains Mono'; font-size:0.78rem; color:#facc15;">350 GP</td>
                                 <td><strong>+1 to hit & dmg</strong> (1d8+1 / 1d10+1 slash); <strong>Crits on 19-20</strong> vs bleeding targets!</td>
-                            </tr>
-                            <tr>
-                                <td><span class="loot-clickable" onclick="openItemModal('vhol_bone_saw')">🪚 Overseer Vhol's Obsidian Bone-Saw</span></td>
-                                <td><span class="tag tag-weapon">WEAPON • Uncommon Magic</span></td>
-                                <td>Overseer Vhol Boss Loot</td>
-                                <td style="font-family:'JetBrains Mono'; font-size:0.78rem; color:#facc15;">500 GP</td>
-                                <td><strong>+1 magic blade</strong> (1d6+1 slash); Crit/Nat 18+ inflicts <strong>Deep Bleed</strong> (1d4 necrotic/rd).</td>
                             </tr>
                             <tr>
                                 <td><span class="loot-clickable" onclick="openItemModal('scout_heavy_crossbow')">🏹 Iron Fang Scout Heavy Crossbow (+1)</span></td>
@@ -1816,17 +1871,17 @@
         // NPC DATA (EXACT STORMWRECK ISLE PROFILE FORMAT FROM SCREENSHOTS 3 & 4)
         const NPC_DATA = {
             geth: {
-                title: "🎭 NPC PROFILE: OLD GETH",
+                title: "🎭 NPC PROFILE: OLD GETH — 💀 DECEASED",
                 philosophy: "<strong>Quiet Compassion in a World of Iron.</strong> The Demon Hegemony's cruelty is a sickness that rots the soul. Power without purpose is vulgar butchery; true strength is protecting those who cannot bleed for themselves.",
                 dilemma: {
-                    problem: "Comatose and dying human stock in the infirmary; secretly brewing painkilling salves while hiding his seditious herbs from Overseer Vhol's enforcers.",
-                    involves: "Slave pens infirmary, ghost-poppy stores, Overseer Vhol's evening inspection.",
-                    approach: "Administers ghost-poppy tea to spare captives agony; risks execution to supply sympathetic warriors with alchemical tools."
+                    problem: "💀 DECEASED: Slain in the slave infirmary by vengeful sentries when Overseer Vhol's body was discovered.",
+                    involves: "Fort Kar-Vash slave infirmary, post-duel sentry retaliation.",
+                    approach: "His dying words and tragic demise proved to Rashuk that weakness invites annihilation, catalyzing Rashuk's descent into Lawful Evil."
                 },
-                moralStand: "<strong>Absolute Red Line:</strong> Refuses to aid in the torture or public sacrifice of children; will betray garrison security if an opportunity to save captives presents itself.",
+                moralStand: "<strong>Legacy:</strong> Gifted Rashuk Alchemical Quenching Dust and pleaded with him to protect the innocent.",
                 appearance: "Aging, hunchbacked goblin-demon with peeling gray scales, a blind cataract in his left eye, and nicotine-stained claws smelling of crushed poppies and sulfur.",
                 voice: "\"You have demon horns, boy... but your eyes are haunted by human sorrow. If you are here for blood, head to the amphitheater. But remember: power without a purpose to protect just makes you another butcher in iron armor.\"",
-                vitals: "Vitals: AC 11 (Natural) | HP 22 (5d6+5) | Init +1 | Speed 25 ft | Darkvision 60 ft | CR 1/4<br>Saves: INT +4, WIS +4",
+                vitals: "Vitals: AC 11 (Natural) | HP 0 / 22 (Deceased) | Init +1 | Speed 25 ft | Darkvision 60 ft | CR 1/4<br>Saves: INT +4, WIS +4",
                 actions: [
                     "🧪 <strong>Ghost-Poppy Draught:</strong> Restores 2d6+1 HP to an adjacent living creature.",
                     "💨 <strong>Quenching Dust Flask:</strong> 20-ft radius cloud; blinds creatures for 1 round and snuffs alchemical alarms.",
@@ -1835,17 +1890,17 @@
                 gear: "Pouch of Ghost-Poppy Salve, 1x Quenching Dust Flask, Iron Slave Infirmary Master Key."
             },
             elia: {
-                title: "🎭 NPC PROFILE: ELIA (10-YEAR-OLD CAPTIVE)",
-                philosophy: "<strong>Innocence in the Ashes.</strong> A child of the borderlands who remembers when parents held hands before the iron collars came. Believes that someone strong will come to break the chains.",
+                title: "🎭 NPC PROFILE: ELIA (10-YEAR-OLD CAPTIVE) — 💀 DECEASED",
+                philosophy: "<strong>Innocence in the Ashes.</strong> A child of the borderlands who remembered when parents held hands before the iron collars came. Believed that someone strong would come to break the chains.",
                 dilemma: {
-                    problem: "Chained to the central timber cross suspended above the boiling magma pit; heat is blistering her feet as the winch lowers.",
-                    involves: "The central amphitheater, Overseer Vhol, the crucifixion winch mechanism.",
-                    approach: "Clutches her woven reed doll and weeps quietly, praying for deliverance."
+                    problem: "💀 DECEASED: Massacred alongside all human captives in the infirmary when Overseer Vhol was found dead.",
+                    involves: "The central amphitheater, Fort Kar-Vash garrison retaliation.",
+                    approach: "Her death triggered Rashuk's memory of the 10-year-old child killed by the convoy commander at the start, destroying any lingering mercy in his heart."
                 },
-                moralStand: "<strong>Absolute Red Line:</strong> Terrified of demon horns and blood, but recognizes true kindness and will not flee from a protector who bleeds red.",
+                moralStand: "<strong>Legacy:</strong> Her memory serves as the catalyst for Rashuk's vow to eradicate the inquisitors with cold, ruthless discipline.",
                 appearance: "10-year-old human girl with soot-stained chestnut hair, torn linen slave rags, and blistered wrists bound in rough hemp rope. Direct mirror of Rashuk at age 10.",
                 voice: "\"You... you bleed like me... Are you an angel... or a demon? Please... don't let me burn...\"",
-                vitals: "Vitals: AC 10 | HP 4 (1d8) | Init +0 | Speed 25 ft | CR 0<br>Saves: None",
+                vitals: "Vitals: AC 10 | HP 0 / 4 (Deceased) | Init +0 | Speed 25 ft | CR 0<br>Saves: None",
                 actions: [
                     "🧸 <strong>Clutch Reed Doll:</strong> Advantage on saves against being frightened for 1 round."
                 ],
@@ -1975,14 +2030,14 @@
                 placement: "Wielded by 🪓 Captain Krug in Act 1."
             },
             vhol_bone_saw: {
-                name: "🪚 Overseer Vhol's Obsidian Bone-Saw",
-                category: "WEAPON • Uncommon Magic Blade",
+                name: "🪓 Overseer Vhol's Obsidian Greatcleaver",
+                category: "WEAPON • Heavy Two-Handed (Martial)",
                 tagClass: "tag-weapon",
-                location: "Overseer Vhol Boss Loot (Amphitheater of Bone)",
+                location: "Overseer Vhol Boss Loot (Claimed by Rashuk)",
                 cost: "500 GP",
-                desc: "A heavy serrated falchion carved from razor-sharp volcanic obsidian and bound in demonic tendon.",
-                effect: "• <strong>+1 bonus to Attack and Damage rolls</strong>.<br>• Deals <strong>1d6 + 1 Slashing Damage</strong> (Light / Finesse).<br>• <strong>Deep Laceration:</strong> When you roll a <strong>Natural 18, 19, or 20</strong> on an attack roll, the target suffers a deep arterial wound and takes <strong>1d4 Necrotic Damage</strong> at the start of each of its turns until treated with a DC 13 Medicine check.",
-                placement: "Looted from 👹 Overseer Vhol's primary weapon belt."
+                desc: "A massive, terrifying executioner cleaver forged from jagged volcanic black obsidian, claimed directly from the corpse of Overseer Vhol.",
+                effect: "• Deals <strong>2d6 + 4 Slashing Damage</strong> (Heavy, Two-Handed).<br>• <strong>Weapon Mastery (Graze):</strong> If your attack roll misses a creature, the target takes flat damage equal to your Strength modifier (<strong>4 Slashing Damage</strong>).<br>• <strong>Laceration / Deep Bleed:</strong> On a critical hit or natural attack roll of <strong>18, 19, or 20</strong>, the serrated obsidian teeth tear deep into muscle and arteries. The target suffers the Laceration condition, taking <strong>1d4 bleed/necrotic damage</strong> at the start of each of its turns until treated with a DC 13 Medicine check or magical healing.<br>• <strong>Great Weapon Fighting Active:</strong> 1s and 2s on damage dice count as 3s.",
+                placement: "Claimed by Rashuk after decapitating Overseer Vhol in the Sunken Amphitheater of Bone."
             },
             scout_heavy_crossbow: {
                 name: "🏹 Iron Fang Scout Heavy Crossbow (+1)",

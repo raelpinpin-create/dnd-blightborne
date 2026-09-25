@@ -757,7 +757,7 @@
             </div>
             <div class="pill-badge-group">
                 <button class="btn-act btn-act-pre" onclick="exportSheetState()" style="color:var(--accent-gold); border:1px solid rgba(245, 158, 11, 0.4); display:flex; align-items:center; gap:4px;" title="Copy current HP, Superiority Dice, Second Wind, Action Surge, and inventory to clipboard">📋 Export Data</button>
-                <span class="pill-badge pill-crimson">LAWFUL NEUTRAL</span>
+                <span class="pill-badge pill-crimson">LAWFUL EVIL</span>
                 <span class="pill-badge pill-gold">BATTLE MASTER</span>
                 <span class="pill-badge pill-neutral">SOLDIER</span>
             </div>
@@ -1021,6 +1021,27 @@
                     </div>
 
                     <div class="action-grid-2col">
+                        <!-- Overseer Vhol's Obsidian Greatcleaver -->
+                        <div class="action-card" style="border-color:rgba(220,38,38,0.5); background:linear-gradient(135deg, rgba(220,38,38,0.06) 0%, #0d131d 100%);">
+                            <div class="action-header">
+                                <div>
+                                    <div class="action-card-title" onclick="openCompendiumModal('vhol_cleaver')" style="color:#fca5a5;">
+                                        🪓 Vhol's Obsidian Greatcleaver <span style="font-size:0.68rem; color:var(--text-muted);">ℹ️</span>
+                                    </div>
+                                    <div style="font-size:0.67rem; font-weight:700; color:var(--accent-crimson-soft); margin-top:1px;">Primary Heavy Greatweapon • 1 Attack</div>
+                                </div>
+                                <span style="font-size:0.62rem; color:#fca5a5; font-weight:700; background:rgba(220,38,38,0.2); border:1px solid var(--accent-crimson); padding:1px 5px; border-radius:3px;">LACERATION</span>
+                            </div>
+                            <div class="action-desc">Melee 5ft. +7 to Hit, 2d6+4 Slashing (GWF active). Nat 18-20 inflicts Laceration (1d4 bleed/rd). Graze: 4 flat dmg on miss.</div>
+                            <div class="action-btn-row">
+                                <button class="btn-roll-action" onclick="rollD20('Obsidian Greatcleaver Attack', 7)">🪓 Attack (+7)</button>
+                                <button class="btn-roll-action btn-roll-dmg" onclick="rollGreatswordDamage(false)">💥 Damage (2d6+4)</button>
+                                <button class="btn-roll-action btn-roll-gold" onclick="rollGreatswordDamage(true)" title="Apply Great Weapon Master +3 PB bonus">+3 GWM Hit</button>
+                                <button class="btn-roll-action btn-roll-dmg" onclick="rollLacerationBleed()" title="Roll 1d4 ongoing bleed/necrotic damage">🩸 Bleed (1d4)</button>
+                                <button class="btn-roll-action btn-roll-blue" onclick="logRoll('🛡️ <strong>Mastery (Graze):</strong> On missed Greatcleaver attack, target takes <span style=\'color:#fbbf24; font-weight:700;\'>4 flat Slashing Damage</span>!')">Graze (4 Dmg)</button>
+                            </div>
+                        </div>
+
                         <!-- Greatsword -->
                         <div class="action-card">
                             <div class="action-header">
@@ -1439,6 +1460,10 @@
 
     // Default Loadout Items
     const defaultItems = [
+        "🪓 Overseer Vhol's Obsidian Greatcleaver (2d6+4 Slashing • Graze • Laceration)",
+        "💍 Inquisitorial Signet Ring (Crown of Bone Piercing Weeping Eye)",
+        "🗺️ Grand Tithe Supply Map to Zul-Gaza (Transit Route Intel)",
+        "🔑 Obsidian Vault Master Key (Fort Kar-Vash Gate & Armory)",
         "🛡️ Plate Armor (Equipped, 18 AC)",
         "⚔️ Greatsword (2d6+4 Slashing • Graze)",
         "🪓 Halberd (1d10+4 Slashing • Reach 10ft • Cleave)",
@@ -1598,6 +1623,11 @@
         const total = bestSum + 4;
 
         logRoll(`🩸 <strong>Savage Attacker Roll:</strong> Set A: [${eff1_1}+${eff1_2}=${sum1}] vs Set B: [${eff2_1}+${eff2_2}=${sum2}] ➔ Keeping <span style="color:#fbbf24; font-weight:700;">${bestSum}</span> + 4 = <span style="color:#f87171; font-weight:800;">${total} Slashing Damage</span>!`);
+    }
+
+    function rollLacerationBleed() {
+        const d4 = Math.floor(Math.random() * 4) + 1;
+        logRoll(`🩸 <strong>LACERATION / DEEP BLEED TRIGGERED:</strong> Target suffers a deep jagged arterial wound! Target takes <span style="color:#f87171; font-weight:800; font-size:1.05rem;">${d4} Bleed/Necrotic Damage</span> at the start of each of its turns until treated (DC 13 Medicine check or magical healing)!`);
     }
 
     // ==========================================
@@ -1962,6 +1992,24 @@
     // ⚔️ 5E COMPENDIUM & ABILITY MODAL ENGINE
     // ==========================================
     const abilityCompendium = {
+        "vhol_cleaver": {
+            name: "🪓 Overseer Vhol's Obsidian Greatcleaver",
+            school: "MARTIAL HEAVY GREATWEAPON",
+            timing: "1 Attack (Heavy, Two-Handed)",
+            range: "Melee 5 feet",
+            components: "Proficient (+7 to Hit)",
+            duration: "Instantaneous",
+            attackMod: "+7 to Hit (STR +4, PB +3)",
+            damage: "2d6 + 4 Slashing (GWF: 1s & 2s count as 3s)",
+            fullRules: "A massive executioner cleaver forged from jagged volcanic black obsidian, claimed directly from the dead hands of Overseer Vhol.<br><br>• <strong>Weapon Mastery (Graze):</strong> If your attack roll misses a creature, the target takes flat damage equal to your Strength modifier (<strong>4 Slashing Damage</strong>).<br>• <strong>Laceration / Deep Bleed:</strong> On a critical hit or natural attack roll of 18–20, the serrated obsidian teeth tear deep into muscle and arteries. The target suffers the Laceration condition, taking <strong>1d4 bleed/necrotic damage</strong> at the start of each of its turns until treated with a DC 13 Medicine check or magical healing.<br>• <strong>Great Weapon Master:</strong> Add +3 damage (PB) once per turn on hit; Crits or kills grant a bonus action attack!",
+            flavor: "Still warm from the volcanic slag of Fort Kar-Vash, the heavy obsidian blade thrums with a sinister thirst for arterial blood.",
+            modalButtons: [
+                { label: "🪓 Attack (+7)", class: "btn-roll-action", onClick: () => rollD20('Obsidian Greatcleaver Attack', 7) },
+                { label: "💥 Damage (2d6+4)", class: "btn-roll-action btn-roll-dmg", onClick: () => rollGreatswordDamage(false) },
+                { label: "+3 GWM Damage", class: "btn-roll-action btn-roll-gold", onClick: () => rollGreatswordDamage(true) },
+                { label: "🩸 Laceration (1d4 Bleed)", class: "btn-roll-action btn-roll-dmg", onClick: () => rollLacerationBleed() }
+            ]
+        },
         "greatsword": {
             name: "🗡️ Greatsword (Mastery: Graze)",
             school: "MARTIAL MELEE WEAPON",
@@ -2223,6 +2271,41 @@
     // 🎒 INVENTORY, LOOT VAULT & DELTA SYSTEM
     // ==========================================
     const worldLootVault = {
+        "obsidian greatcleaver": {
+            name: "🪓 Overseer Vhol's Obsidian Greatcleaver",
+            category: "MARTIAL WEAPON • Heavy, Two-Handed",
+            origin: "Claimed from Overseer Vhol's Corpse",
+            desc: "A massive executioner cleaver forged from jagged volcanic black obsidian, claimed directly from the dead hands of Overseer Vhol.",
+            effect: "• <strong>+7 to Hit, 2d6+4 Slashing damage</strong>.<br>• <strong>Mastery (Graze):</strong> Missed attacks deal <strong>4 flat Slashing damage</strong>.<br>• <strong>Laceration / Deep Bleed:</strong> On a critical hit or natural attack roll of 18–20, target takes <strong>1d4 bleed/necrotic damage</strong> at the start of each turn until treated.<br>• <strong>GWF Active:</strong> 1s and 2s on damage dice count as 3s."
+        },
+        "vhol's obsidian greatcleaver": {
+            name: "🪓 Overseer Vhol's Obsidian Greatcleaver",
+            category: "MARTIAL WEAPON • Heavy, Two-Handed",
+            origin: "Claimed from Overseer Vhol's Corpse",
+            desc: "A massive executioner cleaver forged from jagged volcanic black obsidian, claimed directly from the dead hands of Overseer Vhol.",
+            effect: "• <strong>+7 to Hit, 2d6+4 Slashing damage</strong>.<br>• <strong>Mastery (Graze):</strong> Missed attacks deal <strong>4 flat Slashing damage</strong>.<br>• <strong>Laceration / Deep Bleed:</strong> On a critical hit or natural attack roll of 18–20, target takes <strong>1d4 bleed/necrotic damage</strong> at the start of each turn until treated.<br>• <strong>GWF Active:</strong> 1s and 2s on damage dice count as 3s."
+        },
+        "inquisitorial signet ring": {
+            name: "💍 Inquisitorial Signet Ring",
+            category: "RELIC & CLEARANCE • Inquisitorial Seal",
+            origin: "Looted from Overseer Vhol",
+            desc: "A heavy obsidian ring bearing the carved insignia of a Crown of Bone Piercing a Weeping Eye.",
+            effect: "• Grants military access and clearance recognized across imperial checkpoints, outposts, and courier waystations."
+        },
+        "grand tithe supply map to zul-gaza": {
+            name: "🗺️ Grand Tithe Supply Map to Zul-Gaza",
+            category: "TACTICAL INTEL • Transit Map",
+            origin: "Looted from Overseer Vhol's Desk",
+            desc: "Detailed parchment charting the military supply road from Fort Kar-Vash through the Obsidian Scar into the Iron Mines of Oros and Zul-Gaza.",
+            effect: "• Reveals convoy patrol schedules, hidden waterholes, checkpoint locations, and safe terrain paths through the volcanic wastes."
+        },
+        "obsidian vault master key": {
+            name: "🔑 Obsidian Vault Master Key",
+            category: "KEY & PASS • Fort Kar-Vash",
+            origin: "Looted from Overseer Vhol",
+            desc: "A heavy serrated obsidian skeleton key that opens the secure armory, inner gate, and high-value holding cells of Fort Kar-Vash.",
+            effect: "• Unlocks fortified doors, gear lockers, and subterranean gates within Fort Kar-Vash."
+        },
         "plate armor": {
             name: "🛡️ Plate Armor (Equipped)",
             category: "HEAVY ARMOR • Standard Loadout",
@@ -2355,16 +2438,17 @@
     }
 
     function getStoredItems() {
-        let stored = localStorage.getItem('rashuk_inv_v1');
+        let stored = localStorage.getItem('rashuk_inv_v2');
         if (!stored) {
-            localStorage.setItem('rashuk_inv_v1', JSON.stringify(defaultItems));
+            localStorage.removeItem('rashuk_inv_v1');
+            localStorage.setItem('rashuk_inv_v2', JSON.stringify(defaultItems));
             return [...defaultItems];
         }
         return JSON.parse(stored);
     }
 
     function saveStoredItems(items) {
-        localStorage.setItem('rashuk_inv_v1', JSON.stringify(items));
+        localStorage.setItem('rashuk_inv_v2', JSON.stringify(items));
     }
 
     function renderInventory() {

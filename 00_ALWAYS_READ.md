@@ -1,24 +1,25 @@
 # 🩸 BLIGHTBORNE: CAMPAIGN MASTER STATE (00_ALWAYS_READ)
 > **Active Campaign:** Blightborne (The Ashen Trail)  
-> **Current Scenario:** Session 1 (One-Shot / Campaign Launchpad)  
-> **Protagonist:** Rashuk (True Human Name: *Laxas Langley*) — Level 5 Battle Master Fighter (Advanced-Rank Swordsman)  
+> **Current Scenario:** Post-Session 1 / March to Sector 08 (The Iron Mines of Oros)  
+> **Protagonist:** Rashuk (True Human Name: *Laxas Langley*) — Level 5 Battle Master Fighter  
+> **Alignment:** **Lawful Evil** *(Shifted post-massacre: Cold calculating vengeance & rule of iron)*  
 > **Tone:** Visceral Grimdark, Bleak Dark Fantasy, High Stakes Action
 
 ---
 
-## 📍 CURRENT SCENE & SESSION STATE
-* **Location:** Borderlands of Sector 09 ➔ **Rot-Wood Bog** & **Dead-Water Gulch**
-* **Active Situation:** Rashuk has executed Convoy Commander Zorath to protect a 10-year-old human slave boy from being branded. He snatched the locked courier satchel and is currently sprinting through the rain-soaked bog with the Iron Fang Pack and Bloodhound Chimeras on his heels.
-* **Immediate Objective:** Ambush the pursuers in Dead-Water Gulch, prevent his red blood from being exposed, and open the courier satchel to discover the orders of **Grand Inquisitor Gortash**.
+## 📍 CURRENT SCENE & LIVE SESSION STATE
+* **Location:** Borderlands of Sector 09 ➔ **The Ashen Hinterlands / Basalt Ridge Trail**
+* **Active Situation:** Fort Kar-Vash is in chaos. Overseer Vhol lies dead with a crushed skull. In retaliation, demon sentries slaughtered Old Geth, young Elia, and the infirmary captives. Rashuk escaped into the night with Vhol's **Obsidian Greatcleaver**, the **Inquisitorial Signet Ring**, the **Vault Key**, and the **Grand Tithe Supply Map**.
+* **Immediate Objective:** Track the imperial supply route toward the second transit stronghold—**The Iron Mines of Oros**—and use the signet ring to hijack military convoys.
 
 ---
 
-## 🎯 CAMPAIGN ROSTER & KEY NPCS
-* **Rashuk / Laxas Langley:** 25-year-old half-demon/half-human Battle Master Fighter. Lawful Neutral starting alignment.
-* **Overseer Vhol:** CR 5 Advanced-Rank Demon Centurion commanding Fort Kar-Vash.
-* **Old Geth:** One-eyed goblin apothecary secretly helping human captives in Fort Kar-Vash.
-* **Elia:** 10-year-old human captive chained to the cross above the magma pit.
-* **Grand Inquisitor Gortash:** Saint-Rank Warlord in Zul-Gaza, commander of the 15-year-old Sanctuary purge and architect of the Aethel-Engine.
+## 🎯 CAMPAIGN ROSTER & KEY NPC STATUSES
+* **Rashuk (Laxas Langley):** Level 5 Battle Master Fighter. **Lawful Evil**. Wields Vhol's Obsidian Greatcleaver (`2d6+4 Slashing + Laceration`).
+* **Overseer Vhol:** `💀 DECEASED` — Executed by Rashuk in the Amphitheater of Bone.
+* **Old Geth:** `💀 DECEASED` — Slaughtered in the post-battle garrison retaliation.
+* **Elia:** `💀 DECEASED` — Executed by fortress sentries and cast into the magma pit.
+* **The Masked Grand Inquisitor:** Supreme Saint-Rank Commander in Zul-Gaza, bearer of the Bone Crown seal. Target of absolute retribution.
 
 ---
 

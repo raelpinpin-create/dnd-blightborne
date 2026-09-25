@@ -3,7 +3,7 @@
 > **Class & Level:** Fighter (Battle Master Archetype) 5  
 > **Heritage / Species:** Half-Demon / Half-Human Hybrid (Abyssal Bloodline mechanics)  
 > **Background:** Soldier (Origin Feat: Savage Attacker)  
-> **Alignment:** Lawful Neutral  
+> **Alignment:** **Lawful Evil** *(Cold, calculating retribution; power is the only law)*  
 > **Speed:** 30 ft | **Proficiency Bonus (PB):** +3  
 > **Hit Points:** 59 / 59 (Hit Dice: 5d10; 10 + 4d10 + 15 Con + 5 Abyssal Fortitude)  
 > **Armor Class:** 18 (Plate Armor) | **Initiative:** +1  
@@ -36,19 +36,23 @@
 ---
 
 ## ⚔️ ATTACKS & COMBAT ACTIONS (EXTRA ATTACK x2)
-* 🗡️ **Greatsword (Primary Melee):**
+
+* 🪓 **Overseer Vhol's Obsidian Greatcleaver (Primary Equipped):**
   * **To Hit:** +7 (+4 STR, +3 PB)
   * **Damage:** `2d6 + 4` Slashing (Great Weapon Fighting: 1s & 2s count as 3s).
-  * **Weapon Mastery (Graze):** On a missed attack roll, deal **4 flat Slashing damage** (STR mod) to the target.
-  * **Great Weapon Master:** Add **+3 damage** (PB) once per turn on hit with heavy weapon; Crits or dropping a target to 0 HP grants a Bonus Action melee attack.
-* 🪓 **Halberd (Reach Melee):**
-  * **To Hit:** +7 (+4 STR, +3 PB)
-  * **Damage:** `1d10 + 4` Slashing (Reach 10 ft, Heavy, Two-Handed; GWF active).
-  * **Weapon Mastery (Cleave):** Once per turn on hit, make another melee attack against a second creature within 5 ft (deals `1d10` damage).
-* 🏹 **Heavy Crossbow (Ranged):**
-  * **To Hit:** +4 (+1 DEX, +3 PB)
-  * **Damage:** `1d10 + 1` Piercing (Ammunition, Heavy, Loading, Range 100/400 ft).
-  * **Weapon Mastery (Push):** On hit, push a Large or smaller creature up to **10 ft straight back**.
+  * **Weapon Mastery (Graze):** On a missed attack roll, deal **4 flat Slashing damage** (STR mod).
+  * **Special Ability — Laceration (Deep Bleed):** On a critical hit or natural 18–20 attack roll, target suffers deep arterial lacerations dealing **1d4 ongoing bleed/necrotic damage** at the start of each of its turns until treated (DC 13 Medicine check or magical healing).
+  * **Great Weapon Master:** Add **+3 damage** (PB) once per turn on hit; Crits or kills grant a Bonus Action melee attack.
+
+* 🗡️ **Greatsword (Secondary Arsenal):**
+  * **To Hit:** +7 | **Damage:** `2d6 + 4` Slashing (GWF active, Graze Mastery).
+
+* 🪓 **Halberd (Reach Arsenal):**
+  * **To Hit:** +7 | **Damage:** `1d10 + 4` Slashing (Reach 10 ft, Heavy, Two-Handed; Cleave Mastery).
+
+* 🏹 **Heavy Crossbow (Ranged Arsenal):**
+  * **To Hit:** +4 (+1 DEX, +3 PB) | **Damage:** `1d10 + 1` Piercing (Range 100/400 ft, Push Mastery 10 ft).
+
 * 👊 **Unarmed Strike / Demon Claws:**
   * **To Hit:** +7 | **Damage:** `5` flat Bludgeoning or `1d4 + 4` Slashing.
 
@@ -85,11 +89,20 @@
 
 ---
 
-## 🎒 INVENTORY & WEALTH
+## 🎒 INVENTORY & ARSENAL
 * **Equipped Armor:** 🛡️ Plate Armor (18 AC)
-* **Equipped Weapons:** ⚔️ Greatsword, 🪓 Halberd, 🏹 Heavy Crossbow
-* **Ammunition & Gear:**
+* **Equipped Weapons:** 
+  * 🪓 **Overseer Vhol's Obsidian Greatcleaver** *(Equipped — 2d6+4 Slash + Laceration)*
+  * 🗡️ Greatsword
+  * 🪓 Halberd
+  * 🏹 Heavy Crossbow
+* **Worn Relics & Key Quest Items:**
+  * 💍 **Inquisitorial Signet Ring** *(Worn — Authorizes passage & commandeers regional lockboxes)*
+  * 🗺️ **Grand Tithe Supply Map to Zul-Gaza** *(Details 3 supply fortresses)*
+  * 🔑 **Obsidian Vault Master Key** *(Unlocks Fort Kar-Vash gates & armories)*
   * 🎯 20x Crossbow Bolts
+  * 🍷 1x Ghost-Poppy Salve *(Restores 2d6+1 HP, suppresses pain/fear)*
+  * 🧪 1x Alchemical Quenching Dust *(Blinds 15ft for 1 rd or douses braziers)*
   * 🎒 Explorer's Pack
   * 🎖️ Soldier Insignia (Sanctuary / Mercenary Rank)
   * 🃏 Playing Card Set
