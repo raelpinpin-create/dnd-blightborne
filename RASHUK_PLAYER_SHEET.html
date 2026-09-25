@@ -1042,25 +1042,6 @@
                             </div>
                         </div>
 
-                        <!-- Halberd -->
-                        <div class="action-card">
-                            <div class="action-header">
-                                <div>
-                                    <div class="action-card-title" onclick="openCompendiumModal('halberd')">
-                                        🪓 Halberd (Mastery: Cleave) <span style="font-size:0.68rem; color:var(--text-muted);">ℹ️</span>
-                                    </div>
-                                    <div style="font-size:0.67rem; font-weight:700; color:#86efac; margin-top:1px;">Melee Reach • 1 Attack (10ft, Heavy)</div>
-                                </div>
-                                <span style="font-size:0.62rem; color:#86efac; font-weight:700; background:rgba(134,239,172,0.1); border:1px solid #86efac; padding:1px 5px; border-radius:3px;">REACH 10FT</span>
-                            </div>
-                            <div class="action-desc">Reach 10ft. +7 to Hit, 1d10+4 Slashing (1s/2s count as 3s). Cleave: Strike 2nd foe within 5ft.</div>
-                            <div class="action-btn-row">
-                                <button class="btn-roll-action" onclick="rollD20('Halberd Attack', 7)">🪓 Attack (+7)</button>
-                                <button class="btn-roll-action btn-roll-dmg" onclick="rollHalberdDamage(false)">💥 Damage (1d10+4)</button>
-                                <button class="btn-roll-action btn-roll-blue" onclick="rollHalberdCleave()">⚔️ Cleave Extra</button>
-                            </div>
-                        </div>
-
                         <!-- Heavy Crossbow -->
                         <div class="action-card">
                             <div class="action-header">
@@ -1409,8 +1390,8 @@
 
     const maxSecondWind = 2;
     let curSecondWind = (function() {
-        const saved = localStorage.getItem('rashuk_second_wind_v1');
-        return saved !== null ? parseInt(saved) : 2;
+        const saved = localStorage.getItem('rashuk_second_wind_v2');
+        return saved !== null ? parseInt(saved) : 1;
     })();
 
     let hasActionSurge = (function() {
@@ -1443,14 +1424,10 @@
         "🪓 Overseer Vhol's Obsidian Greatcleaver (2d6+4 Slashing • Graze • Laceration)",
         "💍 Inquisitorial Signet Ring (Crown of Bone Piercing Weeping Eye)",
         "🗺️ Grand Tithe Supply Map to Zul-Gaza (Transit Route Intel)",
-        "🔑 Obsidian Vault Master Key (Fort Kar-Vash Gate & Armory)",
         "🛡️ Plate Armor (Equipped, 18 AC)",
-        "🪓 Halberd (1d10+4 Slashing • Reach 10ft • Cleave)",
         "🏹 Heavy Crossbow (1d10+1 Piercing • Push)",
-        "🎯 20x Crossbow Bolts",
         "🎒 Explorer's Pack",
         "🎖️ Soldier Insignia (Sanctuary / Mercenary Rank)",
-        "🃏 Playing Card Set",
         "🔨 Smith's Tools"
     ];
 
@@ -2417,18 +2394,19 @@
     }
 
     function getStoredItems() {
-        let stored = localStorage.getItem('rashuk_inv_v3');
+        let stored = localStorage.getItem('rashuk_inv_v4');
         if (!stored) {
             localStorage.removeItem('rashuk_inv_v1');
             localStorage.removeItem('rashuk_inv_v2');
-            localStorage.setItem('rashuk_inv_v3', JSON.stringify(defaultItems));
+            localStorage.removeItem('rashuk_inv_v3');
+            localStorage.setItem('rashuk_inv_v4', JSON.stringify(defaultItems));
             return [...defaultItems];
         }
         return JSON.parse(stored);
     }
 
     function saveStoredItems(items) {
-        localStorage.setItem('rashuk_inv_v3', JSON.stringify(items));
+        localStorage.setItem('rashuk_inv_v4', JSON.stringify(items));
     }
 
     function renderInventory() {

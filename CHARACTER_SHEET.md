@@ -66,7 +66,7 @@
 ## ⚡ FIGHTER CLASS FEATURES & FEATS
 * **Extra Attack:** Attack twice per Attack action.
 * **Action Surge (1/Short or Long Rest):** Gain 1 additional action on your turn.
-* **Second Wind (2/Short or Long Rest):** Bonus Action to regain `1d10 + 5` HP.
+* **Second Wind (1/2 Uses Remaining):** Bonus Action to regain `1d10 + 5` HP.
 * **Tactical Mind:** When failing an ability check, expend a Second Wind use to add `+1d10` to the roll; if you still fail, the use is refunded.
 * **Fighting Style — Great Weapon Fighting:** When rolling damage with a two-handed melee weapon, any 1 or 2 counts as a 3.
 * **Origin Feat (Soldier) — Savage Attacker:** Once per turn on a hit, roll the weapon's damage dice twice and keep the higher result.
@@ -90,17 +90,13 @@
 * **Equipped Armor:** 🛡️ Plate Armor (18 AC)
 * **Equipped Weapons:** 
   * 🪓 **Overseer Vhol's Obsidian Greatcleaver** *(Equipped — 2d6+4 Slash + Laceration)*
-  * 🪓 Halberd
-  * 🏹 Heavy Crossbow
+  * 🏹 **Heavy Crossbow** *(1d10+1 Pierce, Push 10ft)*
 * **Worn Relics & Key Quest Items:**
   * 💍 **Inquisitorial Signet Ring** *(Worn — Authorizes passage & commandeers regional lockboxes)*
   * 🗺️ **Grand Tithe Supply Map to Zul-Gaza** *(Details 3 supply fortresses)*
-  * 🔑 **Obsidian Vault Master Key** *(Unlocks Fort Kar-Vash gates & armories)*
-  * 🎯 20x Crossbow Bolts
   * 🍷 1x Ghost-Poppy Salve *(Restores 2d6+1 HP, suppresses pain/fear)*
   * 🧪 1x Alchemical Quenching Dust *(Blinds 15ft for 1 rd or douses braziers)*
   * 🎒 Explorer's Pack
   * 🎖️ Soldier Insignia (Sanctuary / Mercenary Rank)
-  * 🃏 Playing Card Set
   * 🔨 Smith's Tools
 * **Wealth:** **15 GP, 0 SP** (10 SP = 1 GP)

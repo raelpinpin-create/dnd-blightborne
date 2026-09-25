@@ -26,12 +26,11 @@
 * **Vitals:** **AC 18** (Plate Armor) | **HP: 59 / 59** | **Speed:** 30 ft | **PB:** +3
 * **Combat Resources:**
   * 🎲 **Superiority Dice:** `4 / 4 d8` (DC 15 Save: Trip, Riposte, Precision, Menacing Attack)
-  * 💚 **Second Wind:** `2 / 2 Uses` (`1d10 + 5` healing or Tactical Mind d10 to skill checks)
+  * 💚 **Second Wind:** `1 / 2 Uses` (`1d10 + 5` healing or Tactical Mind d10 to skill checks)
   * ⚡ **Action Surge:** `1 / 1 Available` (Grants 1 extra Action per turn)
   * 🤝 **Help Tokens:** `2 / 2 Available` (+1d6 to ally checks within 30 ft)
 * **Equipped Loadout:**
   * 🪓 **Overseer Vhol's Obsidian Greatcleaver:** Heavy Two-Handed Greatweapon, `2d6+4 Slashing` (GWF active: 1s & 2s count as 3s), **Weapon Mastery: Graze** (deals 4 flat Slashing damage on a miss), **Laceration / Deep Bleed** (on Crit or natural attack roll 18–20, inflicts `1d4 ongoing bleed/necrotic damage` per turn until treated).
-  * 🪓 **Halberd:** `1d10+4 Slashing` (10ft Reach, Cleave).
   * 🏹 **Heavy Crossbow:** `1d10+1 Piercing` (Range 100/400 ft, Push 10ft).
 * **Psychological Shift (Lawful Evil):**
   * *The Philosophy of Iron:* Watching Fort Kar-Vash burn while remembering the prologue massacre of Sanctuary convinced Rashuk that compassion is a death sentence in the Hegemony.

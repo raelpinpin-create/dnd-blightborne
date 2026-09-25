@@ -14,8 +14,8 @@
 * **Alignment:** `LAWFUL EVIL` (Embraced ruthless retribution after the Kar-Vash infirmary massacre)
 * **Armor Class:** **18** (Plate Armor) | **Max HP:** **59** (5d10+15+5) | **Speed:** 30 ft | **PB:** +3
 * **Primary Weapon:** **Overseer Vhol's Obsidian Greatcleaver** (Heavy 2-Handed, `2d6+4 Slashing`, GWF, Graze, Laceration Bleed on Nat 18–20)
-* **Combat Resources:** 4d8 Superiority Dice (DC 15 Saves), 2x Second Wind (1d10+5), Action Surge (1/1), 2x Help Tokens
-* **Campaign Relics Carried:** Inquisitorial Signet Ring, Grand Tithe Supply Map to Zul-Gaza, Obsidian Vault Master Key, Locked Brass Satchel
+* **Combat Resources:** 4d8 Superiority Dice (DC 15 Saves), 1x Second Wind remaining (1/2), Action Surge (1/1), 2x Help Tokens
+* **Campaign Relics Carried:** Inquisitorial Signet Ring, Grand Tithe Supply Map to Zul-Gaza, Locked Brass Satchel
 
 ---
 
