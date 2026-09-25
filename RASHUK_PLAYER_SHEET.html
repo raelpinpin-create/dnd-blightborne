@@ -1271,7 +1271,7 @@
                         <!-- Card 1: Ashes of Sanctuary -->
                         <div class="dossier-card-btn" onclick="openDossierModal('sanctuary')">
                             <div class="dossier-btn-title">📜 The Ashes of Sanctuary</div>
-                            <div class="dossier-btn-sub">15 years ago: The purge led by Inquisitor Gortash and the birth of "Rashuk".</div>
+                            <div class="dossier-btn-sub">15 years ago: The purge of Sanctuary and the birth of "Rashuk".</div>
                         </div>
 
                         <!-- Card 2: Blight-Born Secret -->
@@ -1282,14 +1282,14 @@
 
                         <!-- Card 3: Advanced-Rank Swordsman -->
                         <div class="dossier-card-btn" onclick="openDossierModal('martial')">
-                            <div class="dossier-btn-title">⚔️ Advanced-Rank Martial Doctrine</div>
-                            <div class="dossier-btn-sub">Water-God parry stances, Riposte precision, and unbreakable soldier discipline.</div>
+                            <div class="dossier-btn-title">⚔️ Advanced Martial Doctrine</div>
+                            <div class="dossier-btn-sub">Defensive parry stances, Riposte precision, and veteran soldier discipline.</div>
                         </div>
 
                         <!-- Card 4: Vow of Retribution -->
                         <div class="dossier-card-btn" onclick="openDossierModal('retribution')">
-                            <div class="dossier-btn-title">🎯 Directive 409 & Retribution</div>
-                            <div class="dossier-btn-sub">Execution of Zorath, the rescue of Elia, and the march toward Fort Kar-Vash.</div>
+                            <div class="dossier-btn-title">🎯 The Courier Satchel & Retribution</div>
+                            <div class="dossier-btn-sub">Execution of Zorath, the rescue of Elia, and the locked inquisitorial dispatch.</div>
                         </div>
                     </div>
                 </div>
@@ -2037,7 +2037,7 @@
             attackMod: "+7 Melee Weapon Attack Roll",
             damage: "Weapon Damage + 1d8 Superiority Damage",
             fullRules: "When a creature misses you with a melee attack, you can use your Reaction and expend one superiority die to make a melee weapon attack against the creature (<strong>+7 to Hit</strong>). If you hit, you add the superiority die (<strong>+1d8</strong>) to the attack's damage roll.",
-            flavor: "Deflecting the incoming blade along his heavy guard with Water-God mastery, Rashuk instantly ripostes into the enemy's exposed throat.",
+            flavor: "Deflecting the incoming blade along his heavy crossguard with disciplined precision, Rashuk instantly ripostes into the enemy's exposed flank.",
             modalButtons: [
                 { label: "🛡️ Riposte (+7 & +1d8)", class: "btn-roll-action btn-roll-blue", onClick: () => execManeuverRiposte() }
             ]
@@ -2143,9 +2143,9 @@
             body: `
                 <p>Fifteen years ago, the hidden forest commune of <strong>Sanctuary</strong> was the only place in the Demon Hegemony where runaway humans and sympathetic demons lived in peace. Laxas Langley was born there—the illicit child of a human mother and a demon rebel.</p>
                 <br>
-                <p>When the imperial inquisition uncovered Sanctuary's coordinates, <strong>Grand Inquisitor Gortash</strong> arrived with an army of ironclad centurions. The village was razed to the ground in a single night. 42 demon sympathizers were crucified on burning iron beams; 19 human laborers were executed by decapitation.</p>
+                <p>When the imperial inquisition uncovered Sanctuary's coordinates, an ironclad inquisitorial army arrived. The settlement was razed to the ground in a single night. 42 demon sympathizers were crucified on burning iron beams; 19 human laborers were executed. The face of the masked inquisitor who condemned his family remains etched in Laxas's memory—a faceless nightmare he has vowed to hunt down.</p>
                 <br>
-                <p>10-year-old Laxas survived by burying himself in the sulfuric mud beneath his burning home, watching his parents die in the inferno. Taking the demon name <strong>Rashuk</strong>, he spent 15 brutal years in the gladiator pits and mercenary companies of the Hegemony, forging his body and blade into an unbreakable weapon of vengeance.</p>
+                <p>10-year-old Laxas survived by burying himself in the sulfuric mud beneath his burning home, watching the inferno consume everything. Taking the demon name <strong>Rashuk</strong>, he spent 15 brutal years in the gladiator pits and mercenary companies of the Hegemony, forging his body and blade into an unbreakable weapon.</p>
             `
         },
         "heritage": {
@@ -2164,27 +2164,27 @@
             `
         },
         "martial": {
-            title: "⚔️ Advanced-Rank Martial Doctrine (Water-God Stance)",
+            title: "⚔️ Advanced Martial Doctrine (Defensive Mastery)",
             category: "COMBAT DOCTRINE & MASTERY",
             date: "Class: Fighter (Battle Master) 5",
             body: `
-                <p>Rashuk does not fight like an undisciplined brute. He was trained in the rigorous defensive doctrines of the <strong>Water-God Style</strong>, which emphasizes balance, kinetic deflection, and devastating counter-thrusts.</p>
+                <p>Rashuk does not fight like an undisciplined brute. He was forged through rigorous mercenary combat and soldier drills that emphasize balance, kinetic deflection, and devastating counter-thrusts.</p>
                 <br>
-                <p>• <strong>Riposte Mastery:</strong> Rather than dodging away from attacks, Rashuk slides along the attacker's trajectory, catching their weapon on his crossguard and countering into their vitals.</p>
+                <p>• <strong>Riposte Mastery:</strong> Rather than dodging wildly, Rashuk slides along the attacker's trajectory, catching their weapon on his heavy crossguard and countering directly into their exposed vitals.</p>
                 <p>• <strong>Weapon Mastery Suite:</strong> Mastered the <em>Graze</em> of the Greatsword (dealing 4 damage even on a miss), the <em>Cleave</em> of the Halberd (striking multiple foes across 10ft reach), and the <em>Push</em> of the Heavy Crossbow (hurling foes 10ft back).</p>
                 <p>• <strong>Great Weapon Fighting & Master:</strong> Rerolls low damage dice, adds +3 damage on heavy strikes, and gains bonus action attacks on critical strikes or kills.</p>
             `
         },
         "retribution": {
-            title: "🎯 Directive 409 & The Vow of Retribution",
-            category: "ACTIVE MISSION & DESTINY",
+            title: "🎯 The Courier Satchel & The Vow of Retribution",
+            category: "ACTIVE SITUATION & MOTIVE",
             date: "Active Arc: The Ashen Trail",
             body: `
-                <p><strong>The Incident:</strong> During convoy duty near Sector 09, Convoy Commander Zorath prepared to brand and execute a 10-year-old human slave boy named <em>Elia</em>. Seeing the ghost of his younger self, Rashuk broke his mercenary oath, decapitated Zorath with a single greatsword stroke, and fled into the Rot-Wood Bog.</p>
+                <p><strong>The Incident:</strong> During convoy duty near Sector 09, Convoy Commander Zorath prepared to brand and execute a 10-year-old human captive named <em>Elia</em>. Seeing the ghost of his younger self, Rashuk broke his mercenary oath, executed Zorath with a single greatsword stroke, and fled into the Rot-Wood Bog.</p>
                 <br>
-                <p><strong>Directive 409:</strong> The locked brass courier satchel snatched from Zorath contains orders sealed with <em>A Crown of Bone Piercing a Weeping Eye</em>—the personal sigil of <strong>Grand Inquisitor Gortash</strong>. It reveals the construction of the <strong>Aethel-Engine in Zul-Gaza</strong>, which requires 10,000 human souls before the Blood Eclipse.</p>
+                <p><strong>The Locked Courier Satchel:</strong> Snatched from Zorath's corpse, the heavy brass dispatch satchel is stamped with an inquisitorial wax seal depicting <em>A Crown of Bone Piercing a Weeping Eye</em>. What high-level imperial directives lie inside remain locked behind an iron clasp.</p>
                 <br>
-                <p><strong>The Vow:</strong> <em>"As long as I draw breath, no more children burn. Fort Kar-Vash will fall, and Gortash will pay his blood debt."</em></p>
+                <p><strong>The Vow:</strong> <em>"As long as I draw breath, no more innocent children burn. I will break this lock, find the ones responsible for Sanctuary, and make them pay in blood."</em></p>
             `
         }
     };
