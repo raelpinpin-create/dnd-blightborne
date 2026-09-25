@@ -1042,26 +1042,6 @@
                             </div>
                         </div>
 
-                        <!-- Greatsword -->
-                        <div class="action-card">
-                            <div class="action-header">
-                                <div>
-                                    <div class="action-card-title" onclick="openCompendiumModal('greatsword')">
-                                        🗡️ Greatsword (Mastery: Graze) <span style="font-size:0.68rem; color:var(--text-muted);">ℹ️</span>
-                                    </div>
-                                    <div style="font-size:0.67rem; font-weight:700; color:var(--accent-crimson-soft); margin-top:1px;">Melee Weapon • 1 Attack (Heavy, 2H)</div>
-                                </div>
-                                <span style="font-size:0.62rem; color:var(--accent-gold); font-weight:700; background:rgba(245,158,11,0.1); border:1px solid var(--accent-gold); padding:1px 5px; border-radius:3px;">GWF ACTIVE</span>
-                            </div>
-                            <div class="action-desc">Melee 5ft. +7 to Hit, 2d6+4 Slashing (1s/2s count as 3s). Miss deals 4 flat Graze dmg.</div>
-                            <div class="action-btn-row">
-                                <button class="btn-roll-action" onclick="rollD20('Greatsword Attack', 7)">🗡️ Attack (+7)</button>
-                                <button class="btn-roll-action btn-roll-dmg" onclick="rollGreatswordDamage(false)">💥 Damage (2d6+4)</button>
-                                <button class="btn-roll-action btn-roll-gold" onclick="rollGreatswordDamage(true)" title="Apply Great Weapon Master +3 PB bonus">+3 GWM Hit</button>
-                                <button class="btn-roll-action btn-roll-blue" onclick="logRoll('🛡️ <strong>Mastery (Graze):</strong> On missed Greatsword attack, target takes <span style=\'color:#fbbf24; font-weight:700;\'>4 flat Slashing Damage</span>!')">Graze (4 Dmg)</button>
-                            </div>
-                        </div>
-
                         <!-- Halberd -->
                         <div class="action-card">
                             <div class="action-header">
@@ -1465,7 +1445,6 @@
         "🗺️ Grand Tithe Supply Map to Zul-Gaza (Transit Route Intel)",
         "🔑 Obsidian Vault Master Key (Fort Kar-Vash Gate & Armory)",
         "🛡️ Plate Armor (Equipped, 18 AC)",
-        "⚔️ Greatsword (2d6+4 Slashing • Graze)",
         "🪓 Halberd (1d10+4 Slashing • Reach 10ft • Cleave)",
         "🏹 Heavy Crossbow (1d10+1 Piercing • Push)",
         "🎯 20x Crossbow Bolts",
@@ -2438,17 +2417,18 @@
     }
 
     function getStoredItems() {
-        let stored = localStorage.getItem('rashuk_inv_v2');
+        let stored = localStorage.getItem('rashuk_inv_v3');
         if (!stored) {
             localStorage.removeItem('rashuk_inv_v1');
-            localStorage.setItem('rashuk_inv_v2', JSON.stringify(defaultItems));
+            localStorage.removeItem('rashuk_inv_v2');
+            localStorage.setItem('rashuk_inv_v3', JSON.stringify(defaultItems));
             return [...defaultItems];
         }
         return JSON.parse(stored);
     }
 
     function saveStoredItems(items) {
-        localStorage.setItem('rashuk_inv_v2', JSON.stringify(items));
+        localStorage.setItem('rashuk_inv_v3', JSON.stringify(items));
     }
 
     function renderInventory() {

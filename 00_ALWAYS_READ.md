@@ -31,7 +31,6 @@
   * 🤝 **Help Tokens:** `2 / 2 Available` (+1d6 to ally checks within 30 ft)
 * **Equipped Loadout:**
   * 🪓 **Overseer Vhol's Obsidian Greatcleaver:** Heavy Two-Handed Greatweapon, `2d6+4 Slashing` (GWF active: 1s & 2s count as 3s), **Weapon Mastery: Graze** (deals 4 flat Slashing damage on a miss), **Laceration / Deep Bleed** (on Crit or natural attack roll 18–20, inflicts `1d4 ongoing bleed/necrotic damage` per turn until treated).
-  * 🗡️ **Greatsword:** `2d6+4 Slashing` (Graze).
   * 🪓 **Halberd:** `1d10+4 Slashing` (10ft Reach, Cleave).
   * 🏹 **Heavy Crossbow:** `1d10+1 Piercing` (Range 100/400 ft, Push 10ft).
 * **Psychological Shift (Lawful Evil):**

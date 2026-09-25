@@ -44,9 +44,6 @@
   * **Special Ability — Laceration (Deep Bleed):** On a critical hit or natural 18–20 attack roll, target suffers deep arterial lacerations dealing **1d4 ongoing bleed/necrotic damage** at the start of each of its turns until treated (DC 13 Medicine check or magical healing).
   * **Great Weapon Master:** Add **+3 damage** (PB) once per turn on hit; Crits or kills grant a Bonus Action melee attack.
 
-* 🗡️ **Greatsword (Secondary Arsenal):**
-  * **To Hit:** +7 | **Damage:** `2d6 + 4` Slashing (GWF active, Graze Mastery).
-
 * 🪓 **Halberd (Reach Arsenal):**
   * **To Hit:** +7 | **Damage:** `1d10 + 4` Slashing (Reach 10 ft, Heavy, Two-Handed; Cleave Mastery).
 
@@ -93,7 +90,6 @@
 * **Equipped Armor:** 🛡️ Plate Armor (18 AC)
 * **Equipped Weapons:** 
   * 🪓 **Overseer Vhol's Obsidian Greatcleaver** *(Equipped — 2d6+4 Slash + Laceration)*
-  * 🗡️ Greatsword
   * 🪓 Halberd
   * 🏹 Heavy Crossbow
 * **Worn Relics & Key Quest Items:**
